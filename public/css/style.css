@@ -11,7 +11,7 @@ body{
 
 }
 .log{
-  background-color: red;
+  background-color: yellow;
 }
 .pad{
   margin-left: 40%;
@@ -30,7 +30,7 @@ body{
   border-radius: 5px;
 }
 .barang-img-profile{
-  width: 50px;
+  width: 49px;
   border-radius: 50%;
 }
 .chat-area-barang{
