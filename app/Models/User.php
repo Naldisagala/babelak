@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Tawar;
 
 class User extends Authenticatable
 {
@@ -41,4 +42,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function tawar()
+    {
+        return $this->hasMany(Tawar::class, 'id_user', 'id');
+    }
 }

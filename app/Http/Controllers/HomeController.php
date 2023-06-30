@@ -11,18 +11,25 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
 
     /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
+    {   
+        
+        return view('pages.home',['barang'=> $this->getAllBarang($request['search'])]);
+    }
+
+    public function barang_detail($id)
     {
-        return view('home');
+        $this->getBarangById($id);
+        return view('pages.barang',['barang'=> $this->getBarangById($id)]);
     }
 }
