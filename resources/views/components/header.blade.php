@@ -36,7 +36,7 @@ $count = $controller->cartCount(null);
           @else
           <div>
             <a style="background: #D98CBB!important;color:white" href="/login-page" class="btn btn-info">Login</a>
-            <a style="background: white!important;color:#D98CBB" href="/login-page" class="btn btn-info">Register</a>
+            <a style="background: white!important;color:#D98CBB" href="/register-page" class="btn btn-info">Register</a>
           </div>
           @endif
 
