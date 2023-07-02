@@ -23,6 +23,7 @@ Route::POST('/tawar/{user}/{seller}/{barang}/{harga}','TawarController@sendChatT
 Route::get('/barang/{id}','HomeController@barang_detail');
 
 Route::get('/keranjang', 'KeranjangController@index');
+Route::get('/cart-hapus/{id}', 'KeranjangController@hapus');
 
 Route::get('/login-page', function () {
     return view('login');
@@ -30,4 +31,7 @@ Route::get('/login-page', function () {
 Route::get('/register-page', function () {
     return view('register');
 });
+Route::post('/register-post', 'RegisterController@RegisterUser');
+Route::post('/login-post', 'LoginController@login');
+
 Auth::routes();

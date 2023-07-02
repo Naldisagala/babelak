@@ -21,6 +21,7 @@ $count = $controller->cartCount(null);
                 <span style="margin-left:-25px;margin-top:5px;color:white;display:inline-block;width:15px;height:15px;border-radius:50%;background:#C65299;padding:2px;text-align:center;font-size:10px;"><b>{{$count}}</b></span>
             @endif
           </form>
+          @if (Auth::check())
           <ul class="navbar-nav mb-md-0">
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="#"><i class="fa-regular fa-envelope"></i></a>
@@ -32,6 +33,13 @@ $count = $controller->cartCount(null);
               <a class="nav-link active" aria-current="page" href="#"><i class="fa-regular fa-user"></i></a>
             </li>
           </ul>
+          @else
+          <div>
+            <a style="background: #D98CBB!important;color:white" href="/login-page" class="btn btn-info">Login</a>
+            <a style="background: white!important;color:#D98CBB" href="/register-page" class="btn btn-info">Register</a>
+          </div>
+          @endif
+
         </div>
       </nav>
     </header>
