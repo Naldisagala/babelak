@@ -1,15 +1,15 @@
 <!-- Menghubungkan dengan view template master -->
 @extends('../main')
- 
+
 <!-- isi bagian judul halaman -->
 <!-- cara penulisan isi section yang pendek -->
 @section('title', 'Keranjang')
- 
- 
+
+
 <!-- isi bagian konten -->
 <!-- cara penulisan isi section yang panjang -->
 @section('content')
- 
+
 <h2><b>Keranjang Belanja</b></h2>
 <br>
 <div class="row">
@@ -38,7 +38,7 @@
                         <div style="display: flex; align-items: center;">
                             <span>{{$item->kota}}</span>
                         </div>
-                    </div>                    
+                    </div>
                     <hr style="background: grey">
                     @foreach ($item->list_barang as $items)
                     @php
@@ -64,10 +64,10 @@
                         <div style="display: flex; align-items: center;">
                             <span><i class="fas fa-trash-alt"></i></span>
                         </div>
-                    </div>  
+                    </div>
                     <br>
                     @endforeach
-                       
+
                 </div>
             </div>
         </div>
@@ -96,7 +96,7 @@
                         <div class="col-9">
                             <div class="text-right">Gratis Ongkir Sistem COD</div>
                         </div>
-                    </div>                      
+                    </div>
                 </div>
             </div>
         </div>
@@ -111,14 +111,14 @@
                     <div class="col">
                         <div class="text-right">{{ "Rp ".number_format(0, 0, ',', '.')}}</div>
                     </div>
-                </div> 
+                </div>
                 <div class="row">
                     <button style="background: #C65299!important" class="btn btn-primary">Buat Pesanan</button>
-                </div> 
+                </div>
             </div>
         </div>
     </div>
 </div>
 
- 
+
 @endsection

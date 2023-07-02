@@ -30,4 +30,7 @@ Route::get('/login-page', function () {
 Route::get('/register-page', function () {
     return view('register');
 });
+Route::post('/register-post', 'RegisterController@RegisterUser');
+Route::post('/login-post', 'LoginController@login');
+
 Auth::routes();

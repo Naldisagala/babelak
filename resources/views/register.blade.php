@@ -8,11 +8,10 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/album/">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="../../public/font/css/all.min.css">
-    
+
     <link rel="stylesheet" href="{{url('/css/style.css')}}">
     <title>Register</title>
 </head>
-
 <body class="kiri">
     <div class="container-fluid">
     <div class="row  ">
@@ -22,46 +21,53 @@
         </div>
         <div class="col log" style="height: 100vh!important">
                 <div class="card-body mt-4">
-                    <form> 
+                    <form action="/register-post" method="post">
+                        @csrf()
                         <img class="mb-4 pad" src="{{url('/image/logo_log.png')}}" alt="" width="150" height="57">
                         <h1 class="h3 mb-4 fw-bold">Register</h1>
                         <div class="pad-form row">
                             <div class="col">
                             <h6>Nama</h6>
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="floatingInput" placeholder="Nama">
+                                <input type="text" class="form-control" name="name" id="floatingInput" value="{{old('name')}}" placeholder="Nama">
                                 <label for="floatingInput">Masukkan Nama</label>
+                                @if($errors->any()) <small style="color:red">*{{$errors->first('name')}}</small> @endif
                             </div>
                             </div>
                             <div class="col">
                                 <h6>Username</h6>
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="floatingInput" placeholder="Username">
+                                    <input type="text" class="form-control" name="username" id="floatingInput" value="{{old('username')}}" placeholder="Username">
                                     <label for="floatingInput">Masukkan Usename</label>
+                                    @if($errors->any()) <small style="color:red">*{{$errors->first('username')}}</small> @endif
                                 </div>
                             </div>
                             <h6  class="mt-4">Email</h6>
                             <div class="form-floating">
-                                <input type="email" class="form-control" id="floatingPassword" placeholder="email">
+                                <input type="email" class="form-control" name="email" id="floatingPassword" value="{{old('email')}}" placeholder="email">
                                 <label for="floatingPassword">&nbsp&nbsp&nbsp Masukkan Email</label>
+                                @if($errors->any()) <small style="color:red">*{{$errors->first('email')}}</small> @endif
                             </div>
-                            
+
                             <h6  class="mt-4">No Handphone</h6>
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="floatingPassword" placeholder="no hp">
+                                <input type="text" class="form-control" name="hp" id="floatingPassword" value="{{old('hp')}}" placeholder="no hp">
                                 <label for="floatingPassword">&nbsp&nbsp&nbsp Masukkan no handphone</label>
+                                @if($errors->any()) <small style="color:red">*{{$errors->first('hp')}}</small> @endif
                             </div>
                             <h6  class="mt-4">Password</h6>
                             <div class="form-floating">
-                                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                                <input type="password" class="form-control" name="password" id="floatingPassword" value="{{old('password')}}" placeholder="Password">
                                 <label for="floatingPassword">&nbsp&nbsp&nbsp Masukkan Password</label>
+                                @if($errors->any()) <small style="color:red">*{{$errors->first('password')}}</small> @endif
                             </div>
                             <h6  class="mt-4">Konfirmasi Password</h6>
                             <div class="form-floating">
-                                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                                <input type="password" class="form-control" name="password_confirm" id="floatingPassword" value="{{old('password_confirm')}}" placeholder="Password">
                                 <label for="floatingPassword">&nbsp&nbsp&nbsp Konfirmasi Password</label>
+                                @if($errors->any()) <small style="color:red">*{{$errors->first('password_confirm')}}</small> @endif
                             </div>
-                        
+
                             <div class="checkbox mb-3 row">
                                 <label class="col-7">
                                     <input type="checkbox" value="remember-me"> Ingat saya
@@ -71,7 +77,7 @@
                                 </label>
                             </div>
                             <button class="w-100 btn btn-sm btn-primary fw-bold" type="submit">Login</button>
-                            <hr style="width: 100%">     
+                            <hr style="width: 100%">
                             <button class="w-100 btn btn-sm btn-light" type="submit">
                                 <img src="{{url('/image/google.png')}}" alt="" width="25" height="25">Login dengan Google
                             </button>

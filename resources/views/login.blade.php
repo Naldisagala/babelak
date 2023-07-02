@@ -8,7 +8,7 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/album/">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="../../public/font/css/all.min.css">
-    
+
     <link rel="stylesheet" href="{{url('/css/style.css')}}">
     <title>Login</title>
 </head>
@@ -22,21 +22,22 @@
         </div>
         <div class="col log" style="height: 100vh!important">
                 <div class="card-body mt-4">
-                    <form> 
+                    <form method="post" action="/login-post">
+                        @csrf()
                         <img class="mb-4 pad" src="{{url('/image/logo_log.png')}}" alt="" width="150" height="57">
                         <h1 class="h3 mb-4 fw-bold">Login</h1>
                         <div class="pad-form">
                             <h6>Email</h6>
                             <div class="form-floating">
-                                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                                <input type="email" class="form-control" name="email" id="floatingInput" placeholder="name@example.com">
                                 <label for="floatingInput">Masukkan Email</label>
                             </div>
                             <h6  class="mt-4">Password</h6>
                             <div class="form-floating">
-                                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                                <input type="password" class="form-control" name="password" id="floatingPassword" placeholder="Password">
                                 <label for="floatingPassword">Password</label>
                             </div>
-                        
+
                             <div class="checkbox mb-3 row">
                                 <label class="col-7">
                                     <input type="checkbox" value="remember-me"> Ingat saya
@@ -46,11 +47,11 @@
                                 </label>
                             </div>
                             <button class="w-100 btn btn-sm btn-primary fw-bold" type="submit">Login</button>
-                            <hr style="width: 100%">     
-                            
+                            <hr style="width: 100%">
+
                             <div style="text-align: center">
                                 <br>
-                                Belum punya akun? <a href="">Daftar</a>
+                                Belum punya akun? <a href="/register-page">Daftar</a>
                             </div>
                         </div>
                     </form>
