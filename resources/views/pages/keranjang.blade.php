@@ -62,7 +62,7 @@
                             </div>
                         </div>
                         <div style="display: flex; align-items: center;">
-                            <span><i class="fas fa-trash-alt"></i></span>
+                            <span><a href="/cart-hapus/{{$items->id}}"><i class="fas fa-trash-alt"></i></a></span>
                         </div>
                     </div>
                     <br>

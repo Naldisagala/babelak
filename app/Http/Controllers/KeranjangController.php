@@ -11,4 +11,14 @@ class KeranjangController extends Controller
         // dd($this->getCart(1));
         return view('pages.keranjang',['keranjang'=> $this->getCart(1)]);
     }
+
+    public function hapus($id)
+    {   
+        $hapus = $this->cartHapus($id);
+        if ($hapus) {
+            return redirect()->back();
+        } else {
+            return redirect()->back();
+        }
+    }
 }

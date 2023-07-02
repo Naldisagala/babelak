@@ -87,4 +87,18 @@ class Controller extends BaseController
         
         return $seller;
     }
+
+    public function cartHapus($id)
+    {
+        $keranjang = Keranjang::find($id);
+    
+        if ($keranjang) {
+            $keranjang->active = 0;
+            $keranjang->save();
+    
+            return true;
+        }
+    
+        return false;
+    }
 }
