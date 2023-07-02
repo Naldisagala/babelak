@@ -17,32 +17,32 @@
     </div>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="{{url('/image/barang.jpg')}}" width="100%" height="260px" alt="" srcset="">
+            <img src="{{url('/image/banner.png')}}" width="100%" height="260px" alt="" srcset="">
             <div class="container">
                 <div class="carousel-caption text-start">
-                    <h1>Example headline.</h1>
-                    <p>Some representative placeholder content for the first slide of the carousel.</p>
-                    <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
+                    <h1 class="crsl-text">TEMUKAN BARANG BERHARGA ANDA</h1>
+                    <p class="crsl-text">Menawarkan berbagai barang yang layak pakai dan terjangkau</p>
+                    <p><a class="btn btn-lg btn-primary" href="../login-page">Gabung bersama kami</a></p>
                 </div>
             </div>
         </div>
         <div class="carousel-item">
-            <img src="{{url('/image/barang.jpg')}}" width="100%" height="260px" alt="" srcset="">
+            <img src="{{url('/image/banner2.png')}}" width="100%" height="260px" alt="" srcset="">
             <div class="container">
                 <div class="carousel-caption">
-                    <h1>Another example headline.</h1>
-                    <p>Some representative placeholder content for the second slide of the carousel.</p>
-                    <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
+                    <h1 class="crsl-text2">SERBA SERBI BARANG RUMAHAN</h1>
+                    <p class="crsl-text2">Situs jual beli online barang baru dan bekas yang mudah dan aman.</p>
+                    <p><br></p>
                 </div>
             </div>
         </div>
       <div class="carousel-item">
-        <img src="{{url('/image/barang.jpg')}}" width="100%" height="260px" alt="" srcset="">
+        <img src="{{url('/image/banner3.png')}}" width="100%" height="260px" alt="" srcset="">
         <div class="container">
           <div class="carousel-caption text-end">
-            <h1>One more for good measure.</h1>
-            <p>Some representative placeholder content for the third slide of this carousel.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
+            <h1 class="crsl-text">JADILAH SELLER BABELAK</h1>
+            <p class="crsl-text">Jangkau seluruh pelanggan setiap harinya</p>
+            <p><br></p>
           </div>
         </div>
       </div>
@@ -71,7 +71,7 @@
                     @endphp
                     <div class="col">
                         <div class="card shadow-sm">
-                            <a href="/barang/{{$item->id}}"><img width="100%" height="100%" src="{{$item->gambar[0]}}" alt="kipas"></a>
+                            <a href="/barang/{{$item->id}}"><img width="100%" height="100%" src="{{$item->gambar[0]}}" alt="barang"></a>
                             <div class="card-body">
                                 <h6>{{$item->nama_barang}}</h6>
                                 <small><i class="fa-solid fa-location-dot"></i> {{$item->alamat->kota}}</small>
@@ -84,7 +84,7 @@
                 @endif
             </div>
             <div style="display: flex; justify-content: center;">
-                <div class="pagination-container">
+                <div class="pagination-container"><br><br><br>
                     <ul class="pagination pagination-lg"> <!-- Tambahkan kelas "pagination-lg" untuk ukuran yang lebih besar -->
                         <!-- Link sebelumnya -->
                         @if ($barang->onFirstPage())
@@ -103,8 +103,8 @@
                                 <li class="disabled"><span>{{ $page->label }}</span></li>
                             @endif
                         @endforeach
-                
-                        <!-- Link selanjutnya -->
+                        
+                        <!-- Link selanjutnya --> 
                         @if ($barang->hasMorePages())
                             <li><a href="{{ $barang->nextPageUrl() }}" rel="next"><i class="fas fa-angle-double-right"></i></a></li> <!-- Gunakan ikon "fa-angle-double-right" dari Font Awesome -->
                         @else

@@ -7,11 +7,15 @@ body{
   margin: auto;
 }
 .kiri{
-  background-color: #CB63A3;
-
+  background-color: #c65299;
+}
+.kiri .imglogo{
+  padding-left: 210px;
+  padding-top: 280px;
 }
 .log{
-  background-color: yellow;
+  background-color: white;
+  margin-left: 0px;
 }
 .pad{
   margin-left: 40%;
@@ -240,3 +244,23 @@ body{
   transition: 0.3s all;
 }
 /* end barang */
+
+/* awal carousel */ 
+.crsl-text{
+  font-weight: bold;
+  color: black;
+  text-shadow: 3px 3px 1px white;
+  
+}
+.crsl-text2{
+  font-weight: bold;
+  color: white;
+  text-shadow: 2px 2px 1px black;
+}
+/* akhirr caraousel */
+
+/* awal footer */ 
+  footer{
+    background-color: #5a23c8;
+  }
+/* akhir footer */

@@ -18,6 +18,7 @@
     <DIV class="row">
         <div class="col kiri">
                 <div class="card-body">
+                    <img class="imglogo" src="{{url('image/logo.png')}}"  alt="">
               </div>
         </div>
         <div class="col log" style="height: 100vh!important">
@@ -50,7 +51,7 @@
                             
                             <div style="text-align: center">
                                 <br>
-                                Belum punya akun? <a href="">Daftar</a>
+                                Belum punya akun? <a href="register-page">Daftar</a>
                             </div>
                         </div>
                     </form>
