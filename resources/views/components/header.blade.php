@@ -32,9 +32,12 @@
                     <li class="nav-item">
                         <a class="nav-link active " href="#"><i class="fa-regular fa-bell"></i></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#"><i
+                    <li class="nav-item dropdown">
+                        <a class="nav-link active " aria-current="page" href="#" data-bs-toggle="dropdown"><i
                                 class="fa-regular fa-user"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                        </ul>
                     </li>
                 </ul>
             @else
