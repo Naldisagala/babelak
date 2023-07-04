@@ -37,6 +37,12 @@
                                 class="fa-regular fa-user"></i></a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                            <li>
+                                <form action="/logout" method="post">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item">Logout</button>
+                                </form>
+                            </li>
                         </ul>
                     </li>
                 </ul>

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,5 +34,10 @@ Route::get('/register-page', function () {
 });
 Route::post('/register-post', 'RegisterController@RegisterUser');
 Route::post('/login-post', 'LoginController@login');
+Route::post('/logout', 'LoginController@logout');
+
+Route::group(['middleware' => ['auth']], function() {
+    Route::get('/profile', 'ProfileController@index');
+});
 
 Auth::routes();

@@ -68,7 +68,7 @@
                         @endphp
                         <div class="col">
                             <div class="card shadow-sm">
-                                <a href="/barang/{{ $item->id }}"><img width="100%" height="100%"
+                                <a href="/barang/{{ $item->id }}"><img class="img-product" width="100%" height="100%"
                                         src="{{ $item->gambar[0] }}" alt="barang"></a>
                                 <div class="card-body">
                                     <h6>{{ $item->nama_barang }}</h6>

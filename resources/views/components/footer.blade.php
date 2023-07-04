@@ -1,11 +1,15 @@
-<footer class="text-body-secondary py-5 footer">
+<footer class="bg-light py-5 footer">
     <div class="container">
         <p class="float-end mb-1">
-            <a href="#">Back to top</a>
+            <a href="#">
+                <i class="fa fa-arrow-up me-3"></i>
+                <span>Back to top</span>
+            </a>
         </p>
-        <p class="mb-1">Album example xxxxxxxis &copy; Bootstrap, but please download and customize it for yourself!
-        </p>
-        <p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a
-                href="/docs/5.3/getting-started/introduction/">getting started guide</a>.</p>
+        <div class="col-6">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minus quis nesciunt assumenda? Quis, voluptas
+            obcaecati exercitationem minus nam repellendus molestiae culpa autem consectetur quidem nobis, optio officia
+            provident. Inventore, optio?
+        </div>
     </div>
 </footer>
