@@ -13,8 +13,8 @@
                 <div class="input-group">
                     <input type="text" name='search' class="form-control src" placeholder="Search"
                         aria-label="Recipient's username" aria-describedby="basic-addon2">
-                    <span class="input-group-text src-icon" id="basic-addon2"><i style="color: white"
-                            class="fa-solid fa-search"></i></span>
+                    <span class="input-group-text src-icon d-flex align-items-center justify-content-center"
+                        id="basic-addon2"><i style="color: white" class="fa-solid fa-search"></i></span>
                 </div>
 
                 <a href="/keranjang" class="btn-cart"><i class="fa-solid fa-cart-shopping"></i></a>
