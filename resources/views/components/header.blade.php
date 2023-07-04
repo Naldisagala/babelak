@@ -26,14 +26,14 @@
             @if (Auth::check())
                 <ul class="navbar-nav mb-md-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#"><i
+                        <a class="nav-link mx-2" aria-current="page" href="#"><i
                                 class="fa-regular fa-envelope"></i></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active " href="#"><i class="fa-regular fa-bell"></i></a>
+                        <a class="nav-link mx-2" href="#"><i class="fa-regular fa-bell"></i></a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link active " aria-current="page" href="#" data-bs-toggle="dropdown"><i
+                        <a class="nav-link mx-2" aria-current="page" href="#" data-bs-toggle="dropdown"><i
                                 class="fa-regular fa-user"></i></a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/profile">Profile</a></li>

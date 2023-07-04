@@ -1,5 +1,5 @@
 <!-- Menghubungkan dengan view template master -->
-@extends('../main')
+@extends('main')
 
 <!-- isi bagian judul halaman -->
 <!-- cara penulisan isi section yang pendek -->
@@ -8,60 +8,56 @@
 
 <!-- isi bagian konten -->
 @section('content')
-
-    <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true"
-                aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    <div class="container">
+        <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true"
+                    aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="{{ url('/image/banner.png') }}" width="100%" height="260px" alt="" srcset="">
+                    <div class="container">
+                        <div class="carousel-caption text-start">
+                            <h1 class="crsl-text">TEMUKAN BARANG BERHARGA ANDA</h1>
+                            <p class="crsl-text">Menawarkan berbagai barang yang layak pakai dan terjangkau</p>
+                            <p><a class="btn btn-lg btn-primary" href="../login-page">Gabung bersama kami</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ url('/image/banner2.png') }}" width="100%" height="260px" alt="" srcset="">
+                    <div class="container">
+                        <div class="carousel-caption">
+                            <h1 class="crsl-text2">SERBA SERBI BARANG RUMAHAN</h1>
+                            <p class="crsl-text2">Situs jual beli online barang baru dan bekas yang mudah dan aman.</p>
+                            <p><br></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ url('/image/banner3.png') }}" width="100%" height="260px" alt="" srcset="">
+                    <div class="container">
+                        <div class="carousel-caption text-end">
+                            <h1 class="crsl-text">JADILAH SELLER BABELAK</h1>
+                            <p class="crsl-text">Jangkau seluruh pelanggan setiap harinya</p>
+                            <p><br></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="{{ url('/image/banner.png') }}" width="100%" height="260px" alt="" srcset="">
-                <div class="container">
-                    <div class="carousel-caption text-start">
-                        <h1 class="crsl-text">TEMUKAN BARANG BERHARGA ANDA</h1>
-                        <p class="crsl-text">Menawarkan berbagai barang yang layak pakai dan terjangkau</p>
-                        <p><a class="btn btn-lg btn-primary" href="../login-page">Gabung bersama kami</a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img src="{{ url('/image/banner2.png') }}" width="100%" height="260px" alt="" srcset="">
-                <div class="container">
-                    <div class="carousel-caption">
-                        <h1 class="crsl-text2">SERBA SERBI BARANG RUMAHAN</h1>
-                        <p class="crsl-text2">Situs jual beli online barang baru dan bekas yang mudah dan aman.</p>
-                        <p><br></p>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img src="{{ url('/image/banner3.png') }}" width="100%" height="260px" alt="" srcset="">
-                <div class="container">
-                    <div class="carousel-caption text-end">
-                        <h1 class="crsl-text">JADILAH SELLER BABELAK</h1>
-                        <p class="crsl-text">Jangkau seluruh pelanggan setiap harinya</p>
-                        <p><br></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
     </div>
-    </div>
-
-
-
-
     <div class="album py-5 bg-body-tertiary">
         <div class="container">
             <div class="row row-cols-1 row-cols-md-5 g-5">

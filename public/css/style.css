@@ -264,3 +264,10 @@ footer {
     background-color: #000;
 }
 /* akhir footer */
+.mt-11 {
+    margin-top: 100px !important;
+}
+
+main {
+    min-height: 733px;
+}

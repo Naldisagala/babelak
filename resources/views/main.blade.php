@@ -51,11 +51,8 @@
 
 <body>
     @include('./components/header')
-    <main>
-
-        <div class="container">
-            <br><br><br><br>
-            @yield('content')
+    <main class="mt-11">
+        @yield('content')
     </main>
 
     @include('./components/footer')
