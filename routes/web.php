@@ -39,6 +39,7 @@ Route::post('/logout', 'LoginController@logout');
 Route::group(['middleware' => ['auth']], function() {
     Route::get('/profile', 'ProfileController@index');
     Route::get('/my-order', 'OrderController@myorder');
+    Route::get('/my-products', 'ProductController@myproducts');
 });
 
 Auth::routes();

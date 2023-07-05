@@ -99,14 +99,14 @@
                                                                         <div class="col-md-12">
                                                                             <hr>
                                                                         </div>
-                                                                        <div class="col-md-7">
+                                                                        <div class="col-md-4">
                                                                             <ul class="list-style-none">
                                                                                 <li><span>Total Pembayaran</span></li>
                                                                                 <li><strong>Rp. 000.000</strong></li>
                                                                             </ul>
                                                                         </div>
                                                                         <div
-                                                                            class="col-md-5 d-flex align-items-center justify-content-end">
+                                                                            class="col-md-8 d-flex align-items-center justify-content-end">
                                                                             <button type="button"
                                                                                 class="btn btn-primary mx-3">Pesanan
                                                                                 Diterima</button>
@@ -152,14 +152,14 @@
                                                                         <div class="col-md-12">
                                                                             <hr>
                                                                         </div>
-                                                                        <div class="col-md-7">
+                                                                        <div class="col-md-4">
                                                                             <ul class="list-style-none">
                                                                                 <li><span>Total Pembayaran</span></li>
                                                                                 <li><strong>Rp. 000.000</strong></li>
                                                                             </ul>
                                                                         </div>
                                                                         <div
-                                                                            class="col-md-5 d-flex align-items-center justify-content-end">
+                                                                            class="col-md-8 d-flex align-items-center justify-content-end">
                                                                             <button type="button"
                                                                                 class="btn btn-primary mx-3">Pesanan
                                                                                 Diterima</button>
@@ -205,14 +205,14 @@
                                                                         <div class="col-md-12">
                                                                             <hr>
                                                                         </div>
-                                                                        <div class="col-md-7">
+                                                                        <div class="col-md-4">
                                                                             <ul class="list-style-none">
                                                                                 <li><span>Total Pembayaran</span></li>
                                                                                 <li><strong>Rp. 000.000</strong></li>
                                                                             </ul>
                                                                         </div>
                                                                         <div
-                                                                            class="col-md-5 d-flex align-items-center justify-content-end">
+                                                                            class="col-md-8 d-flex align-items-center justify-content-end">
                                                                             <button type="button"
                                                                                 class="btn btn-primary mx-3">Pesanan
                                                                                 Diterima</button>
