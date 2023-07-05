@@ -19,7 +19,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/my-order" class="nav-link px-5" aria-selected="false">
+                            <a href="/my-orders" class="nav-link px-5" aria-selected="false">
                                 Pesanan Saya
                             </a>
                         </li>

@@ -19,7 +19,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/my-order" class="nav-link px-5 active" aria-selected="false">
+                            <a href="/my-orders" class="nav-link px-5" aria-selected="false">
                                 Pesanan Saya
                             </a>
                         </li>
@@ -29,7 +29,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/sold-orders" class="nav-link px-5" aria-selected="false">
+                            <a href="/sold-orders" class="nav-link px-5 active" aria-selected="false">
                                 Pesanan Terjual
                             </a>
                         </li>
@@ -76,7 +76,7 @@
                                                                 <div class="card-body bg-light-smoth">
                                                                     <div class="row">
                                                                         <div class="col-md-6">
-                                                                            <h6>Nama Penjual</h6>
+                                                                            <h6>Nama Pembeli</h6>
                                                                         </div>
                                                                         <div class="col-md-6 text-end">
                                                                             <span>Sedang Dikemas</span>

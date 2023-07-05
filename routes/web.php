@@ -38,8 +38,9 @@ Route::post('/logout', 'LoginController@logout');
 
 Route::group(['middleware' => ['auth']], function() {
     Route::get('/profile', 'ProfileController@index');
-    Route::get('/my-order', 'OrderController@myorder');
+    Route::get('/my-orders', 'OrderController@myorders');
     Route::get('/my-products', 'ProductController@myproducts');
+    Route::get('/sold-orders', 'OrderController@soldorders');
 });
 
 Auth::routes();
