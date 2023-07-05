@@ -4,35 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
     public function index()
     {
-
         return view('pages.profile', []);
     }
     
-    public function changeBiodata(Request $request)
-    {
-        $id = auth()->user()->id;
-        $data = $request->validate([
-            'name'             => 'required|max:100',
-            'nip'              => ['required', 'min:3', 'max:30'],
-            'email'            => 'required|email:dns',
-            'sector'           => 'required',
-        ]);
-
-        $user = User::find($id);
-        $user->name   = $data['name'];
-        $user->nip    = $data['nip'];
-        $user->email  = $data['email'];
-        $user->sector = $data['sector'];
-        $user->update();
-
-        return redirect('/profile')->with('sukses', 'Change Biodata successfull!');
-    }
-
     public function changePassword(Request $request)
     {
         $id = auth()->user()->id;

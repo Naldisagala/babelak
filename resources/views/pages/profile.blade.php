@@ -14,22 +14,22 @@
                 <div class="nav-align-top mb-4">
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item">
-                            <a href="/profile" class="nav-link active" aria-selected="true">
+                            <a href="/profile" class="nav-link px-5 active" aria-selected="true">
                                 Profil
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/my-order" class="nav-link" aria-selected="false">
+                            <a href="/my-order" class="nav-link px-5" aria-selected="false">
                                 Pesanan Saya
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/my-products" class="nav-link" aria-selected="false">
+                            <a href="/my-products" class="nav-link px-5" aria-selected="false">
                                 Produk Saya
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/sold-orders" class="nav-link" aria-selected="false">
+                            <a href="/sold-orders" class="nav-link px-5" aria-selected="false">
                                 Pesanan Terjual
                             </a>
                         </li>

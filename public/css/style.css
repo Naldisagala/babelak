@@ -275,3 +275,11 @@ main {
 .img-product {
     min-height: 239.19px;
 }
+
+.list-style-none {
+    list-style-type: none;
+}
+
+.bg-light-smoth {
+    background-color: #f7f2f2;
+}
