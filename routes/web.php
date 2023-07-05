@@ -42,6 +42,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/my-products', 'ProductController@myproducts');
     Route::get('/sold-orders', 'OrderController@soldorders');
     Route::get('/chat', 'ChatController@index');
+    Route::get('/notification', 'NotificationController@index');
 });
 
 Auth::routes();
