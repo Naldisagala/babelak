@@ -48,13 +48,7 @@
 </head>
 
 <body>
-    @include('components/header')
-    <main class="mt-11">
-        @yield('content')
-    </main>
-
-    @include('components/footer')
-
+    @yield('content')
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
@@ -85,7 +79,6 @@
             touch: false
         })
     </script>
-
 </body>
 
 </html>
