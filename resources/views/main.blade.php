@@ -76,6 +76,9 @@
     <script src="/assets/js/main.js"></script>
 
     <!-- Page JS -->
+    <script src="/assets/js/extended-ui-perfect-scrollbar.js"></script>
+
+    <!-- Page JS -->
     <script src="/assets/js/pages-account-settings-account.js"></script>
 
     <!-- Place this tag in your head or just before your close body tag. -->

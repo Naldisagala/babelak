@@ -55,10 +55,7 @@
                                         </tr>
                                     </thead>
                                     <tbody class="table-border-bottom-0">
-                                        @php
-                                            $inc = 6;
-                                        @endphp
-                                        @for ($i = 1; $i <= $inc; $i++)
+                                        @for ($i = 1; $i <= 6; $i++)
                                             <tr>
                                                 <td>{{ $i }}</td>
                                                 <td>ID Product</td>

@@ -62,15 +62,12 @@
                                     </nav>
                                 </div>
                                 <div class="col-md-9">
-                                    @php
-                                        $inc = 5;
-                                    @endphp
                                     <div class="nav-align-top mb-4">
                                         <div class="tab-content">
                                             <div class="tab-pane fade show active" id="order-is-being-packed"
                                                 role="tabpanel">
                                                 <div class="row row-cols-1 row-cols-md-1s g-4 mb-5">
-                                                    @for ($i = 0; $i < $inc; $i++)
+                                                    @for ($i = 0; $i < 5; $i++)
                                                         <div class="col">
                                                             <div class="card w-100">
                                                                 <div class="card-body bg-light-smoth">
@@ -110,9 +107,8 @@
                                                                             <button type="button"
                                                                                 class="btn btn-primary mx-3">Pesanan
                                                                                 Diterima</button>
-                                                                            <button type="button"
-                                                                                class="btn btn-secondary">Chat
-                                                                                Penjual</button>
+                                                                            <a href="/chat" class="btn btn-secondary">Chat
+                                                                                Penjual</a>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -123,7 +119,7 @@
                                             </div>
                                             <div class="tab-pane fade" id="order-delivery" role="tabpanel">
                                                 <div class="row row-cols-1 row-cols-md-1s g-4 mb-5">
-                                                    @for ($i = 0; $i < $inc; $i++)
+                                                    @for ($i = 0; $i < 5; $i++)
                                                         <div class="col">
                                                             <div class="card w-100">
                                                                 <div class="card-body bg-light-smoth">
@@ -163,9 +159,9 @@
                                                                             <button type="button"
                                                                                 class="btn btn-primary mx-3">Pesanan
                                                                                 Diterima</button>
-                                                                            <button type="button"
+                                                                            <a href="/chat" type="button"
                                                                                 class="btn btn-secondary">Chat
-                                                                                Penjual</button>
+                                                                                Penjual</a>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -176,7 +172,7 @@
                                             </div>
                                             <div class="tab-pane fade" id="order-done" role="tabpanel">
                                                 <div class="row row-cols-1 row-cols-md-1s g-4 mb-5">
-                                                    @for ($i = 0; $i < $inc; $i++)
+                                                    @for ($i = 0; $i < 5; $i++)
                                                         <div class="col">
                                                             <div class="card w-100">
                                                                 <div class="card-body bg-light-smoth">
@@ -216,9 +212,9 @@
                                                                             <button type="button"
                                                                                 class="btn btn-primary mx-3">Pesanan
                                                                                 Diterima</button>
-                                                                            <button type="button"
+                                                                            <a href="/chat" type="button"
                                                                                 class="btn btn-secondary">Chat
-                                                                                Penjual</button>
+                                                                                Penjual</a>
                                                                         </div>
                                                                     </div>
                                                                 </div>
