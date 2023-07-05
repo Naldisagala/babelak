@@ -15,6 +15,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ url('/css/style.css') }}">
 
+    <!-- Datatables -->
+    <link rel="stylesheet" href="/css/dataTables.bootstrap4.css">
+
     <!-- Core CSS -->
     <link rel="stylesheet" href="/assets/vendor/css/core.css" class="template-customizer-core-css" />
     <link rel="stylesheet" href="/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
@@ -65,6 +68,78 @@
 
     <script src="/assets/vendor/js/menu.js"></script>
     <!-- endbuild -->
+
+    <!-- jQuery Datatables -->
+    <script src="/plugins/datatables/jquery.dataTables.min.js"></script>
+    <!-- Datatables Bootstrap 4 -->
+    <script src="/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Datatables Extensions -->
+    <script src="/plugins/datatables/extensions/dataTables.buttons.min.js"></script>
+    <script src="/plugins/datatables/extensions/buttons.flash.min.js"></script>
+    <script src="/plugins/datatables/extensions/jszip.min.js"></script>
+    <script src="/plugins/datatables/extensions/pdfmake.js"></script>
+    <script src="/plugins/datatables/extensions/vfs_fonts.js"></script>
+    <script src="/plugins/datatables/extensions/custom.datatables.js"></script>
+    <script src="/plugins/datatables/extensions/jquery.formatNumber-0.1.1.min.js"></script>
+
+    <script>
+        let tbl_count = $("table").find("tr:first th").length;
+        let column_show = []
+        for (let i = 0; i < (tbl_count - 1); i++) {
+            column_show.push(i)
+        }
+        $('.datatables').DataTable({
+            autoWidth: true,
+            "lengthMenu": [
+                [16, 32, 64, -1],
+                [16, 32, 64, "All"]
+            ],
+            dom: 'Bfrtip',
+            buttons: [{
+                    extend: 'excelHtml5'
+                },
+                {
+                    extend: 'pdfHtml5',
+                    exportOptions: {
+                        columns: column_show
+                    }
+                },
+            ]
+        });
+
+
+        $('.datatables-not-order').DataTable({
+            autoWidth: true,
+            "ordering": false,
+            "lengthMenu": [
+                [16, 32, 64, -1],
+                [16, 32, 64, "All"]
+            ]
+        });
+
+        let table_collapse = $('.datatables-collapse').DataTable({
+            autoWidth: true,
+            "lengthMenu": [
+                [16, 32, 64, -1],
+                [16, 32, 64, "All"]
+            ]
+        });
+        $('.datatables-collapse tbody').on('click', 'td:first-child.main', function() {
+            var tr = $(this).closest('tr');
+            var row = table_collapse.row(tr);
+
+            if (row.child.isShown()) {
+                // This row is already open - close it.
+                row.child.hide();
+                tr.removeClass('shown');
+            } else {
+                // Open row.
+                row.child('ok').show();
+                tr.addClass('shown');
+            }
+        });
+    </script>
 
     <!-- Main JS -->
     <script src="/assets/js/main.js"></script>

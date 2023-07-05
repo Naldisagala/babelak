@@ -1,5 +1,5 @@
 <!-- Menghubungkan dengan view template master -->
-@extends('auth.main')
+@extends('layouts.auth.main')
 
 <!-- isi bagian judul halaman -->
 <!-- cara penulisan isi section yang pendek -->

@@ -1,5 +1,5 @@
 <!-- Menghubungkan dengan view template master -->
-@extends('main')
+@extends('layouts.main')
 
 <!-- isi bagian judul halaman -->
 <!-- cara penulisan isi section yang pendek -->

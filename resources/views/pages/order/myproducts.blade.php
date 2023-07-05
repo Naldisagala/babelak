@@ -1,9 +1,9 @@
 <!-- Menghubungkan dengan view template master -->
-@extends('main')
+@extends('layouts.main')
 
 <!-- isi bagian judul halaman -->
 <!-- cara penulisan isi section yang pendek -->
-@section('title', 'Pesanan Saya')
+@section('title', 'Produk Saya')
 
 
 <!-- isi bagian konten -->
@@ -43,7 +43,7 @@
                                 </button>
                             </div>
                             <div class="table-responsive text-nowrap">
-                                <table class="table">
+                                <table class="table datatables">
                                     <thead class="bg-light-smoth">
                                         <tr>
                                             <th>No.</th>
