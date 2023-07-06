@@ -16,4 +16,9 @@ class AdminController extends Controller
     {
         return view('pages.admin.users', []);
     }
+
+    public function userDetail($id)
+    {
+        return view('pages.admin.user_detail', []);
+    }
 }

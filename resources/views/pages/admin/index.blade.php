@@ -56,7 +56,7 @@
                                                     <td>
                                                         <div class="row">
                                                             <div class="col-2">
-                                                                <img width="75" src="/image/default.jpg" alt="Avatar">
+                                                                <img width="75" src="/image/default.jpg" alt="Default">
                                                             </div>
                                                             <div class="col-10 d-flex btn-group-vertical">
                                                                 <span class="ms-3"><strong>Nama Barang</strong></span>
@@ -65,8 +65,9 @@
                                                         </div>
                                                     </td>
                                                     <td class="text-end">
-                                                        <button type="button" name="view" id="view"
-                                                            class="btn btn-primary w-50">Lihat</button>
+                                                        <a href="/{{ env('URL_ADMIN', 'admin') }}/items-enter/{{ $i }}"
+                                                            name="view" id="view"
+                                                            class="btn btn-primary w-50">Lihat</a>
                                                     </td>
                                                 </tr>
                                             @endfor

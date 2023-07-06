@@ -29,12 +29,12 @@
             </a>
 
             <ul class="menu-sub">
-                <li class="menu-item">
+                <li class="menu-item {{ $active == 'product-validation' ? 'active' : '' }}">
                     <a href="/{{ env('URL_ADMIN', 'admin') }}/product-validation" class="menu-link">
                         <div data-i18n="Without menu">Validasi Barang</div>
                     </a>
                 </li>
-                <li class="menu-item">
+                <li class="menu-item {{ $active == 'booking' ? 'active' : '' }}">
                     <a href="/{{ env('URL_ADMIN', 'admin') }}/booking" class="menu-link">
                         <div data-i18n="Without navbar">Pemesanan</div>
                     </a>
@@ -42,12 +42,12 @@
             </ul>
         </li>
 
-        <li class="menu-item">
+        <li class="menu-item {{ $active == 'payment-confirmation' ? 'active' : '' }}">
             <a href="/{{ env('URL_ADMIN', 'admin') }}/payment-confirmation" class="menu-link">
                 <div data-i18n="Analytics">Konfirmasi Pembayaran</div>
             </a>
         </li>
-        <li class="menu-item">
+        <li class="menu-item {{ $active == 'report-finance' ? 'active' : '' }}">
             <a href="/{{ env('URL_ADMIN', 'admin') }}/report-finance" class="menu-link">
                 <div data-i18n="Analytics">Laporan Keuangan</div>
             </a>

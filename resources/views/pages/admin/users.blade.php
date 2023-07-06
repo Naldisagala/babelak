@@ -31,7 +31,7 @@
                                     </tr>
                                 </thead>
                                 <tbody class="table-border-bottom-0">
-                                    @for ($i = 1; $i <= 6; $i++)
+                                    @for ($i = 1; $i <= 20; $i++)
                                         <tr>
                                             <td>{{ $i }}</td>
                                             <td>
@@ -48,12 +48,10 @@
                                             <td class="text-center">{{ $i + rand(1, 10) }}</td>
                                             <td class="text-center">Aktif</td>
                                             <td class="text-end">
-                                                <button type="button" class="btn btn-primary mx-2">
+                                                <a href="/{{ env('URL_ADMIN', 'admin') }}/users/{{ $i }}"
+                                                    class="btn btn-primary mx-2">
                                                     <i class="fa fa-eye"></i>
-                                                </button>
-                                                <button type="button" class="btn btn-outline-primary mx-2">
-                                                    <i class="fa fa-trash"></i>
-                                                </button>
+                                                </a>
                                             </td>
                                         </tr>
                                     @endfor
