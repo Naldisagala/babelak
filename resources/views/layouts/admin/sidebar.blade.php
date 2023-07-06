@@ -12,27 +12,30 @@
     <div class="menu-inner-shadow"></div>
 
     <ul class="menu-inner py-1">
-        <li class="menu-item">
-            <a href="/dashboard" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+        <li class="menu-item {{ $active == 'dashboard' ? 'active' : '' }}">
+            <a href="/{{ env('URL_ADMIN', 'admin') }}/dashboard" class="menu-link">
                 <div data-i18n="Analytics">Beranda</div>
+            </a>
+        </li>
+        <li class="menu-item {{ $active == 'users' ? 'active' : '' }}">
+            <a href="/{{ env('URL_ADMIN', 'admin') }}/users" class="menu-link">
+                <div data-i18n="Analytics">Data Pengguna</div>
             </a>
         </li>
 
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-layout"></i>
                 <div data-i18n="Layouts">Barang</div>
             </a>
 
             <ul class="menu-sub">
                 <li class="menu-item">
-                    <a href="/product-validation" class="menu-link">
+                    <a href="/{{ env('URL_ADMIN', 'admin') }}/product-validation" class="menu-link">
                         <div data-i18n="Without menu">Validasi Barang</div>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="/booking" class="menu-link">
+                    <a href="/{{ env('URL_ADMIN', 'admin') }}/booking" class="menu-link">
                         <div data-i18n="Without navbar">Pemesanan</div>
                     </a>
                 </li>
@@ -40,14 +43,12 @@
         </li>
 
         <li class="menu-item">
-            <a href="/payment-confirmation" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+            <a href="/{{ env('URL_ADMIN', 'admin') }}/payment-confirmation" class="menu-link">
                 <div data-i18n="Analytics">Konfirmasi Pembayaran</div>
             </a>
         </li>
         <li class="menu-item">
-            <a href="/report-finance" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+            <a href="/{{ env('URL_ADMIN', 'admin') }}/report-finance" class="menu-link">
                 <div data-i18n="Analytics">Laporan Keuangan</div>
             </a>
         </li>

@@ -2,13 +2,29 @@
     id="layout-navbar">
     <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
         <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
-            <i class="bx bx-menu bx-sm"></i>
+            <i class="fa fa-bars"></i>
         </a>
     </div>
 
     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
 
         <ul class="navbar-nav flex-row align-items-center ms-auto">
+
+            <li class="btn-group">
+                <button type="button" class="btn btn-white btn-icon rounded-pill dropdown-toggle hide-arrow"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-bell"></i>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end" style="">
+                    <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
+                    <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
+                    <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
+                </ul>
+            </li>
 
             <!-- User -->
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
@@ -38,8 +54,8 @@
                     </li>
                     <li>
                         <a class="dropdown-item" href="auth-login-basic.html">
-                            <i class="bx bx-power-off me-2"></i>
-                            <span class="align-middle">Log Out</span>
+                            <i class="fa fa-power-off me-2"></i>
+                            <span>Log Out</span>
                         </a>
                     </li>
                 </ul>

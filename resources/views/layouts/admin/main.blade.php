@@ -138,6 +138,25 @@
             ]
         });
 
+        $('.datatables-simple').DataTable({
+            autoWidth: true,
+            "lengthMenu": [
+                [5, 10, 20, 50, -1],
+                [5, 10, 20, 50, "All"]
+            ],
+            dom: 'Bfrtip',
+            buttons: [{
+                    extend: 'excelHtml5'
+                },
+                {
+                    extend: 'pdfHtml5',
+                    exportOptions: {
+                        columns: column_show
+                    }
+                },
+            ]
+        });
+
 
         $('.datatables-not-order').DataTable({
             autoWidth: true,

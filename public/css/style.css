@@ -284,6 +284,10 @@ main {
     background-color: #f7f2f2;
 }
 
+.bg-light-grey {
+    background-color: rgba(105, 108, 255, 0.16) !important;
+}
+
 .text-short-summary {
     overflow: hidden;
     display: -webkit-box;

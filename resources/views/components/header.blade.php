@@ -36,7 +36,8 @@
                         <a class="nav-link mx-2" aria-current="page" href="#" data-bs-toggle="dropdown"><i
                                 class="fa-regular fa-user"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/admin">Admin</a></li>
+                            <li><a class="dropdown-item" href="/{{ env('URL_ADMIN', 'admin') }}/dashboard">Admin</a>
+                            </li>
                             <li><a class="dropdown-item" href="/profile">Profile</a></li>
                             <li>
                                 <form action="/logout" method="post">

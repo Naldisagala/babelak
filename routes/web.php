@@ -43,7 +43,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/sold-orders', 'OrderController@soldorders');
     Route::get('/chat', 'ChatController@index');
     Route::get('/notification', 'NotificationController@index');
-    Route::get('/admin', 'AdminController@index');
+
+    // admin
+    Route::get('/'.env("URL_ADMIN", 'admin').'/dashboard', 'AdminController@index');
+    Route::get('/'.env("URL_ADMIN", 'admin').'/users', 'AdminController@users');
 });
 
 Auth::routes();
