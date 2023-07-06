@@ -1,6 +1,6 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo my-5">
-        <a href="index.html" class="app-brand-link">
+        <a href="" class="app-brand-link">
             <img class="imglogo" src="{{ url('image/logo_log.png') }}" alt="">
         </a>
 
@@ -29,8 +29,8 @@
             </a>
 
             <ul class="menu-sub">
-                <li class="menu-item {{ $active == 'product-validation' ? 'active' : '' }}">
-                    <a href="/{{ env('URL_ADMIN', 'admin') }}/product-validation" class="menu-link">
+                <li class="menu-item {{ $active == 'items-enter' ? 'active' : '' }}">
+                    <a href="/{{ env('URL_ADMIN', 'admin') }}/items-enter" class="menu-link">
                         <div data-i18n="Without menu">Validasi Barang</div>
                     </a>
                 </li>

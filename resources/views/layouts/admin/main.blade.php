@@ -119,7 +119,7 @@
         for (let i = 0; i < (tbl_count - 1); i++) {
             column_show.push(i)
         }
-        $('.datatables').DataTable({
+        let oTable = $('.datatables').DataTable({
             autoWidth: true,
             "lengthMenu": [
                 [10, 16, 32, 64, -1],
@@ -138,7 +138,7 @@
             ]
         });
 
-        $('.datatables-simple').DataTable({
+        let oTableSimple = $('.datatables-simple').DataTable({
             autoWidth: true,
             "lengthMenu": [
                 [5, 10, 20, 50, -1],
@@ -158,7 +158,8 @@
         });
 
 
-        $('.datatables-not-order').DataTable({
+
+        let oTableNotOrder = $('.datatables-not-order').DataTable({
             autoWidth: true,
             "ordering": false,
             "lengthMenu": [
@@ -166,6 +167,12 @@
                 [16, 32, 64, "All"]
             ]
         });
+
+        $('#search-header').keyup(function() {
+            oTable.search($(this).val()).draw();
+            oTableSimple.search($(this).val()).draw();
+            oTableNotOrder.search($(this).val()).draw();
+        })
 
         let table_collapse = $('.datatables-collapse').DataTable({
             autoWidth: true,

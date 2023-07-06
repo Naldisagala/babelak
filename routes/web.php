@@ -48,6 +48,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/'.env("URL_ADMIN", 'admin').'/dashboard', 'AdminController@index');
     Route::get('/'.env("URL_ADMIN", 'admin').'/users', 'AdminController@users');
     Route::get('/'.env("URL_ADMIN", 'admin').'/users/{id}', 'AdminController@userDetail');
+    Route::get('/'.env("URL_ADMIN", 'admin').'/items-enter', 'ProductController@itemsEnter');
+    Route::get('/'.env("URL_ADMIN", 'admin').'/item-validation/{id}', 'ProductController@productValidation');
+    Route::get('/'.env("URL_ADMIN", 'admin').'/booking', 'ProductController@booking');
 });
 
 Auth::routes();

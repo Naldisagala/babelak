@@ -10,7 +10,7 @@
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="fw-bold py-3 mb-4">
-            Dashboard
+            @yield('title')
         </h4>
 
         <div class="row">
@@ -65,7 +65,7 @@
                                                         </div>
                                                     </td>
                                                     <td class="text-end">
-                                                        <a href="/{{ env('URL_ADMIN', 'admin') }}/items-enter/{{ $i }}"
+                                                        <a href="/{{ env('URL_ADMIN', 'admin') }}/item-validation/{{ $i }}"
                                                             name="view" id="view"
                                                             class="btn btn-primary w-50">Lihat</a>
                                                     </td>

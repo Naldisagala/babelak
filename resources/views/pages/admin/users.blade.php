@@ -3,14 +3,14 @@
 
 <!-- isi bagian judul halaman -->
 <!-- cara penulisan isi section yang pendek -->
-@section('title', 'Dashboard')
+@section('title', 'Data Pengguna')
 
 
 <!-- isi bagian konten -->
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="fw-bold py-3 mb-4">
-            Data Pengguna
+            @yield('title')
         </h4>
 
         <div class="row">
