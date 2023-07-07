@@ -10,7 +10,7 @@
                 <img class="img-size hidden md:block" src="{{ url('/image/logo.png') }}" alt="logo">
                 <img width="20" class="block md:hidden" src="{{ url('/image/Logo_white.svg') }}" alt="logo">
             </a>
-            <form class="d-flex w-50" action="?search=" method="GET">
+            <form class="d-flex w-55 md:w-35" action="?search=" method="GET">
                 <div class="input-group">
                     <input type="text" name='search' class="form-control src rounded-start-20 -me-20 pe-4"
                         placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
