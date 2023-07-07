@@ -14,53 +14,43 @@
         </h4>
 
         <div class="row">
-            <!-- Basic Buttons -->
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-body">
-                        <div class="table-responsive text-nowrap">
-                            <table class="table datatables">
-                                <thead class="bg-light-smoth">
-                                    <tr>
-                                        <th class="text-center">No.</th>
-                                        <th class="text-center">ID</th>
-                                        <th class="text-center">Nama Barang</th>
-                                        <th class="text-center">Nama</th>
-                                        <th class="text-center">Harga</th>
-                                        <th class="text-center">Status Pemakaian</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody class="table-border-bottom-0">
-                                    @for ($i = 1; $i <= 20; $i++)
-                                        <tr>
-                                            <td class="text-center">{{ $i }}</td>
-                                            <td class="text-center">
-                                                <span>ID_P</span>
-                                            </td>
-                                            <td class="text-center">
-                                                <span>Nama Barang</span>
-                                            </td>
-                                            <td class="text-center">
-                                                <span>{{ chr(rand(97, 122)) }}</span>
-                                            </td>
-                                            <td class="text-center">
-                                                <span>Rp. 000.000</span>
-                                            </td>
-                                            <td class="text-center">
-                                                <span>Baik</span>
-                                            </td>
-                                            <td class="text-end">
-                                                <a href="/{{ env('URL_ADMIN', 'admin') }}/item-validation/{{ $i }}"
-                                                    class="btn btn-primary mx-2">
-                                                    Check
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    @endfor
-
-                                </tbody>
-                            </table>
+                        <div class="row row-cols-1 row-cols-md-1s g-4 mb-5">
+                            @for ($i = 0; $i < 5; $i++)
+                                <div class="col">
+                                    <div class="card w-100">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <img width="130" class="rounded-circle"
+                                                        src="/image/default.jpg"
+                                                        alt="Card image cap">
+                                                </div>
+                                                <div
+                                                    class="col-md-7 d-flex align-items-center justify-content-start">
+                                                    <ul class="list-style-none">
+                                                        <li><strong>Nama Barang</strong></li>
+                                                        <li><strong>Rp. 000.000</strong></li>
+                                                        <li><span>Nama Pembeli</span></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-md-3 text-end">
+                                                    <span>Nama Penjual</span>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <hr>
+                                                </div>
+                                                <div
+                                                    class="col-md-12 d-flex align-items-center justify-content-end">
+                                                    <span>tanggal, waktu</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endfor
                         </div>
                     </div>
                 </div>
