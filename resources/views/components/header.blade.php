@@ -7,13 +7,15 @@
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg">
         <div class="container">
             <a class="navbar-brand" href="/home">
-                <img class="img-size" src="{{ url('/image/logo.png') }}" alt="logo">
+                <img class="img-size hidden md:block" src="{{ url('/image/logo.png') }}" alt="logo">
+                <img width="20" class="block md:hidden" src="{{ url('/image/Logo_white.svg') }}" alt="logo">
             </a>
-            <form class="d-flex" action="?search=" method="GET">
+            <form class="d-flex w-50" action="?search=" method="GET">
                 <div class="input-group">
-                    <input type="text" name='search' class="form-control src rounded-start-20 -me-20 pe-4" placeholder="Search"
-                        aria-label="Recipient's username" aria-describedby="basic-addon2">
-                    <span class="input-group-text src-icon d-flex align-items-center justify-content-center rounded-circle-20 z-index-20"
+                    <input type="text" name='search' class="form-control src rounded-start-20 -me-20 pe-4"
+                        placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                    <span
+                        class="input-group-text src-icon d-flex align-items-center justify-content-center rounded-circle-20 z-index-20"
                         id="basic-addon2"><i style="color: white" class="fa-solid fa-search"></i></span>
                 </div>
 
@@ -24,7 +26,7 @@
                 @endif
             </form>
             @if (Auth::check())
-                <ul class="navbar-nav mb-md-0">
+                <ul class="navbar-nav mb-md-0 flex-row">
                     <li class="nav-item">
                         <a class="nav-link mx-2" aria-current="page" href="#"><i
                                 class="fa-regular fa-envelope"></i></a>

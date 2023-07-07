@@ -122,9 +122,29 @@ body {
     user-select: none;
 }
 
+.hidden {
+    display: none;
+}
+
+.block {
+    display: block;
+}
+
 @media (min-width: 768px) {
     .bd-placeholder-img-lg {
         font-size: 3.5rem;
+    }
+
+    .md\:block {
+        display: block;
+    }
+
+    .md\:hidden {
+        display: none;
+    }
+
+    .md\:w-100 {
+        width: 100%;
     }
 }
 
@@ -356,19 +376,27 @@ div.dt-filter-spacer {
     margin: 10px 0;
 }
 
-.z-index-20{
+.z-index-20 {
     z-index: 20;
 }
 
-.-me-20{
+.-me-20 {
     margin-right: -20px;
 }
 
-.rounded-circle-20{
-    border-radius: 20px!important;
+.rounded-circle-20 {
+    border-radius: 20px !important;
 }
 
-.rounded-start-20{
-    border-top-left-radius: 20px!important;
-    border-bottom-left-radius: 20px!important;
+.rounded-start-20 {
+    border-top-left-radius: 20px !important;
+    border-bottom-left-radius: 20px !important;
+}
+
+.d-absolute {
+    position: absolute;
+}
+
+.flex-row {
+    flex-direction: row !important;
 }

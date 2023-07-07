@@ -10,14 +10,14 @@
     @endphp
     <div class="container">
         <div class="row">
-            <div class="col-4">
+            <div class="col-md-4">
                 <div class="card">
-                    <div class="card-body">
-                        <img class="img-barang" src="{{ $barang->gambar[0] }}" style="max-width: 350px">
+                    <div class="card-body d-flex align-items-center justify-content-center">
+                        <img class="img-barang w-100" src="{{ $barang->gambar[0] }}" style="max-width: 350px">
                     </div>
                 </div>
             </div>
-            <div class="col-8">
+            <div class="col-md-8">
                 <div class="card">
                     <div class="card-body">
                         <h2><b>{{ $barang->nama_barang }}</b></h2>
