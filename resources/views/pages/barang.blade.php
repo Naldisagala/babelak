@@ -11,7 +11,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-                <div class="card">
+                <div class="card h-100">
                     <div class="card-body d-flex align-items-center justify-content-center">
                         <img class="img-barang w-100" src="{{ $barang->gambar[0] }}" style="max-width: 350px">
                     </div>
@@ -20,22 +20,27 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-body">
-                        <h2><b>{{ $barang->nama_barang }}</b></h2>
-                        <h5>{{ 'Rp ' . number_format($barang->harga, 0, ',', '.') }}</h5>
+                        <h5><b>{{ $barang->nama_barang }}</b></h5>
+                        <h2><strong>{{ 'Rp ' . number_format($barang->harga, 0, ',', '.') }}</strong></h2>
                         <br><br>
-                        <p><i class="fa fa-check"></i> <b>Tingkat
-                                Pemakaian</b><br><small>{{ $barang->status_barang }}</small>
+                        <p>
+                            <i class="fa fa-check me-3"></i>
+                            <b>Tingkat Pemakaian</b><br>
+                            <small>{{ $barang->status_barang }}</small>
                         </p>
-                        <p><i class="fa fa-location-dot"></i>
-                            <b>Lokasi</b><br><small>{{ $barang->seller->alamat->kota }}</small>
+                        <p>
+                            <i class="fa fa-location-dot me-3"></i>
+                            <b>Lokasi</b><br>
+                            <small>{{ $barang->seller->alamat->kota }}</small>
                         </p>
-                        <p><i class="fa fa-credit-card"></i> <b>Pembayaran yang dipakai</b><br><small>Semua Metode</small>
+                        <p>
+                            <i class="fa fa-credit-card  me-3"></i>
+                            <b>Pembayaran yang dipakai</b><br>
+                            <small>Semua Metode</small>
                         </p>
-                        <div class="">
-                            <button class="btn btn-default"
-                                style="background: #C65299!important;color:white;width:200px">Beli</button>
-                            <button class="btn btn-default" style="background: #C65299!important;color:white"><i
-                                    class="fa-solid fa-cart-shopping"></i></button>
+                        <div class="mt-5">
+                            <button class="btn btn-primary w-50 me-3">Beli</button>
+                            <button class="btn btn-primary"><i class="fa-solid fa-cart-shopping"></i></button>
                         </div>
                     </div>
                 </div>
@@ -43,24 +48,33 @@
         </div>
 
         <div class="row mt-4">
-            <div class="col">
-                <div class="card">
+            <div class="col-md-6">
+                <div class="card h-100">
                     <div class="card-body">
                         <h5 class="card-title"><b>Deskripsi Barang</b></h5>
                         <p class="card-text">{{ $barang->deskripsi }}</p>
                     </div>
                 </div>
             </div>
-            <div class="col">
-                <div class="card">
+            <div class="col-md-6">
+                <div class="card h-100">
                     <div class="card-body">
-                        <h5 class="card-title"><b><img src="{{ url('/image/bangku_kecil.jpeg') }}"
-                                    class="barang-img-profile" alt="" srcset="">
-                                {{ $barang->seller->nama_toko }}</b> <br><small
-                                style="font-size: 12px">{{ $barang->seller->alamat->kota }}</small></h5>
-                        <div class="chat-area-barang" style="display: flex; flex-direction: column-reverse;padding:10px;">
+                        <h5 class="card-title">
+                            <div class="row">
+                                <div class="col-1">
+                                    <img src="{{ url('/image/bangku_kecil.jpeg') }}" class="barang-img-profile"
+                                        alt="Penjual">
+                                </div>
+                                <div class="col-11 ps-4">
+                                    <h5><strong>{{ $barang->seller->nama_toko }}</strong></h5>
+                                    <small style="font-size: 12px">{{ $barang->seller->alamat->kota }}</small>
+                                </div>
+                            </div>
+                        </h5>
+                        <div class="chat-area-barang mt-4"
+                            style="display: flex; flex-direction: column-reverse;padding:10px;">
                             @if ($barang->status_tawar == 'no')
-                                <span style="text-align: center;color:white;font-weight:600">Barang Tidak Dapat
+                                <span class="text-center text-white fw-bold">Barang Tidak Dapat
                                     Ditawar</span>
                             @else
                                 <form action="/tawar/1/{{ $barang->seller->id }}/{{ $barang->id }}/null" method="POST">
