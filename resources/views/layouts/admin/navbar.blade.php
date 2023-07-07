@@ -62,10 +62,13 @@
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="auth-login-basic.html">
-                            <i class="fa fa-power-off me-2"></i>
-                            <span>Log Out</span>
-                        </a>
+                        <form action="/logout" method="post">
+                            @csrf
+                            <button type="submit" class="dropdown-item">
+                                <i class="fa fa-power-off me-2"></i>
+                                <span>Log Out</span>
+                            </button>
+                        </form>
                     </li>
                 </ul>
             </li>

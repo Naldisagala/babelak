@@ -26,17 +26,17 @@
                         <p>
                             <i class="fa fa-check me-3"></i>
                             <b>Tingkat Pemakaian</b><br>
-                            <small>{{ $barang->status_barang }}</small>
+                            <small class="ms-4 ps-2">{{ $barang->status_barang }}</small>
                         </p>
                         <p>
                             <i class="fa fa-location-dot me-3"></i>
                             <b>Lokasi</b><br>
-                            <small>{{ $barang->seller->alamat->kota }}</small>
+                            <small class="ms-4 ps-2">{{ $barang->seller->alamat->kota }}</small>
                         </p>
                         <p>
                             <i class="fa fa-credit-card  me-3"></i>
                             <b>Pembayaran yang dipakai</b><br>
-                            <small>Semua Metode</small>
+                            <small class="ms-4 ps-2">Semua Metode</small>
                         </p>
                         <div class="mt-5">
                             <button class="btn btn-primary w-50 me-3">Beli</button>

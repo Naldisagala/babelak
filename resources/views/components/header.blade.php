@@ -44,7 +44,7 @@
                             <li>
                                 <form action="/logout" method="post">
                                     @csrf
-                                    <button type="submit" class="dropdown-item">Logout</button>
+                                    <button type="submit" class="dropdown-item">Log Out</button>
                                 </form>
                             </li>
                         </ul>
@@ -52,10 +52,12 @@
                 </ul>
             @else
                 <div>
-                    <a style="background: #D98CBB!important;color:white" href="/login-page"
-                        class="btn btn-info">Login</a>
-                    <a style="background: white!important;color:#D98CBB" href="/register-page"
-                        class="btn btn-info">Register</a>
+                    <a href="/login-page" class="btn btn-login me-2 mobile:hidden md:block">Login</a>
+                    <a href="/register-page" class="btn btn-regist mobile:hidden md:block">Register</a>
+                    <a href="/login-page" class="btn btn-login me-2 mobile:block md:hidden"><i
+                            class="fa fa-right-to-bracket"></i></a>
+                    <a href="/register-page" class="btn btn-regist mobile:block md:hidden"><i
+                            class="fa fa-user"></i></a>
                 </div>
             @endif
 

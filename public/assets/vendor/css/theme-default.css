@@ -241,6 +241,32 @@ button.list-group-item-primary.active {
     color: #435971;
 }
 
+.btn-login {
+    color: #fff;
+    background-color: #d98cbb;
+    border-color: #d98cbb;
+    box-shadow: 0 0.125rem 0.25rem 0 rgba(105, 108, 255, 0.4);
+}
+.btn-login:hover {
+    color: #fff;
+    background-color: #bf75a3;
+    border-color: #bf75a3;
+    transform: translateY(-1px);
+}
+
+.btn-regist {
+    color: #d98cbb;
+    background-color: #ffffff;
+    border-color: #ffffff;
+    box-shadow: 0 0.125rem 0.25rem 0 rgba(105, 108, 255, 0.4);
+}
+.btn-regist:hover {
+    color: #d98cbb;
+    background-color: #f0e0e0;
+    border-color: #f0e0e0;
+    transform: translateY(-1px);
+}
+
 .btn-primary {
     color: #fff;
     background-color: #c65299;
