@@ -125,7 +125,26 @@
                 [10, 16, 32, 64, -1],
                 [10, 16, 32, 64, "All"]
             ],
-            dom: 'Bfrtip',
+            dom: '<"dt-top-container"<l><"dt-center-in-div"B><f>r>t<"dt-filter-spacer"f><ip>',
+            buttons: [{
+                    extend: 'excelHtml5'
+                },
+                {
+                    extend: 'pdfHtml5',
+                    exportOptions: {
+                        columns: column_show
+                    }
+                },
+            ]
+        });
+
+        let oTableReport = $('.datatables-report').DataTable({
+            autoWidth: true,
+            "lengthMenu": [
+                [-1, 10, 20, 30, 50, 60, 70, 80, 90, 100],
+                ["All", 10, 20, 30, 50, 60, 70, 80, 90, 100]
+            ],
+            dom: '<"dt-top-container"<l><"dt-center-in-div"B><f>r>t<"dt-filter-spacer"f><ip>',
             buttons: [{
                     extend: 'excelHtml5'
                 },
@@ -170,6 +189,7 @@
 
         $('#search-header').keyup(function() {
             oTable.search($(this).val()).draw();
+            oTableReport.search($(this).val()).draw();
             oTableSimple.search($(this).val()).draw();
             oTableNotOrder.search($(this).val()).draw();
         })

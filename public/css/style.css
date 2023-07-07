@@ -339,3 +339,19 @@ main {
     border-color: #8e5299;
     transform: translateY(-1px);
 }
+
+div.dt-top-container {
+    display: flex;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+div.dt-center-in-div {
+    margin: 0 auto;
+    width: 100%;
+    margin-left: 20px;
+}
+
+div.dt-filter-spacer {
+    margin: 10px 0;
+}

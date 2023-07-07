@@ -1,9 +1,9 @@
 <!-- Menghubungkan dengan view template master -->
-@extends('layouts.admin.main', ['active' => 'booking'])
+@extends('layouts.admin.main', ['active' => 'payment-confirmation'])
 
 <!-- isi bagian judul halaman -->
 <!-- cara penulisan isi section yang pendek -->
-@section('title', 'Pemesanan Diterima')
+@section('title', 'Pembayaran Selesai')
 
 
 <!-- isi bagian konten -->
@@ -40,8 +40,11 @@
                                                 <div class="col-md-12">
                                                     <hr>
                                                 </div>
-                                                <div class="col-md-12 d-flex align-items-center justify-content-end">
+                                                <div class="col-md-6">
                                                     <span>tanggal, waktu</span>
+                                                </div>
+                                                <div class="col-md-6 d-flex align-items-center justify-content-end">
+                                                    <button type="button" class="btn btn-primary">Done</button>
                                                 </div>
                                             </div>
                                         </div>
