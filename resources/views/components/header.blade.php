@@ -11,13 +11,13 @@
             </a>
             <form class="d-flex" action="?search=" method="GET">
                 <div class="input-group">
-                    <input type="text" name='search' class="form-control src" placeholder="Search"
+                    <input type="text" name='search' class="form-control src rounded-start-20 -me-20 pe-4" placeholder="Search"
                         aria-label="Recipient's username" aria-describedby="basic-addon2">
-                    <span class="input-group-text src-icon d-flex align-items-center justify-content-center"
+                    <span class="input-group-text src-icon d-flex align-items-center justify-content-center rounded-circle-20 z-index-20"
                         id="basic-addon2"><i style="color: white" class="fa-solid fa-search"></i></span>
                 </div>
 
-                <a href="/keranjang" class="btn-cart"><i class="fa-solid fa-cart-shopping"></i></a>
+                <a href="/keranjang" class="btn-cart mx-4"><i class="fa-solid fa-cart-shopping"></i></a>
                 @if ($count > 0)
                     <span
                         style="margin-left:-25px;margin-top:5px;color:white;display:inline-block;width:15px;height:15px;border-radius:50%;background:#C65299;padding:2px;text-align:center;font-size:10px;"><b>{{ $count }}</b></span>

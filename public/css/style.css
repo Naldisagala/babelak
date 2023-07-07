@@ -355,3 +355,20 @@ div.dt-center-in-div {
 div.dt-filter-spacer {
     margin: 10px 0;
 }
+
+.z-index-20{
+    z-index: 20;
+}
+
+.-me-20{
+    margin-right: -20px;
+}
+
+.rounded-circle-20{
+    border-radius: 20px!important;
+}
+
+.rounded-start-20{
+    border-top-left-radius: 20px!important;
+    border-bottom-left-radius: 20px!important;
+}
