@@ -68,6 +68,7 @@ Route::group(['middleware' => ['buyer-seller']], function() {
     Route::post('/change-password', 'ProfileController@changePassword');
     Route::get('/chat', 'ChatController@index');
     Route::get('/notification', 'NotificationController@index');
+    Route::post('/ajax-region', 'ProductController@ajaxRegion');
 });
 
 Auth::routes();
