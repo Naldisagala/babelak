@@ -52,6 +52,11 @@ class User extends Authenticatable
         return $this->hasMany(Tawar::class, 'id_user', 'id');
     }
 
+    public function detail()
+    {
+        return $this->hasMany(UserDetail::class);
+    }
+
     public function isAdmin()
     {
         if($this->role === 'admin') { 
@@ -70,7 +75,6 @@ class User extends Authenticatable
             return false; 
         }
     }
-
 
     public function isBuyer()
     {

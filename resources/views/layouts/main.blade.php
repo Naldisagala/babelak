@@ -110,6 +110,8 @@
     <script src="/plugins/datatables/extensions/custom.datatables.js"></script>
     <script src="/plugins/datatables/extensions/jquery.formatNumber-0.1.1.min.js"></script>
 
+    @yield('script')
+
     <script>
         let tbl_count = $("table").find("tr:first th").length;
         let column_show = []
@@ -173,9 +175,6 @@
 
     <!-- Page JS -->
     <script src="/assets/js/extended-ui-perfect-scrollbar.js"></script>
-
-    <!-- Page JS -->
-    <script src="/assets/js/pages-account-settings-account.js"></script>
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>

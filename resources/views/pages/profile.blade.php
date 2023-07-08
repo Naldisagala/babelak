@@ -8,7 +8,7 @@
 
 <!-- isi bagian konten -->
 @section('content')
-    <div class="container-xxl flex-grow-1 container-p-y">
+    <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="nav-align-top mb-4">
@@ -19,56 +19,102 @@
 
                     <div class="tab-content">
                         <div role="tabpanel">
-                            <form id="form-profile" method="POST" onsubmit="return false">
+                            <form id="form-profile" method="POST" action="/profile" enctype="multipart/form-data">
+                                @csrf
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <img src="/image/default.jpg" alt="default" class="d-block rounded w-100"
-                                            id="uploadedAvatar" />
-                                        <button type="button" class="btn btn-outline-primary w-100 mt-4">Pilih
-                                            Photo</button>
+                                        <img src="{{ !empty($user['photo']) ? '/files/profile/' . $user['photo'] : '/image/default.jpg' }}"
+                                            alt="default" class="d-block rounded w-100" id="imgProfile" />
+                                        <input type="hidden" name="old_photo" id="old_photo"
+                                            value="{{ $user['photo'] ?? '' }}">
+                                        <label class="btn btn-outline-primary w-100 mt-4">
+                                            Pilih Photo <input name="photo" id="btnImgProfile" type="file"
+                                                style="display: none;">
+                                        </label>
                                         <button type="button" class="btn btn-outline-primary w-100 mt-4">Ubah Kata
                                             Sandi</button>
                                     </div>
-                                    <div class="col-md-7">
+                                    <div class="col-md-7 px-md-5">
                                         <div class="form-group my-3">
                                             <label for="full_name">Nama Lengkap</label>
-                                            <input type="text" class="form-control" name="" id="full_name"
-                                                full_name placeholder="Nama Lengkap">
+                                            <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                                name="name" id="full_name" full_name placeholder="Nama Lengkap"
+                                                value="{{ $user['name'] }}">
+                                            @error('name')
+                                                <div class="invalid-feedback text-left">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                         <div class="form-group my-3">
                                             <label for="username">Username</label>
-                                            <input type="text" class="form-control" name="" id="username"
-                                                username placeholder="Username">
+                                            <input type="text"
+                                                class="form-control @error('username') is-invalid @enderror" name="username"
+                                                id="username" username placeholder="Username"
+                                                value="{{ old('username') ?? $user['username'] }}">
+                                            @error('username')
+                                                <div class="invalid-feedback text-left">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                         <div class="form-group my-3">
                                             <label for="nik">NIK</label>
-                                            <input type="text" class="form-control" name="" id="nik" nik
-                                                placeholder="NIK">
+                                            <input type="text" class="form-control @error('nik') is-invalid @enderror"
+                                                name="nik" id="nik" nik placeholder="NIK"
+                                                value="{{ old('nik') ?? $user['nik'] }}">
+                                            @error('nik')
+                                                <div class="invalid-feedback text-left">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                         <div class="form-group my-3">
                                             <label for="telp">Nomor Handphone</label>
-                                            <input type="text" class="form-control" name="" id="telp" telp
-                                                placeholder="Nomor Handphone">
+                                            <input type="text" class="form-control @error('hp') is-invalid @enderror"
+                                                name="hp" id="telp" telp placeholder="Nomor Handphone"
+                                                value="{{ old('hp') ?? $user['hp'] }}">
+                                            @error('hp')
+                                                <div class="invalid-feedback text-left">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                         <div class="form-group my-3">
                                             <label for="email">Email</label>
-                                            <input type="text" class="form-control" name="" id="email" email
-                                                placeholder="Email">
+                                            <input type="email" class="form-control @error('email') is-invalid @enderror"
+                                                name="email" id="email" email placeholder="Email"
+                                                value="{{ old('email') ?? $user['email'] }}">
+                                            @error('email')
+                                                <div class="invalid-feedback text-left">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                         <div class="form-group my-3">
                                             <label for="institute_name">Nama Institut</label>
-                                            <input type="text" class="form-control" name="" id="institute_name"
-                                                institute_name placeholder="Nama Institut">
-                                        </div>
-                                        <div class="form-group my-3">
-                                            <label for="institute_name">Nama Institut</label>
-                                            <input type="text" class="form-control" name="" id="institute_name"
-                                                institute_name placeholder="Nama Institut">
+                                            <input type="text"
+                                                class="form-control @error('institute') is-invalid @enderror"
+                                                name="institute" id="institute_name" institute_name
+                                                placeholder="Nama Institut"
+                                                value="{{ old('institute') ?? $user['institute'] }}">
+                                            @error('institute')
+                                                <div class="invalid-feedback text-left">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                         <div class="form-group my-3">
                                             <label for="address">Alamat</label>
-                                            <textarea placeholder="Alamat" class="form-control" name="address" id="address" rows="3"></textarea>
+                                            <textarea placeholder="Alamat" class="form-control @error('address') is-invalid @enderror" name="address" id="address"
+                                                rows="3">{{ old('address') ?? $user['address'] }}</textarea>
+                                            @error('address')
+                                                <div class="invalid-feedback text-left">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
+                                        <small class="mt-2">Keterangan : Lengkapi biodata terlebih dahulu</small>
 
                                         <div class="mt-5">
                                             <button type="submit" class="btn btn-primary me-2">Save changes</button>
@@ -83,4 +129,28 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        $(function() {
+            $('#btnImgProfile').change(function() {
+                var input = this;
+                var url = $(this).val();
+                var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+                if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jpeg" ||
+                        ext == "jpg")) {
+                    var reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        $('#imgProfile').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                } else {
+                    $('#imgProfile').attr('src', '/image/default.jpg');
+                }
+            });
+
+        });
+    </script>
 @endsection

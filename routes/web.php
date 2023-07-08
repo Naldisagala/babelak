@@ -36,6 +36,7 @@ Route::get('/register-page', function () {
 Route::post('/register-post', 'RegisterController@RegisterUser');
 Route::post('/login-post', 'LoginController@login');
 Route::post('/logout', 'LoginController@logout');
+Route::get('/'.env("URL_ADMIN", 'admin'), 'AdminController@login');
 
 Route::group(['middleware' => ['admin']], function() {
     Route::get('/'.env("URL_ADMIN", 'admin').'/dashboard', 'AdminController@index');
@@ -54,6 +55,7 @@ Route::group(['middleware' => ['buyer']], function() {
 });
 
 Route::group(['middleware' => ['seller']], function() {
+    Route::get('/product', 'ProductController@myproducts');
     Route::get('/my-products', 'ProductController@myproducts');
     Route::get('/sold-orders', 'OrderController@soldorders');
     Route::get('/sales-revenue', 'OrderController@soldorders');
@@ -61,6 +63,7 @@ Route::group(['middleware' => ['seller']], function() {
 
 Route::group(['middleware' => ['buyer-seller']], function() {
     Route::get('/profile', 'ProfileController@index');
+    Route::post('/profile', 'ProfileController@change');
     Route::get('/chat', 'ChatController@index');
     Route::get('/notification', 'NotificationController@index');
 });

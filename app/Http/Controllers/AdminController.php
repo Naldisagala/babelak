@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
+    public function login()
+    {
+        return view('pages.admin.login', []);
+    }
+
     public function index()
     {
         return view('pages.admin.index', []);

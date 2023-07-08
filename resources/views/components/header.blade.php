@@ -44,12 +44,27 @@
                             <li>
                                 <a class="dropdown-item" href="/profile">Profile</a>
                             </li>
-                            <li>
-                                <button type="button" class="dropdown-item" data-bs-toggle="modal"
-                                    data-bs-target="#becomeSeller">
-                                    Jadi Penjual
-                                </button>
-                            </li>
+                            @if (auth()->user()->role == 'seller')
+                                <li>
+                                    <a class="dropdown-item" href="/my-products">Barang Saya</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/sold-orders">Pesanan Terjual</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/sales-revenue">Pendapatan Penjualan</a>
+                                </li>
+                            @else
+                                <li>
+                                    <a class="dropdown-item" href="/my-orders">Pesanan Saya</a>
+                                </li>
+                                <li>
+                                    <button type="button" class="dropdown-item" data-bs-toggle="modal"
+                                        data-bs-target="#becomeSeller">
+                                        Jadi Penjual
+                                    </button>
+                                </li>
+                            @endif
                             <li>
                                 <form action="/logout" method="post">
                                     @csrf
