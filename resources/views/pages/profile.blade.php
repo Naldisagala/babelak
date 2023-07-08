@@ -25,11 +25,12 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <img src="{{ !empty($user['photo']) ? '/files/profile/' . $user['photo'] : '/image/default.jpg' }}"
-                                            alt="default" class="d-block rounded w-100" id="imgProfile" />
+                                            alt="default" class="d-block rounded w-100"id="imgProfile" />
                                         <input type="hidden" name="old_photo" id="old_photo"
                                             value="{{ $user['photo'] ?? '' }}">
                                         <label class="btn btn-outline-primary w-100 mt-4">
-                                            Pilih Photo <input name="photo" id="btnImgProfile" type="file"
+                                            Pilih Photo <input name="photo" onchange="changePhoto(this)"
+                                                data-target_photo="imgProfile" id="btnImgProfile" type="file"
                                                 style="display: none;">
                                         </label>
                                         <button type="button" class="btn btn-outline-primary w-100 mt-4"
@@ -152,7 +153,8 @@
                                             id="password" placeholder="Password"
                                             aria-describedby="password-description">
                                         <span id="password-description"
-                                            class="input-group-text cursor-pointer toggle-password">
+                                            class="input-group-text cursor-pointer toggle-password"
+                                            onclick="showPassword(this)">
                                             <i class="fa fa-eye"></i>
                                         </span>
                                     </div>
@@ -166,7 +168,8 @@
                                             id="confirm_password" placeholder="Konfirmasi Password"
                                             aria-describedby="confirm_password-description">
                                         <span id="confirm_password-description"
-                                            class="input-group-text cursor-pointer toggle-password">
+                                            class="input-group-text cursor-pointer toggle-password"
+                                            onclick="showPassword(this)">
                                             <i class="fa fa-eye"></i></span>
                                     </div>
                                 </div>
@@ -188,29 +191,10 @@
 
 @section('script')
     <script>
-        $(function() {
-            $('#btnImgProfile').change(function() {
-                var input = this;
-                var url = $(this).val();
-                var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
-                if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jpeg" ||
-                        ext == "jpg")) {
-                    var reader = new FileReader();
-
-                    reader.onload = function(e) {
-                        $('#imgProfile').attr('src', e.target.result);
-                    }
-                    reader.readAsDataURL(input.files[0]);
-                } else {
-                    $('#imgProfile').attr('src', '/image/default.jpg');
-                }
-            });
-        });
-
-        $('.toggle-password').click(function() {
-            $(this).children().toggleClass('fa-eye fa-eye-slash');
-            let input = $(this).prev();
+        function showPassword(thisis) {
+            $(thisis).children().toggleClass('fa-eye fa-eye-slash');
+            let input = $(thisis).prev();
             input.prop('type', input.prop('type') == 'password' ? 'text' : 'password');
-        });
+        }
     </script>
 @endsection

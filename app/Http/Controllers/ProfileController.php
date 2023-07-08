@@ -59,7 +59,7 @@ class ProfileController extends Controller
             }
 
             $data['id_user'] = $id;
-            $data['photo']   = $o_photo ?? $file;
+            $data['photo']   = $file ?? $o_photo;
 
             $dataUser   = array_slice($data, 0, 4);
             $dataDetail = array_slice($data, 4, 5);

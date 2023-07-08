@@ -193,6 +193,39 @@
                 tr.addClass('shown');
             }
         });
+
+        function changePhoto(input) {
+            let url = $(input).val();
+            let target = $(input).data('target_photo');
+            let ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+            if (input.files && input.files[0] && (ext == "png" || ext == "jpeg" ||
+                    ext == "jpg")) {
+                let reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $(`#${target}`).attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                $(`#${target}`).attr('src', '/image/default.jpg');
+            }
+        }
+
+        function changeVideo(input) {
+            let url = $(input).val();
+            let target = $(input).data('target_video');
+            let ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+            if (input.files && input.files[0] && (ext == "mp4")) {
+                let reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $(`#${target}`).attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                $(`#${target}`).attr('src', '/image/default.jpg');
+            }
+        }
     </script>
 
     <!-- Main JS -->

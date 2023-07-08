@@ -25,103 +25,13 @@
                                         <span class="font-bold">Foto</span>
                                     </div>
                                     <div class="col-md-10">
-                                        <div class="row">
+                                        <div class="row" id="wrapper-photo">
                                             <div class="col-md-12 text-end">
-                                                <button type="button" class="btn btn-primary mb-4">
+                                                <button type="button" data-inc="0" onclick="addPhoto(this)"
+                                                    class="btn btn-primary mb-4">
                                                     <i class="fa fa-plus me-2"></i>
                                                     <i class="fa fa-image"></i>
                                                 </button>
-                                            </div>
-                                            <div class="col-lg-3 col-md-4 col-sm-6 py-3">
-                                                <img id="image-product-view-1" class="w-100" src="/image/default.jpg"
-                                                    alt="Default">
-                                                <div class="btn-group w-100 my-3" role="group">
-                                                    <label class="btn btn-primary w-75">
-                                                        Choose... <input name="image[]" data-inc="1" id="image-product-1"
-                                                            type="file" style="display: none;">
-                                                    </label>
-                                                    <button type="button" class="btn btn-outline-primary w-25">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-4 col-sm-6 py-3">
-                                                <img id="image-product-view-1" class="w-100" src="/image/default.jpg"
-                                                    alt="Default">
-                                                <div class="btn-group w-100 my-3" role="group">
-                                                    <label class="btn btn-primary w-75">
-                                                        Choose... <input name="image[]" data-inc="1" id="image-product-1"
-                                                            type="file" style="display: none;">
-                                                    </label>
-                                                    <button type="button" class="btn btn-outline-primary w-25">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-4 col-sm-6 py-3">
-                                                <img id="image-product-view-1" class="w-100" src="/image/default.jpg"
-                                                    alt="Default">
-                                                <div class="btn-group w-100 my-3" role="group">
-                                                    <label class="btn btn-primary w-75">
-                                                        Choose... <input name="image[]" data-inc="1" id="image-product-1"
-                                                            type="file" style="display: none;">
-                                                    </label>
-                                                    <button type="button" class="btn btn-outline-primary w-25">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-4 col-sm-6 py-3">
-                                                <img id="image-product-view-1" class="w-100" src="/image/default.jpg"
-                                                    alt="Default">
-                                                <div class="btn-group w-100 my-3" role="group">
-                                                    <label class="btn btn-primary w-75">
-                                                        Choose... <input name="image[]" data-inc="1" id="image-product-1"
-                                                            type="file" style="display: none;">
-                                                    </label>
-                                                    <button type="button" class="btn btn-outline-primary w-25">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-4 col-sm-6 py-3">
-                                                <img id="image-product-view-1" class="w-100" src="/image/default.jpg"
-                                                    alt="Default">
-                                                <div class="btn-group w-100 my-3" role="group">
-                                                    <label class="btn btn-primary w-75">
-                                                        Choose... <input name="image[]" data-inc="1" id="image-product-1"
-                                                            type="file" style="display: none;">
-                                                    </label>
-                                                    <button type="button" class="btn btn-outline-primary w-25">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-4 col-sm-6 py-3">
-                                                <img id="image-product-view-1" class="w-100" src="/image/default.jpg"
-                                                    alt="Default">
-                                                <div class="btn-group w-100 my-3" role="group">
-                                                    <label class="btn btn-primary w-75">
-                                                        Choose... <input name="image[]" data-inc="1"
-                                                            id="image-product-1" type="file" style="display: none;">
-                                                    </label>
-                                                    <button type="button" class="btn btn-outline-primary w-25">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-4 col-sm-6 py-3">
-                                                <img id="image-product-view-1" class="w-100" src="/image/default.jpg"
-                                                    alt="Default">
-                                                <div class="btn-group w-100 my-3" role="group">
-                                                    <label class="btn btn-primary w-75">
-                                                        Choose... <input name="image[]" data-inc="1"
-                                                            id="image-product-1" type="file" style="display: none;">
-                                                    </label>
-                                                    <button type="button" class="btn btn-outline-primary w-25">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -129,25 +39,13 @@
                                         <span class="font-bold">Video</span>
                                     </div>
                                     <div class="col-md-10">
-                                        <div class="row">
+                                        <div class="row" id="wrapper-video">
                                             <div class="col-md-12 text-end">
-                                                <button type="button" class="btn btn-primary mb-4">
+                                                <button type="button" data-inc="0" onclick="addVideo(this)"
+                                                    class="btn btn-primary mb-4">
                                                     <i class="fa fa-plus me-2"></i>
                                                     <i class="fa fa-video"></i>
                                                 </button>
-                                            </div>
-                                            <div class="col-lg-3 col-md-4 col-sm-6 py-3">
-                                                <img id="image-product-view-1" class="w-100" src="/image/video.png"
-                                                    alt="Default">
-                                                <div class="btn-group w-100 my-3" role="group">
-                                                    <label class="btn btn-primary w-75">
-                                                        Choose... <input name="image[]" data-inc="1"
-                                                            id="image-product-1" type="file" style="display: none;">
-                                                    </label>
-                                                    <button type="button" class="btn btn-outline-primary w-25">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -310,10 +208,60 @@
 @endsection
 @section('script')
     <script>
-        function titleCase(str) {
-            return str.toLowerCase().split(' ').map(function(word) {
-                return (word.charAt(0).toUpperCase() + word.slice(1));
-            }).join(' ');
+        function addPhoto(thisis) {
+            let inc = parseInt($(thisis).data('inc'));
+            if (inc > 10) return false;
+            inc++
+            let wrapper = ''
+            wrapper += `<div class="col-lg-3 col-md-4 col-sm-6 py-3" id="data-photo-${inc}">
+                <img id="image-product-view-${inc}" class="w-100" src="/image/default.jpg"
+                    alt="Default" width="190" height="190">
+                <div class="btn-group w-100 my-3" role="group">
+                    <label class="btn btn-primary w-75">
+                        Choose... <input name="image[]" onchange="changePhoto(this)"
+                            data-target_photo="image-product-view-${inc}" data-inc="${inc}"
+                            id="image-product-1" type="file" style="display: none;">
+                    </label>
+                    <button type="button" onclick="remove(this)" data-type="photo" data-inc="${inc}" class="btn btn-outline-primary w-25">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </div>
+            </div>`;
+            $('#wrapper-photo').append(wrapper)
+            $(thisis).data('inc', inc)
+        }
+
+        function addVideo(thisis) {
+            let inc = parseInt($(thisis).data('inc'));
+            if (inc > 1) return false;
+            inc++
+            let wrapper = ''
+            wrapper += `<div class="col-lg-3 col-md-4 col-sm-6 py-3" id="data-video-${inc}">
+                <video id="view-video-${inc}" class="w-100" width="190" height="190"
+                    controls preload="auto" src="/video/mov_bbb.mp4"></video>
+                <div class="btn-group w-100 my-3" role="group">
+                    <label class="btn btn-primary w-75">
+                        Choose... <input name="video[]" data-inc="${inc}" id="video-product-${inc}"
+                            data-target_video="view-video-${inc}" onchange="changeVideo(this)"
+                            data-inc="${inc}" type="file" style="display: none;">
+                    </label>
+                    <button type="button" onclick="remove(this)" data-type="video" class="btn btn-outline-primary w-25"
+                        data-inc="${inc}">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </div>
+            </div>`;
+            $('#wrapper-video').append(wrapper)
+            $(thisis).data('inc', inc)
+        }
+
+        function remove(thisis) {
+            let inc = $(thisis).data('inc');
+            let type = $(thisis).data('type');
+            let confm = confirm(`Apa kamu yakin ingin menghapus ${type} ini?`)
+            if (confm) {
+                $(`#data-${type}-${inc}`).remove()
+            }
         }
 
         function getRegion(thisis) {
@@ -360,6 +308,12 @@
                     console.log(error)
                 }
             });
+        }
+
+        function titleCase(str) {
+            return str.toLowerCase().split(' ').map(function(word) {
+                return (word.charAt(0).toUpperCase() + word.slice(1));
+            }).join(' ');
         }
     </script>
 @endsection
