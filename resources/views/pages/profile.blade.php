@@ -31,7 +31,8 @@
                                             Pilih Photo <input name="photo" id="btnImgProfile" type="file"
                                                 style="display: none;">
                                         </label>
-                                        <button type="button" class="btn btn-outline-primary w-100 mt-4">Ubah Kata
+                                        <button type="button" class="btn btn-outline-primary w-100 mt-4"
+                                            data-bs-toggle="modal" data-bs-target="#modalChangePassword">Ubah Kata
                                             Sandi</button>
                                     </div>
                                     <div class="col-md-7 px-md-5">
@@ -130,6 +131,59 @@
         </div>
     </div>
 @endsection
+@section('modal')
+    <div class="modal fade" id="modalChangePassword" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <form id="form-profile" method="POST" action="/change-password">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalChangePasswordLabel">Ubah Kata Sandi</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-password-toggle">
+                                    <label class="form-label" for="password">New Password</label>
+                                    <div class="input-group">
+                                        <input required type="password" class="form-control" name="password"
+                                            id="password" placeholder="Password"
+                                            aria-describedby="password-description">
+                                        <span id="password-description"
+                                            class="input-group-text cursor-pointer toggle-password">
+                                            <i class="fa fa-eye"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-password-toggle mt-3">
+                                    <label class="form-label" for="confirm_password">Konfirmasi Password</label>
+                                    <div class="input-group">
+                                        <input required type="password" class="form-control" name="confirm_password"
+                                            id="confirm_password" placeholder="Konfirmasi Password"
+                                            aria-describedby="confirm_password-description">
+                                        <span id="confirm_password-description"
+                                            class="input-group-text cursor-pointer toggle-password">
+                                            <i class="fa fa-eye"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                            Batal
+                        </button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+@endsection
 
 @section('script')
     <script>
@@ -150,7 +204,12 @@
                     $('#imgProfile').attr('src', '/image/default.jpg');
                 }
             });
+        });
 
+        $('.toggle-password').click(function() {
+            $(this).children().toggleClass('fa-eye fa-eye-slash');
+            let input = $(this).prev();
+            input.prop('type', input.prop('type') == 'password' ? 'text' : 'password');
         });
     </script>
 @endsection

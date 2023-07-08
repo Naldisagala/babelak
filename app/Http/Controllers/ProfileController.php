@@ -29,7 +29,7 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function change(Request $request)
+    public function changeProfile(Request $request)
     {
         $id      = auth()->user()->id;
         $photo   = $request->photo;
@@ -59,7 +59,7 @@ class ProfileController extends Controller
             }
 
             $data['id_user'] = $id;
-            $data['photo']   = $file;
+            $data['photo']   = $o_photo ?? $file;
 
             $dataUser   = array_slice($data, 0, 4);
             $dataDetail = array_slice($data, 4, 5);
@@ -72,7 +72,7 @@ class ProfileController extends Controller
                 UserDetail:: create($dataDetail);
             }
 
-            return redirect()->back()->with('success','Update profile Successfully!!');
+            return redirect()->back()->with('success','Update Profile Successfully!!');
         }catch(\Exception $e){
             return redirect()->back()->with('error','Update Profile Failed! '.$e->getMessage());
         }
@@ -81,17 +81,23 @@ class ProfileController extends Controller
     public function changePassword(Request $request)
     {
         $id = auth()->user()->id;
-        $data = $request->validate([
+        $validInput = [
             'password'         => 'required|min:5|max:100',
             'confirm_password' => 'required_with:password|same:password'
-        ]);
+        ];
 
+        $validator = \Validator::make($request->all(), $validInput);
+        if ($validator->fails())
+        {
+            return redirect('/profile')->with('error', $validator->errors()->all());
+        }
+        $data = $request->all();
         $password = Hash::make($data['password']);
 
         $user = User::find($id);
         $user->password   = $password;
         $user->update();
 
-        return redirect('/profile')->with('sukses', 'Change Biodata successfull!');
+        return redirect('/profile')->with('success', 'Change Password Successfully!');
     }
 }

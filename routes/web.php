@@ -63,7 +63,8 @@ Route::group(['middleware' => ['seller']], function() {
 
 Route::group(['middleware' => ['buyer-seller']], function() {
     Route::get('/profile', 'ProfileController@index');
-    Route::post('/profile', 'ProfileController@change');
+    Route::post('/profile', 'ProfileController@changeProfile');
+    Route::post('/change-password', 'ProfileController@changePassword');
     Route::get('/chat', 'ChatController@index');
     Route::get('/notification', 'NotificationController@index');
 });

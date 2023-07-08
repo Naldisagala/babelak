@@ -84,6 +84,7 @@
 
     @include('components/footer')
     @include('components/modal')
+    @yield('modal')
 
 
     <!-- Core JS -->
