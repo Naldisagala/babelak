@@ -9,7 +9,12 @@ class ProductController extends Controller
 {
     public function myproducts()
     {
-        return view('pages.order.myproducts', []);
+        return view('pages.product.index', []);
+    }
+
+    public function product()
+    {
+        return view('pages.product.add', []);
     }
 
     public function productValidation($id)

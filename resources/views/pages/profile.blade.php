@@ -19,6 +19,7 @@
 
                     <div class="tab-content">
                         <div role="tabpanel">
+                            <h4 class="mb-5"><strong>@yield('title')</strong></h4>
                             <form id="form-profile" method="POST" action="/profile" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">

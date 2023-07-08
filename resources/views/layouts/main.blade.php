@@ -26,6 +26,11 @@
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
 
+    <!--These jQuery libraries for chosen need to be included-->
+    <link rel="stylesheet" href="/css/chosen/component-chosen.min.css" />
+
+    <!--These jQuery libraries for select2 need to be included-->
+    <link rel="stylesheet" href="/css/select2.min.css" />
 
     <!-- Helpers -->
     <script src="/assets/vendor/js/helpers.js"></script>
@@ -111,7 +116,26 @@
     <script src="/plugins/datatables/extensions/custom.datatables.js"></script>
     <script src="/plugins/datatables/extensions/jquery.formatNumber-0.1.1.min.js"></script>
 
+    <!--These jQuery libraries for chosen need to be included-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
+
+    <!--These jQuery libraries for select2 need to be included-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/js/select2.min.js"></script>
+
     @yield('script')
+
+    <script>
+        $(document).ready(function() {
+            //Select2
+            $(".select2").select2({
+                tags: true,
+            });
+            //Chosen
+            $(".chosen").chosen({
+                tags: true,
+            });
+        });
+    </script>
 
     <script>
         let tbl_count = $("table").find("tr:first th").length;

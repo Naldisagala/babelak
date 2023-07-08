@@ -37,7 +37,7 @@
                                             <td>
                                                 <div class="row">
                                                     <div class="col-2">
-                                                        <img width="50" src="/image/default.jpg" alt="Avatar">
+                                                        <img width="50" src="/image/default.jpg" alt="Default">
                                                     </div>
                                                     <div class="col-10 d-flex align-items-center justify-content-start">
                                                         <span class="ms-3">Nama</span>

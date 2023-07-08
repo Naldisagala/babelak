@@ -19,11 +19,12 @@
 
                     <div class="tab-content">
                         <div role="tabpanel">
+                            <h4 class="mb-5"><strong>@yield('title')</strong></h4>
                             <div class="d-flex align-items-center justify-content-end">
-                                <button type="button" class="btn btn-primary mb-4">
+                                <a href="/product" class="btn btn-primary mb-4">
                                     <i class="fa fa-plus me-2"></i>
                                     Tambah
-                                </button>
+                                </a>
                             </div>
                             <div class="table-responsive text-nowrap">
                                 <table class="table datatables">
@@ -45,7 +46,7 @@
                                                 <td>
                                                     <div class="row">
                                                         <div class="col-2">
-                                                            <img width="50" src="/image/default.jpg" alt="Avatar">
+                                                            <img width="50" src="/image/default.jpg" alt="Default">
                                                         </div>
                                                         <div class="col-10 d-flex align-items-center justify-content-start">
                                                             <span class="ms-3">Nama Product</span>

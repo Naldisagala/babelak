@@ -55,8 +55,9 @@ Route::group(['middleware' => ['buyer']], function() {
 });
 
 Route::group(['middleware' => ['seller']], function() {
-    Route::get('/product', 'ProductController@myproducts');
     Route::get('/my-products', 'ProductController@myproducts');
+    Route::get('/product', 'ProductController@product');
+
     Route::get('/sold-orders', 'OrderController@soldorders');
     Route::get('/sales-revenue', 'OrderController@soldorders');
 });

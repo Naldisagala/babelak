@@ -422,3 +422,15 @@ div.dt-filter-spacer {
 .flex-row {
     flex-direction: row !important;
 }
+
+.vertical-top {
+    vertical-align: text-top;
+}
+
+.font-bold {
+    font-weight: bold;
+}
+
+.-ml-40-px {
+    margin-left: -40px;
+}
