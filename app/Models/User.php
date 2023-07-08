@@ -25,6 +25,7 @@ class User extends Authenticatable
         'hp',
         'role',
         'username',
+        'is_seller',
     ];
 
     /**
@@ -49,5 +50,34 @@ class User extends Authenticatable
     public function tawar()
     {
         return $this->hasMany(Tawar::class, 'id_user', 'id');
+    }
+
+    public function isAdmin()
+    {
+        if($this->role === 'admin') { 
+            return true; 
+        } else { 
+            return false; 
+        }
+    }
+
+    public function isSeller()
+    {
+        if($this->role === 'seller' &&
+            $this->is_seller == 1) { 
+            return true; 
+        } else { 
+            return false; 
+        }
+    }
+
+
+    public function isBuyer()
+    {
+        if($this->role === 'user') { 
+            return true; 
+        } else { 
+            return false; 
+        }
     }
 }

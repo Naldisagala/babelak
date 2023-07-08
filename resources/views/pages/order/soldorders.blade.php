@@ -12,28 +12,11 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="nav-align-top mb-4">
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li class="nav-item">
-                            <a href="/profile" class="nav-link px-5" aria-selected="true">
-                                Profil
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/my-orders" class="nav-link px-5" aria-selected="false">
-                                Pesanan Saya
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/my-products" class="nav-link px-5" aria-selected="false">
-                                Produk Saya
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/sold-orders" class="nav-link px-5 active" aria-selected="false">
-                                Pesanan Terjual
-                            </a>
-                        </li>
-                    </ul>
+
+                    @include('components/tabs', [
+                        'active_tab' => 'sold-orders',
+                    ])
+
                     <div class="tab-content">
                         <div role="tabpanel">
                             <div class="row">

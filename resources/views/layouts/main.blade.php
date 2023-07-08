@@ -53,10 +53,37 @@
 <body>
     @include('components/header')
     <main class="mt-11">
+        @if (session()->has('success'))
+            <div class="container">
+                <div class="alert alert-primary alert-dismissible" role="alert">
+                    {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        @endif
+        @if (session()->has('error'))
+            <div class="container">
+                @if (is_array(session('error')))
+                    @foreach (session('error') as $error)
+                        <div class="alert alert-danger alert-dismissible" role="alert">
+                            {{ $error }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                aria-label="Close"></button>
+                        </div>
+                    @endforeach
+                @else
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        {{ session('error') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+            </div>
+        @endif
         @yield('content')
     </main>
 
     @include('components/footer')
+    @include('components/modal')
 
 
     <!-- Core JS -->

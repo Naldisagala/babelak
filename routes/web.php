@@ -32,19 +32,12 @@ Route::get('/login-page', function () {
 Route::get('/register-page', function () {
     return view('register');
 });
+
 Route::post('/register-post', 'RegisterController@RegisterUser');
 Route::post('/login-post', 'LoginController@login');
 Route::post('/logout', 'LoginController@logout');
 
-Route::group(['middleware' => ['auth']], function() {
-    Route::get('/profile', 'ProfileController@index');
-    Route::get('/my-orders', 'OrderController@myorders');
-    Route::get('/my-products', 'ProductController@myproducts');
-    Route::get('/sold-orders', 'OrderController@soldorders');
-    Route::get('/chat', 'ChatController@index');
-    Route::get('/notification', 'NotificationController@index');
-
-    // admin
+Route::group(['middleware' => ['admin']], function() {
     Route::get('/'.env("URL_ADMIN", 'admin').'/dashboard', 'AdminController@index');
     Route::get('/'.env("URL_ADMIN", 'admin').'/users', 'AdminController@users');
     Route::get('/'.env("URL_ADMIN", 'admin').'/users/{id}', 'AdminController@userDetail');
@@ -53,6 +46,23 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/'.env("URL_ADMIN", 'admin').'/booking', 'ProductController@booking');
     Route::get('/'.env("URL_ADMIN", 'admin').'/payment-confirmation', 'PaymentController@confirmation');
     Route::get('/'.env("URL_ADMIN", 'admin').'/report-finance', 'ReportController@finance');
+});
+
+Route::group(['middleware' => ['buyer']], function() {
+    Route::get('/my-orders', 'OrderController@myorders');
+    Route::post('/become-seller', 'SellerController@register');
+});
+
+Route::group(['middleware' => ['seller']], function() {
+    Route::get('/my-products', 'ProductController@myproducts');
+    Route::get('/sold-orders', 'OrderController@soldorders');
+    Route::get('/sales-revenue', 'OrderController@soldorders');
+});
+
+Route::group(['middleware' => ['buyer-seller']], function() {
+    Route::get('/profile', 'ProfileController@index');
+    Route::get('/chat', 'ChatController@index');
+    Route::get('/notification', 'NotificationController@index');
 });
 
 Auth::routes();
