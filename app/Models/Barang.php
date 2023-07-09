@@ -19,9 +19,14 @@ class Barang extends Model
         'gambar',
         'deskripsi',
         'harga',
-        'status_tawar',
         'status_barang',
-
+        'status_tawar',
+        'stock',
+        'address',
+        'id_village',
+        'postcode',
+        'usage',
+        'method',
     ];
 
     public function user()

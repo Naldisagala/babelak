@@ -149,7 +149,7 @@
                 [16, 32, 64, -1],
                 [16, 32, 64, "All"]
             ],
-            dom: 'Bfrtip',
+            dom: '<"dt-top-container"<l><"dt-center-in-div"B><f>r>t<"dt-filter-spacer"f><ip>',
             buttons: [{
                     extend: 'excelHtml5'
                 },
@@ -212,6 +212,10 @@
         }
 
         function changeVideo(input) {
+            let inc = $(input).data('inc')
+            $(`#video-default-view-${inc}`).hide()
+            $(`#view-video-${inc}`).show()
+
             let url = $(input).val();
             let target = $(input).data('target_video');
             let ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();

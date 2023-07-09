@@ -39,22 +39,26 @@
                                         </tr>
                                     </thead>
                                     <tbody class="table-border-bottom-0">
-                                        @for ($i = 1; $i <= 6; $i++)
+                                        @foreach ($products as $inc => $product)
                                             <tr>
-                                                <td>{{ $i }}</td>
-                                                <td>ID Product</td>
+                                                <td>{{ $inc + 1 }}</td>
+                                                <td>{{ $product['id'] }}</td>
                                                 <td>
                                                     <div class="row">
                                                         <div class="col-2">
-                                                            <img width="50" src="/image/default.jpg" alt="Default">
+                                                            <img width="50"
+                                                                src="/files/product/{{ $product['gambar'] }}"
+                                                                alt="Default">
                                                         </div>
                                                         <div class="col-10 d-flex align-items-center justify-content-start">
-                                                            <span class="ms-3">Nama Product</span>
+                                                            <span class="ms-3">{{ $product['nama_barang'] }}</span>
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td class="text-center">Rp. 000.000</td>
-                                                <td class="text-center">Tersedia</td>
+                                                <td class="text-end">
+                                                    {{ 'Rp ' . number_format($product['harga'], 2, ',', '.') }}</td>
+                                                <td class="text-center">
+                                                    {{ $product['stock'] > 0 ? 'Tersedia' : 'Tidak Tersedia' }}</td>
                                                 <td class="text-end">
                                                     <button type="button" class="btn btn-primary mx-2">
                                                         <i class="fa fa-eye"></i>
@@ -64,7 +68,7 @@
                                                     </button>
                                                 </td>
                                             </tr>
-                                        @endfor
+                                        @endforeach
 
                                     </tbody>
                                 </table>

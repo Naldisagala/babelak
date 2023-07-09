@@ -42,7 +42,7 @@
                                             <label for="full_name">Nama Lengkap</label>
                                             <input type="text" class="form-control @error('name') is-invalid @enderror"
                                                 name="name" id="full_name" full_name placeholder="Nama Lengkap"
-                                                value="{{ $user['name'] }}">
+                                                value="{{ old('name') ?? $user['name'] }}">
                                             @error('name')
                                                 <div class="invalid-feedback text-left">
                                                     {{ $message }}

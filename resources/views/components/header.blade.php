@@ -39,9 +39,6 @@
                                 class="fa-regular fa-user"></i></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a class="dropdown-item" href="/{{ env('URL_ADMIN', 'admin') }}/dashboard">Admin</a>
-                            </li>
-                            <li>
                                 <a class="dropdown-item" href="/profile">Profile</a>
                             </li>
                             @if (auth()->user()->role == 'seller')
