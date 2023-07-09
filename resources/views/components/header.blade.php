@@ -38,10 +38,11 @@
                         <a class="nav-link mx-2" aria-current="page" href="#" data-bs-toggle="dropdown"><i
                                 class="fa-regular fa-user"></i></a>
                         <ul class="dropdown-menu">
-                            <li>
-                                <a class="dropdown-item" href="/profile">Profile</a>
-                            </li>
+
                             @if (auth()->user()->role == 'seller')
+                                <li>
+                                    <a class="dropdown-item" href="/profile">Profile</a>
+                                </li>
                                 <li>
                                     <a class="dropdown-item" href="/my-products">Barang Saya</a>
                                 </li>
@@ -51,7 +52,10 @@
                                 <li>
                                     <a class="dropdown-item" href="/sales-revenue">Pendapatan Penjualan</a>
                                 </li>
-                            @else
+                            @elseif (auth()->user()->role == 'user')
+                                <li>
+                                    <a class="dropdown-item" href="/profile">Profile</a>
+                                </li>
                                 <li>
                                     <a class="dropdown-item" href="/my-orders">Pesanan Saya</a>
                                 </li>
@@ -60,6 +64,11 @@
                                         data-bs-target="#becomeSeller">
                                         Jadi Penjual
                                     </button>
+                                </li>
+                            @elseif (auth()->user()->role == 'admin')
+                                <li>
+                                    <a class="dropdown-item"
+                                        href="/{{ env('URL_ADMIN', 'admin') }}/dashboard">Dashboard</a>
                                 </li>
                             @endif
                             <li>
