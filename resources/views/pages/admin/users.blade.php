@@ -25,6 +25,7 @@
                                         <th>No.</th>
                                         <th>Nama</th>
                                         <th class="text-center">Username</th>
+                                        <th class="text-center">Role</th>
                                         <th class="text-center">Jumlah Barang</th>
                                         <th class="text-center">Status</th>
                                         <th></th>
@@ -39,7 +40,7 @@
                                                     <div class="col-2">
                                                         <img width="50"
                                                             src="{{ !empty($user->photo) ? '/files/profile/' . $user->photo : '/image/default.jpg' }}"
-                                                            alt="Default">
+                                                            alt="{{ $user->name }}">
                                                     </div>
                                                     <div class="col-10 d-flex align-items-center justify-content-start">
                                                         <span class="ms-3">{{ $user->name }}</span>
@@ -47,6 +48,7 @@
                                                 </div>
                                             </td>
                                             <td class="text-center">{{ $user->username }}</td>
+                                            <td class="text-center">{{ $user->role }}</td>
                                             <td class="text-center">{{ $user->sum_product($user->id) }}</td>
                                             <td class="text-center">Aktif</td>
                                             <td class="text-end">

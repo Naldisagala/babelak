@@ -35,6 +35,15 @@ class AdminController extends Controller
 
     public function userDetail($id)
     {
-        return view('pages.admin.user_detail', []);
+        $user = User::select(
+            'ud.*',
+            'users.*',
+        )
+        ->leftJoin('user_detail as ud', [
+            ['ud.id_user', '=', 'users.id'],
+        ])->where('users.id', '=', $id)->first();
+        return view('pages.admin.user_detail', [
+            'user' => $user
+        ]);
     }
 }

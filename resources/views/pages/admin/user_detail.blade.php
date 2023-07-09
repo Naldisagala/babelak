@@ -19,39 +19,40 @@
                     <div class="card-body p-5">
                         <div class="row">
                             <div class="col-md-3 text-center">
-                                <img class="rounded-circle" width="250" src="/image/default.jpg" alt="Default">
+                                <img class="rounded-circle" width="250"
+                                    src="{{ !empty($user->photo) ? '/files/profile/' . $user->photo : '/image/default.jpg' }}"
+                                    alt="Default">
                                 <p class="mt-4">Aktif</p>
                             </div>
                             <div class="col-md-9 px-5">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <p class="mt-4">Nama</p>
-                                        <h5><strong>Rasad</strong></h5>
+                                        <h5><strong>{{ $user->name }}</strong></h5>
                                     </div>
                                     <div class="col-md-6">
                                         <p class="mt-4">Username</p>
-                                        <h5><strong>rasad123</strong></h5>
+                                        <h5><strong>{{ $user->username }}</strong></h5>
                                     </div>
                                     <div class="col-md-12">
                                         <p class="mt-4">Jumlah Produk yang Dijual</p>
-                                        <h5><strong>rasad123</strong></h5>
+                                        <h5><strong>{{ $user->sum_product($user->id) }}</strong></h5>
                                     </div>
                                     <div class="col-md-12">
                                         <p class="mt-4">Nomor Handphone</p>
-                                        <h5><strong>082178563390</strong></h5>
+                                        <h5><strong>{{ $user->hp }}</strong></h5>
                                     </div>
                                     <div class="col-md-12">
                                         <p class="mt-4">Email</p>
-                                        <h5><strong>antoo12@gmail.com</strong></h5>
+                                        <h5><strong>{{ $user->email }}</strong></h5>
                                     </div>
                                     <div class="col-md-12">
                                         <p class="mt-4">Nama Instansi</p>
-                                        <h5><strong>Universitas Negri Pokok</strong></h5>
+                                        <h5><strong>{{ $user->institute }}</strong></h5>
                                     </div>
                                     <div class="col-md-12">
                                         <p class="mt-4">Alamat</p>
-                                        <h5><strong>Jalan Depan Sana, No. Kota Indah, Kec. Indah Jaya, Kel. Jaya
-                                                Baru, 20333</strong></h5>
+                                        <h5><strong>{{ $user->address }}</strong></h5>
                                     </div>
                                 </div>
                             </div>
