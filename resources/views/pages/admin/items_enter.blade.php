@@ -32,32 +32,32 @@
                                     </tr>
                                 </thead>
                                 <tbody class="table-border-bottom-0">
-                                    @for ($i = 1; $i <= 20; $i++)
+                                    @foreach ($products as $inc => $product)
                                         <tr>
-                                            <td class="text-center">{{ $i }}</td>
+                                            <td class="text-center">{{ $inc + 1 }}</td>
                                             <td class="text-center">
-                                                <span>ID_P</span>
+                                                <span>{{ $product->id }}</span>
                                             </td>
                                             <td class="text-center">
-                                                <span>Nama Barang</span>
+                                                <span>{{ $product->nama_barang }}</span>
                                             </td>
                                             <td class="text-center">
-                                                <span>{{ chr(rand(97, 122)) }}</span>
-                                            </td>
-                                            <td class="text-center">
-                                                <span>Rp. 000.000</span>
-                                            </td>
-                                            <td class="text-center">
-                                                <span>Baik</span>
+                                                <span>{{ $product->name }}</span>
                                             </td>
                                             <td class="text-end">
-                                                <a href="/{{ env('URL_ADMIN', 'admin') }}/item-validation/{{ $i }}"
+                                                <span>{{ 'Rp ' . number_format($product['harga'], 2, ',', '.') }}</span>
+                                            </td>
+                                            <td class="text-center">
+                                                <span>{{ strtoupper($product->usage) }}</span>
+                                            </td>
+                                            <td class="text-end">
+                                                <a href="/{{ env('URL_ADMIN', 'admin') }}/item-validation/{{ $product->id }}"
                                                     class="btn btn-primary mx-2">
                                                     Check
                                                 </a>
                                             </td>
                                         </tr>
-                                    @endfor
+                                    @endforeach
 
                                 </tbody>
                             </table>

@@ -16,7 +16,8 @@ class ProductController extends Controller
 
     public function myproducts()
     {
-        $products = Barang::all();
+        $products = Barang::where('id_seller', '=', auth()->user()->id)
+        ->where('status','=','accept')->get();
         return view('pages.product.index', [
             'products' => $products
         ]);
@@ -32,7 +33,6 @@ class ProductController extends Controller
 
     public function insert(Request $request)
     {
-        // dd($request->all());
         try{
             $user = auth()->user();
             $valid   = [
@@ -51,13 +51,11 @@ class ProductController extends Controller
             ];
 
             if(!empty($request->video)){
-                $valid['video.*'] = 'mimes:mp4|max:5120';
+                $valid['video.*'] = 'mimes:mp4|max:51200';
             }
 
             $request->validate($valid);
             $data = $request->all();
-
-            dd($data);
             
             $gallery = [];
             if($request->hasfile('image')) {
@@ -82,8 +80,6 @@ class ProductController extends Controller
                     ];
                 }
             }
-
-            // dd($data);
 
             $dataProduct = [
                 'id_seller'     => $user->id,
@@ -185,7 +181,13 @@ class ProductController extends Controller
 
     public function itemsEnter()
     {
-        return view('pages.admin.items_enter', []);
+        $products = Barang::select('*')
+        ->leftJoin('users as u', [
+            ['u.id', '=', 'barangs.id_seller'],
+        ])->get();
+        return view('pages.admin.items_enter', [
+            'products' => $products
+        ]);
     }
 
     public function booking()
