@@ -47,7 +47,7 @@
                                                     <div class="row">
                                                         <div class="col-2">
                                                             <img width="50"
-                                                                src="/files/product/{{ $product['gambar'] }}"
+                                                                src="{{ str_contains($product['gambar'], '://') ? $product['gambar'] : '/files/product/' . $product['gambar'] }}"
                                                                 alt="Default">
                                                         </div>
                                                         <div class="col-10 d-flex align-items-center justify-content-start">
@@ -60,9 +60,9 @@
                                                 <td class="text-center">
                                                     {{ $product['stock'] > 0 ? 'Tersedia' : 'Tidak Tersedia' }}</td>
                                                 <td class="text-end">
-                                                    <button type="button" class="btn btn-primary mx-2">
+                                                    <a href="/product/{{ $product['id'] }}" class="btn btn-primary mx-2">
                                                         <i class="fa fa-eye"></i>
-                                                    </button>
+                                                    </a>
                                                     <button type="button" class="btn btn-outline-primary mx-2"
                                                         onclick="alertDeleteProduct(this)" data-id="{{ $product['id'] }}">
                                                         <i class="fa fa-trash"></i>

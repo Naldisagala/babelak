@@ -57,6 +57,7 @@ Route::group(['middleware' => ['buyer']], function() {
 Route::group(['middleware' => ['seller']], function() {
     Route::get('/my-products', 'ProductController@myproducts');
     Route::get('/product', 'ProductController@product');
+    Route::get('/product/{id}', 'ProductController@detail');
     Route::post('/product', 'ProductController@insert');
     Route::delete('/product', 'ProductController@delete');
 

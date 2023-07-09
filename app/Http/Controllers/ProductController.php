@@ -91,7 +91,7 @@ class ProductController extends Controller
                 'gambar'        => $gallery[0]['name'] ?? '',
                 'deskripsi'     => $data['description'],
                 'harga'         => $data['price'],
-                'status_tawar'  => $data['is_tawar'] ?? 0,
+                'status_tawar'  => $data['is_tawar'] ? 'yes' : 'no',
                 'status_barang' => $data['status'] ?? '',
                 'stock'         => $data['stock'],
                 'address'       => $data['address'],
@@ -145,6 +145,37 @@ class ProductController extends Controller
         $id = $request->get('id');
         Barang::where('id', $id)->delete();
         return redirect('/my-products')->with('success', 'Data is successfully deleted');
+    }
+
+    public function detail($id)
+    {
+        $product = Barang::select(
+            'barangs.*',
+            'v.name as village',
+            'd.name as district',
+            'r.name as regencie',
+            'p.name as province',
+        )
+        ->leftJoin('villages as v', [
+            ['v.id', '=', 'barangs.id_village'],
+        ])
+        ->leftJoin('districts as d', [
+            ['d.id', '=', 'v.district_id'],
+        ])
+        ->leftJoin('regencies as r', [
+            ['r.id', '=', 'd.regency_id'],
+        ])
+        ->leftJoin('provinces as p', [
+            ['p.id', '=', 'r.province_id'],
+        ])
+        ->where('barangs.id', '=', $id)->first();
+
+        $gallery = Gallery::where('id_product','=', $id)->get();
+
+        return view('pages.product.view', [
+            'product' => $product,
+            'gallery' => $gallery,
+        ]);
     }
 
     public function productValidation($id)
