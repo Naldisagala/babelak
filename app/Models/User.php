@@ -52,6 +52,11 @@ class User extends Authenticatable
         return $this->hasMany(Tawar::class, 'id_user', 'id');
     }
 
+    public function sum_product($id)
+    {
+        return Barang::where('id_seller', '=', $id)->count();
+    }
+
     public function detail()
     {
         return $this->hasMany(UserDetail::class);

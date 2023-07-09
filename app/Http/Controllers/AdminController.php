@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Barang;
+use App\Models\User;
 
 class AdminController extends Controller
 {
@@ -19,7 +21,16 @@ class AdminController extends Controller
 
     public function users()
     {
-        return view('pages.admin.users', []);
+        $users = User::select(
+            'ud.*',
+            'users.*',
+        )
+        ->leftJoin('user_detail as ud', [
+            ['ud.id_user', '=', 'users.id'],
+        ])->where('users.role', '!=', 'admin')->get();
+        return view('pages.admin.users', [
+            'users' => $users
+        ]);
     }
 
     public function userDetail($id)
