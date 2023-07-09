@@ -176,18 +176,68 @@ class ProductController extends Controller
 
     public function productValidation($id)
     {
-        return view('pages.admin.item_validation', []);
+        $product = Barang::select(
+            'u.username',
+            'u.name as name_user',
+            'ud.address as address_user',
+            'v.name as village',
+            'd.name as district',
+            'r.name as regencie',
+            'p.name as province',
+            'barangs.*'
+        )
+        ->leftJoin('users as u', [
+            ['u.id', '=', 'barangs.id_seller'],
+        ])
+        ->leftJoin('user_detail as ud', [
+            ['ud.id_user', '=', 'u.id'],
+        ])
+        ->leftJoin('villages as v', [
+            ['v.id', '=', 'barangs.id_village'],
+        ])
+        ->leftJoin('districts as d', [
+            ['d.id', '=', 'v.district_id'],
+        ])
+        ->leftJoin('regencies as r', [
+            ['r.id', '=', 'd.regency_id'],
+        ])
+        ->leftJoin('provinces as p', [
+            ['p.id', '=', 'r.province_id'],
+        ])
+        ->where('barangs.id', '=', $id)->first();
+
+        $gallery = Gallery::where('id_product','=', $id)->get();
+
+        return view('pages.admin.item_validation', [
+            'product' => $product,
+            'gallery' => $gallery,
+        ]);
     }
 
     public function itemsEnter()
     {
-        $products = Barang::select('*')
+        $products = Barang::select(
+            'u.*',
+            'barangs.*',
+        )
         ->leftJoin('users as u', [
             ['u.id', '=', 'barangs.id_seller'],
         ])->get();
         return view('pages.admin.items_enter', [
             'products' => $products
         ]);
+    }
+
+    public function productValidationAction(Request $request)
+    {
+        $status = $request->get('type');
+        $id   = $request->get('id');
+
+        $product = Barang::find($id);
+        $product->status   = $status;
+        $product->update();
+
+        return back()->with('success', 'Product Successfully '.ucfirst($status).'!');
     }
 
     public function booking()

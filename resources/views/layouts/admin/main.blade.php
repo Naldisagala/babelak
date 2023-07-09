@@ -70,6 +70,35 @@
                 <!-- Content wrapper -->
                 <div class="content-wrapper">
 
+                    @if (session()->has('success'))
+                        <div class="container pt-5">
+                            <div class="alert alert-primary alert-dismissible" role="alert">
+                                {{ session('success') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                        </div>
+                    @endif
+                    @if (session()->has('error'))
+                        <div class="container pt-5">
+                            @if (is_array(session('error')))
+                                @foreach (session('error') as $error)
+                                    <div class="alert alert-danger alert-dismissible" role="alert">
+                                        {{ $error }}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                    </div>
+                                @endforeach
+                            @else
+                                <div class="alert alert-danger alert-dismissible" role="alert">
+                                    {{ session('error') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                            @endif
+                        </div>
+                    @endif
+
                     <!-- Content -->
                     @yield('content')
                     <!-- / Content -->
@@ -88,6 +117,8 @@
         <div class="layout-overlay layout-menu-toggle"></div>
     </div>
     <!-- / Layout wrapper -->
+
+    @yield('modal')
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
