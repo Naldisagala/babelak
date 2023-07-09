@@ -63,7 +63,8 @@
                                                     <button type="button" class="btn btn-primary mx-2">
                                                         <i class="fa fa-eye"></i>
                                                     </button>
-                                                    <button type="button" class="btn btn-outline-primary mx-2">
+                                                    <button type="button" class="btn btn-outline-primary mx-2"
+                                                        onclick="alertDeleteProduct(this)" data-id="{{ $product['id'] }}">
                                                         <i class="fa fa-trash"></i>
                                                     </button>
                                                 </td>
@@ -79,4 +80,43 @@
             </div>
         </div>
     </div>
+@endsection
+@section('modal')
+    <div class="modal fade" id="deleteProduct" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel2">Perhatian</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="/product" method="POST">
+                    @csrf
+                    {{ method_field('DELETE') }}
+                    <div class="modal-body">
+                        <input type="hidden" name="id" id="delete_product_id">
+                        <p>Apakah kamu yakin ingin menghapus produk ini?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                            Batal
+                        </button>
+                        <button type="submit" class="btn btn-primary">Ya</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@endsection
+@section('script')
+    <script>
+        function alertDeleteProduct(thisis) {
+            let id = $(thisis).data('id')
+            $('#delete_product_id').val(id)
+            $('#deleteProduct').modal({
+                backdrop: 'static',
+                keyboard: false
+            })
+            $('#deleteProduct').modal('show');
+        }
+    </script>
 @endsection

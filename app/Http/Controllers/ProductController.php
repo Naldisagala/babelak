@@ -140,6 +140,13 @@ class ProductController extends Controller
         ], 200);
     }
 
+    public function delete(Request $request)
+    {
+        $id = $request->get('id');
+        Barang::where('id', $id)->delete();
+        return redirect('/my-products')->with('success', 'Data is successfully deleted');
+    }
+
     public function productValidation($id)
     {
         return view('pages.admin.item_validation', []);
