@@ -53,7 +53,7 @@
                                             <label for="username">Username</label>
                                             <input type="text"
                                                 class="form-control @error('username') is-invalid @enderror" name="username"
-                                                id="username" username placeholder="Username"
+                                                id="username" placeholder="Username"
                                                 value="{{ old('username') ?? $user['username'] }}">
                                             @error('username')
                                                 <div class="invalid-feedback text-left">
@@ -64,7 +64,7 @@
                                         <div class="form-group my-3">
                                             <label for="nik">NIK</label>
                                             <input type="text" class="form-control @error('nik') is-invalid @enderror"
-                                                name="nik" id="nik" nik placeholder="NIK"
+                                                name="nik" id="nik" placeholder="NIK"
                                                 value="{{ old('nik') ?? $user['nik'] }}">
                                             @error('nik')
                                                 <div class="invalid-feedback text-left">
@@ -75,7 +75,7 @@
                                         <div class="form-group my-3">
                                             <label for="telp">Nomor Handphone</label>
                                             <input type="text" class="form-control @error('hp') is-invalid @enderror"
-                                                name="hp" id="telp" telp placeholder="Nomor Handphone"
+                                                name="hp" id="telp" placeholder="Nomor Handphone"
                                                 value="{{ old('hp') ?? $user['hp'] }}">
                                             @error('hp')
                                                 <div class="invalid-feedback text-left">
@@ -86,7 +86,7 @@
                                         <div class="form-group my-3">
                                             <label for="email">Email</label>
                                             <input type="email" class="form-control @error('email') is-invalid @enderror"
-                                                name="email" id="email" email placeholder="Email"
+                                                name="email" id="email" placeholder="Email"
                                                 value="{{ old('email') ?? $user['email'] }}">
                                             @error('email')
                                                 <div class="invalid-feedback text-left">
@@ -98,8 +98,7 @@
                                             <label for="institute_name">Nama Institut</label>
                                             <input type="text"
                                                 class="form-control @error('institute') is-invalid @enderror"
-                                                name="institute" id="institute_name" institute_name
-                                                placeholder="Nama Institut"
+                                                name="institute" id="institute_name" placeholder="Nama Institut"
                                                 value="{{ old('institute') ?? $user['institute'] }}">
                                             @error('institute')
                                                 <div class="invalid-feedback text-left">
@@ -108,20 +107,180 @@
                                             @enderror
                                         </div>
                                         <div class="form-group my-3">
-                                            <label for="address">Alamat</label>
-                                            <textarea placeholder="Alamat" class="form-control @error('address') is-invalid @enderror" name="address" id="address"
-                                                rows="3">{{ old('address') ?? $user['address'] }}</textarea>
-                                            @error('address')
-                                                <div class="invalid-feedback text-left">
-                                                    {{ $message }}
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <label for="address">Alamat</label>
+                                                    <textarea placeholder="Alamat" class="form-control @error('address') is-invalid @enderror" name="address" id="address"
+                                                        rows="3">{{ old('address') ?? $user['address'] }}</textarea>
+                                                    @error('address')
+                                                        <div class="invalid-feedback text-left">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
                                                 </div>
-                                            @enderror
+                                                <div class="col-md-6 mt-3">
+                                                    <select required onchange="getRegion(this)" data-type="regency"
+                                                        class="chosen form-control @error('province') is-invalid @enderror"
+                                                        name="province" id="province" data-placeholder="Pilih Provinsi">
+                                                        <option value="" disabled selected>Pilih Provinsi
+                                                        </option>
+                                                        @foreach ($provinces as $prov)
+                                                            <option
+                                                                {{ (old('province')
+                                                                        ? (old('province') == $prov['id']
+                                                                            ? 'selected'
+                                                                            : '')
+                                                                        : $user['id_province'])
+                                                                    ? ($user['id_province'] == $prov['id']
+                                                                        ? 'selected'
+                                                                        : '')
+                                                                    : '' }}
+                                                                value="{{ $prov['id'] }}">
+                                                                {{ ucwords(strtolower($prov['name'])) }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6 mt-3">
+                                                    <select required onchange="getRegion(this)"
+                                                        class="chosen form-control" name="regency" id="regency"
+                                                        data-type="district">
+                                                        <option value="" disabled selected>Pilih Kota/Kabupaten
+                                                        </option>
+                                                        @if (!empty($regencies))
+                                                            @foreach ($regencies as $reg)
+                                                                <option
+                                                                    {{ (old('regency')
+                                                                            ? (old('regency') == $reg['id']
+                                                                                ? 'selected'
+                                                                                : '')
+                                                                            : $user['id_regencie'])
+                                                                        ? ($user['id_regencie'] == $reg['id']
+                                                                            ? 'selected'
+                                                                            : '')
+                                                                        : '' }}
+                                                                    value="{{ $reg['id'] }}">
+                                                                    {{ ucwords(strtolower($reg['name'])) }}
+                                                                </option>
+                                                            @endforeach
+                                                        @endif
+
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6 mt-3">
+                                                    <select required onchange="getRegion(this)"
+                                                        class="chosen form-control" name="district" id="district"
+                                                        data-type="village">
+                                                        <option value="" disabled selected>Pilih Kecamatan
+                                                        </option>
+                                                        @if (!empty($districts))
+                                                            @foreach ($districts as $dis)
+                                                                <option
+                                                                    {{ (old('district')
+                                                                            ? (old('district') == $dis['id']
+                                                                                ? 'selected'
+                                                                                : '')
+                                                                            : $user['id_district'])
+                                                                        ? ($user['id_district'] == $dis['id']
+                                                                            ? 'selected'
+                                                                            : '')
+                                                                        : '' }}
+                                                                    value="{{ $dis['id'] }}">
+                                                                    {{ ucwords(strtolower($dis['name'])) }}
+                                                                </option>
+                                                            @endforeach
+                                                        @endif
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6 mt-3">
+                                                    <select required class="chosen form-control" name="id_village"
+                                                        id="village">
+                                                        <option value="" disabled selected>Pilih Desa</option>
+                                                        @if (!empty($villages))
+                                                            @foreach ($villages as $vil)
+                                                                <option
+                                                                    {{ (old('id_village')
+                                                                            ? (old('id_village') == $vil['id']
+                                                                                ? 'selected'
+                                                                                : '')
+                                                                            : $user['id_village'])
+                                                                        ? ($user['id_village'] == $vil['id']
+                                                                            ? 'selected'
+                                                                            : '')
+                                                                        : '' }}
+                                                                    value="{{ $vil['id'] }}">
+                                                                    {{ ucwords(strtolower($vil['name'])) }}
+                                                                </option>
+                                                            @endforeach
+                                                        @endif
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6 mt-3">
+                                                    <div class="form-group">
+                                                        <input type="number" class="form-control" name="postcode"
+                                                            placeholder="Kode Pos" id="postcode"
+                                                            value="{{ old('postcode') ?? ($user['kode_pos'] ?? '') }}">
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
+
+                                        @if ($user['is_seller'] == 1)
+                                            <h5 class="font-bold mt-5">Seller</h5>
+                                            <div class="form-group my-3">
+                                                <label for="nama_toko">Nama Toko</label>
+                                                <input type="text"
+                                                    class="form-control @error('nama_toko') is-invalid @enderror"
+                                                    name="nama_toko" id="nama_toko" placeholder="Nama Toko"
+                                                    value="{{ old('nama_toko') ?? ($user['nama_toko'] ?? '') }}">
+                                                @error('nama_toko')
+                                                    <div class="invalid-feedback text-left">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group my-3">
+                                                <label for="saldo">Saldo</label>
+                                                <input type="number"
+                                                    class="form-control @error('saldo') is-invalid @enderror"
+                                                    name="saldo" id="saldo" placeholder="Saldo"
+                                                    value="{{ old('saldo') ?? ($user['saldo'] ?? '') }}">
+                                                @error('saldo')
+                                                    <div class="invalid-feedback text-left">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group my-3">
+                                                <label for="rekening">No Rekening</label>
+                                                <input type="text"
+                                                    class="form-control @error('rekening') is-invalid @enderror"
+                                                    name="rekening" id="rekening" placeholder="No Rekening"
+                                                    value="{{ old('rekening') ?? ($user['rekening'] ?? '') }}">
+                                                @error('rekening')
+                                                    <div class="invalid-feedback text-left">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group my-3">
+                                                <label for="type_rekening">Jenis Rekening</label>
+                                                <input type="text"
+                                                    class="form-control @error('type_rekening') is-invalid @enderror"
+                                                    name="type_rekening" id="type_rekening" placeholder="Jenis Rekening"
+                                                    value="{{ old('type_rekening') ?? ($user['type_rekening'] ?? '') }}">
+                                                @error('type_rekening')
+                                                    <div class="invalid-feedback text-left">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                        @endif
                                         <small class="mt-2">Keterangan : Lengkapi biodata terlebih dahulu</small>
 
-                                        <div class="mt-5">
-                                            <button type="submit" class="btn btn-primary me-2">Save changes</button>
-                                            <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+                                        <div class="mt-5 mb-3">
+                                            <button type="submit" class="btn btn-primary me-2">Simpan</button>
+                                            <button type="reset" class="btn btn-outline-secondary">Batal</button>
                                         </div>
                                     </div>
                                 </div>
@@ -195,6 +354,66 @@
             $(thisis).children().toggleClass('fa-eye fa-eye-slash');
             let input = $(thisis).prev();
             input.prop('type', input.prop('type') == 'password' ? 'text' : 'password');
+        }
+
+        function getRegion(thisis) {
+            let id = $(thisis).val()
+            let type = $(thisis).data('type')
+            getAjaxRegion(id, type)
+        }
+
+        function getAjaxRegion(id, type, is_selected = false) {
+            $.ajax({
+                url: "{{ url('/ajax-region') }}",
+                method: 'post',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    id,
+                    type
+                },
+                success: function(result) {
+                    let data = result.data
+                    if (type == 'regency') {
+                        $('#regency').empty().append(
+                            '<option selected disabled value="">Pilih Kota/Kabupaten</option>');
+                        $('#district').empty().append(
+                            '<option selected disabled value="">Pilih Kecamatan</option>');
+                        $(`#district`).trigger("chosen:updated");
+                        $('#village').empty().append(
+                            '<option selected disabled value="">Pilih Desa</option>');
+                        $('#village').trigger("chosen:updated");
+                    } else if (type == 'district') {
+                        $('#district').empty().append(
+                            '<option selected disabled value="">Pilih Kecamatan</option>');
+                        $('#village').empty().append(
+                            '<option selected disabled value="">Pilih Desa</option>');
+                        $('#village').trigger("chosen:updated");
+                    } else if (type == 'village') {
+                        $('#village').empty().append(
+                            '<option selected disabled value="">Pilih Desa</option>');
+                    }
+                    $(data).each(function(index, item) {
+                        let selected = ''
+                        if (is_selected && id == item.id) {
+                            selected = 'selected'
+                        }
+
+                        $(`#${type}`).append(
+                            `<option ${selected} value="${item.id}">${titleCase(item.name)}</option>`
+                        );
+                    });
+                    $(`#${type}`).trigger("chosen:updated");
+                },
+                error: function(error) {
+                    console.log(error)
+                }
+            });
+        }
+
+        function titleCase(str) {
+            return str.toLowerCase().split(' ').map(function(word) {
+                return (word.charAt(0).toUpperCase() + word.slice(1));
+            }).join(' ');
         }
     </script>
 @endsection

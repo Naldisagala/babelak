@@ -63,13 +63,11 @@
             <div class="row row-cols-1 row-cols-md-5 g-5">
                 @if (isset($barang))
                     @foreach ($barang as $item)
-                        @php
-                            $item->gambar = explode('|', $item->gambar);
-                        @endphp
                         <div class="col">
                             <div class="card shadow-sm">
                                 <a href="/barang/{{ $item->id }}"><img class="img-product" width="100%" height="100%"
-                                        src="{{ $item->gambar[0] }}" alt="barang"></a>
+                                        src="{{ str_contains($item->gambar, '://') ? $item->gambar : '/files/product/' . $item->gambar }}"
+                                        alt="{{ $item->nama_barang }}"></a>
                                 <div class="card-body">
                                     <h6>{{ $item->nama_barang }}</h6>
                                     <small><i class="fa-solid fa-location-dot"></i> {{ $item->alamat->kota }}</small>

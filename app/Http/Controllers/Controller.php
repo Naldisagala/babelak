@@ -15,17 +15,17 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
-    public function getAllBarang($cari = null)
+    public function getAllBarang($cari = null, $status = null)
     {
         $barang = Barang::with('user', 'alamat', 'seller')
         ->when($cari, function ($query) use ($cari) {
             return $query->where('nama_barang', 'LIKE', '%' . $cari . '%');
-        })
-        ->paginate(10);
+        });
+        if($status){
+            $barang->where('status', '=', $status);
+        }
 
-        
-
-        return $barang;
+        return $barang->paginate(10);
     }
 
     public function getBarangById($id)

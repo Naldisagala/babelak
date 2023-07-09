@@ -12,8 +12,13 @@ class OrderController extends Controller
         return view('pages.order.myorders', []);
     }
 
-    public function soldorders()
+    public function soldOrders()
     {
         return view('pages.order.soldorders', []);
+    }
+
+    public function salesRevenue()
+    {
+        return view('pages.order.salesrevenue', []);
     }
 }

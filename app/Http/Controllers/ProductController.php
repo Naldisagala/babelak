@@ -14,7 +14,7 @@ use App\Models\Barang;
 class ProductController extends Controller
 {
 
-    public function myproducts()
+    public function myProducts()
     {
         $products = Barang::where('id_seller', '=', auth()->user()->id)
         ->where('status','=','accept')->get();

@@ -24,7 +24,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {   
         
-        return view('pages.home',['barang'=> $this->getAllBarang($request['search'])]);
+        return view('pages.home',['barang'=> $this->getAllBarang($request['search'], "accept")]);
     }
 
     public function barang_detail($id)

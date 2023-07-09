@@ -56,14 +56,14 @@ Route::group(['middleware' => ['buyer']], function() {
 });
 
 Route::group(['middleware' => ['seller']], function() {
-    Route::get('/my-products', 'ProductController@myproducts');
+    Route::get('/my-products', 'ProductController@myProducts');
     Route::get('/product', 'ProductController@product');
     Route::get('/product/{id}', 'ProductController@detail');
     Route::post('/product', 'ProductController@insert');
     Route::delete('/product', 'ProductController@delete');
 
-    Route::get('/sold-orders', 'OrderController@soldorders');
-    Route::get('/sales-revenue', 'OrderController@soldorders');
+    Route::get('/sold-orders', 'OrderController@soldOrders');
+    Route::get('/sales-revenue', 'OrderController@salesRevenue');
 });
 
 Route::group(['middleware' => ['buyer-seller']], function() {

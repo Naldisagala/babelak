@@ -6,43 +6,100 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\UserDetail;
+use App\Models\Province;
+use App\Models\Regency;
+use App\Models\District;
+use App\Models\Village;
+use App\Models\Alamat;
+use App\Models\Seller;
 
 class ProfileController extends Controller
 {
     public function index()
     {
+        $provinces = Province::all();
         $user = User::select(
             'ud.*', 
+            'a.*', 
             'users.name', 
             'users.email', 
             'users.role', 
             'users.hp', 
-            'users.username'
+            'users.username',
+            'users.is_seller',
+            'v.name as name_village',
+            'd.name as name_district',
+            'd.id as id_district',
+            'r.name as name_regencie',
+            'r.id as id_regencie',
+            'p.name as name_province',
+            'p.id as id_province',
+            's.nama_toko',
+            's.saldo',
+            's.rekening',
+            's.type as type_rekening',
         )->leftJoin('user_detail as ud', [
             ['ud.id_user', '=', 'users.id'],
-        ])
-        ->where('users.id', '=',auth()->user()->id)
+        ])->leftJoin('alamats as a', [
+            ['a.id_user', '=', 'users.id'],
+        ])->leftJoin('villages as v', [
+            ['v.id', '=', 'ud.id_village'],
+        ])->leftJoin('districts as d', [
+            ['d.id', '=', 'v.district_id'],
+        ])->leftJoin('regencies as r', [
+            ['r.id', '=', 'd.regency_id'],
+        ])->leftJoin('provinces as p', [
+            ['p.id', '=', 'r.province_id'],
+        ])->leftJoin('sellers as s', [
+            ['s.id_user', '=', 'users.id'],
+        ])->where('users.id', '=',auth()->user()->id)
         ->first();
 
+        $address   = null;
+        $regencies = [];
+        $districts = [];
+        $villages  = [];
+        if(!empty($user->id_village)){
+            $regencies = Regency::where('province_id', '=', $user->id_province)->get();
+            $districts = District::where('regency_id', '=', $user->id_regencie)->get();
+            $villages  = Village::where('district_id', '=', $user->id_district)->get();
+        }
+
         return view('pages.profile', [
-            'user' => $user
+            'user'      => $user,
+            'provinces' => $provinces,
+            'address'   => $address,
+            'regencies' => $regencies,
+            'districts' => $districts,
+            'villages'  => $villages,
         ]);
     }
 
     public function changeProfile(Request $request)
     {
-        $id      = auth()->user()->id;
-        $photo   = $request->photo;
-        $o_photo = $request->get('old_photo');
+        $user      = auth()->user();
+        $id        = $user->id;
+        $photo     = $request->photo;
+        $o_photo   = $request->get('old_photo');
+        $is_seller = $user->is_seller;
 
         $valid   = [
-            'name'      => 'required',
-            'username'  => 'required',
-            'email'     => 'required|email:dns',
-            'hp'        => 'required',
-            'nik'       => 'required',
-            'institute' => 'required',
-            'address'   => 'required'
+            'name'          => 'required',
+            'username'      => 'required',
+            'email'         => 'required|email:dns',
+            'hp'            => 'required',
+            'nik'           => 'required',
+            'institute'     => 'required',
+            'address'       => 'required',
+            'id_village'    => 'required',
+            'province'      => 'required',
+            'regency'       => 'required',
+            'district'      => 'required',
+            'postcode'      => 'required',
+            'nama_toko'     => 'required',
+            'saldo'         => 'required',
+            'rekening'      => 'required',
+            'type_rekening' => 'required',
         ];
 
         if(!empty($photo)){
@@ -58,18 +115,58 @@ class ProfileController extends Controller
                 $request->photo->move(public_path('files/profile'), $file);
             }
 
-            $data['id_user'] = $id;
-            $data['photo']   = $file ?? $o_photo;
-
+            
             $dataUser   = array_slice($data, 0, 4);
-            $dataDetail = array_slice($data, 4, 5);
+            $dataDetail = array_slice($data, 4, 4);
+            $dataDetail['id_user'] = $id;
+            $dataDetail['photo']   = $file ?? $o_photo;
 
             User::where('id', '=', $id)->update($dataUser);
+            $province = Province::where('id', '=', $data['province'])->first();
+            $regency = Regency::where('id', '=', $data['regency'])->first();
+            $district = District::where('id', '=', $data['district'])->first();
+            $village  = Village::where('id', '=', $data['id_village'])->first();
+
             $detail = UserDetail::where('id_user', '=', $id);
             if (!empty($detail->first())) {
                 $detail->update($dataDetail);
             } else {
                 UserDetail:: create($dataDetail);
+            }
+
+            $dataAddress = [
+                'id_user'  => $id,
+                'provinsi' => ucwords(strtolower($province->name)),
+                'kota'     => ucwords(strtolower($regency->name)),
+                'kec'      => ucwords(strtolower($district->name)),
+                'alamat'   => ucwords(strtolower($village->name)),
+                'kode_pos' => $data['postcode'],
+                'jenis'    => 'Home',
+                'lat'      => '',
+                'long'     => ''
+            ];
+
+            $address = Alamat::where('id_user','=',$id);
+            if (!empty($address->first())) {
+                $address->update($dataAddress);
+            }else{
+                Alamat::create($dataAddress);
+            }
+
+            if($is_seller == 1){
+                $dataSeller = [
+                    'id_user'   => $id,
+                    'nama_toko' => $data['nama_toko'],
+                    'saldo'     => $data['saldo'],
+                    'rekening'  => $data['rekening'],
+                    'type'      => $data['type_rekening'],
+                ];
+                $seller = Seller::where('id_user','=',$id);
+                if (!empty($seller->first())) {
+                    $seller->update($dataSeller);
+                }else{
+                    Seller::create($dataSeller);
+                }
             }
 
             return redirect()->back()->with('success','Update Profile Successfully!!');
