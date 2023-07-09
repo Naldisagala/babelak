@@ -16,7 +16,14 @@ class AdminController extends Controller
 
     public function index()
     {
-        return view('pages.admin.index', []);
+        $count_user = User::where('role', '!=', 'admin')->count();
+        $count_product = Barang::where('status', '=', 'waiting')->count();
+        $products = Barang::where('status', '=', 'waiting')->get();
+        return view('pages.admin.index', [
+            'count_user'    => $count_user,
+            'count_product' => $count_product,
+            'products'       => $products,
+        ]);
     }
 
     public function users()

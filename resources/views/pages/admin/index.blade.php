@@ -22,7 +22,7 @@
                                 <div class="card bg-light-grey text-center">
                                     <h5 class="card-header"><strong>Jumlah Pengguna</strong></h5>
                                     <div class="card-body">
-                                        <h4><strong>31</strong></h4>
+                                        <h4><strong>{{ $count_user }}</strong></h4>
                                     </div>
                                 </div>
                             </div>
@@ -30,7 +30,7 @@
                                 <div class="card bg-light-grey text-center">
                                     <h5 class="card-header"><strong>Barang Masuk</strong></h5>
                                     <div class="card-body">
-                                        <h4><strong>30</strong></h4>
+                                        <h4><strong>{{ $count_product }}</strong></h4>
                                     </div>
                                 </div>
                             </div>
@@ -51,26 +51,30 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @for ($i = 0; $i < 20; $i++)
+                                            @foreach ($products as $product)
                                                 <tr>
                                                     <td>
                                                         <div class="row">
                                                             <div class="col-2">
-                                                                <img width="75" src="/image/default.jpg" alt="Default">
+                                                                <img width="75"
+                                                                    src="{{ str_contains($product['gambar'], '://') ? $product['gambar'] : '/files/product/' . $product['gambar'] }}"
+                                                                    alt="{{ $product['nama_barang'] }}">
                                                             </div>
                                                             <div class="col-10 d-flex btn-group-vertical">
-                                                                <span class="ms-3"><strong>Nama Barang</strong></span>
-                                                                <span class="ms-3">Rp. 000.000</span>
+                                                                <span
+                                                                    class="ms-3"><strong>{{ $product['nama_barang'] }}</strong></span>
+                                                                <span
+                                                                    class="ms-3 text-end">{{ 'Rp ' . number_format($product['harga'], 2, ',', '.') }}</span>
                                                             </div>
                                                         </div>
                                                     </td>
                                                     <td class="text-end">
-                                                        <a href="/{{ env('URL_ADMIN', 'admin') }}/item-validation/{{ $i }}"
+                                                        <a href="/{{ env('URL_ADMIN', 'admin') }}/item-validation/{{ $product['id'] }}"
                                                             name="view" id="view"
                                                             class="btn btn-primary w-50">Lihat</a>
                                                     </td>
                                                 </tr>
-                                            @endfor
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>

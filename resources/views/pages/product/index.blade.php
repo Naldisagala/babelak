@@ -48,7 +48,7 @@
                                                         <div class="col-2">
                                                             <img width="50"
                                                                 src="{{ str_contains($product['gambar'], '://') ? $product['gambar'] : '/files/product/' . $product['gambar'] }}"
-                                                                alt="Default">
+                                                                alt="{{ $product['nama_barang'] }}">
                                                         </div>
                                                         <div class="col-10 d-flex align-items-center justify-content-start">
                                                             <span class="ms-3">{{ $product['nama_barang'] }}</span>

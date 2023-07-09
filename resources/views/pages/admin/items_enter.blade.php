@@ -27,6 +27,7 @@
                                         <th class="text-center">Nama Barang</th>
                                         <th class="text-center">Nama</th>
                                         <th class="text-center">Harga</th>
+                                        <th class="text-center">Status</th>
                                         <th class="text-center">Status Pemakaian</th>
                                         <th></th>
                                     </tr>
@@ -46,6 +47,9 @@
                                             </td>
                                             <td class="text-end">
                                                 <span>{{ 'Rp ' . number_format($product['harga'], 2, ',', '.') }}</span>
+                                            </td>
+                                            <td class="text-center">
+                                                <span>{{ $product->status }}</span>
                                             </td>
                                             <td class="text-center">
                                                 <span>{{ strtoupper($product->usage) }}</span>
