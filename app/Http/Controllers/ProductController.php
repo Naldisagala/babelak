@@ -205,7 +205,7 @@ class ProductController extends Controller
             ['p.id', '=', 'r.province_id'],
         ])
         ->where('barangs.id', '=', $id)->first();
-
+        
         $gallery = Gallery::where('id_product','=', $id)->get();
 
         return view('pages.admin.item_validation', [

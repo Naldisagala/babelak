@@ -44,15 +44,15 @@ body {
     border-radius: 5px;
 }
 .rekom-tawar {
-    background: #ffffff7d;
+    background: #6a3fad7d;
     padding: 10px;
     border-radius: 10px;
     color: white;
     font-weight: 600;
 }
 .bubble-chat {
-    background-color: #dcf8c6;
-    color: #000;
+    background-color: #c65299;
+    color: white;
     padding: 10px;
     border-radius: 20px;
     margin-bottom: 10px;
@@ -80,7 +80,7 @@ body {
     position: absolute;
     width: 15px;
     height: 29px;
-    background-color: #dcf8c6;
+    background-color: #c65299;
     right: 15px;
     top: 65%;
     transform: rotate(-45deg);
@@ -433,4 +433,27 @@ div.dt-filter-spacer {
 
 .-ml-40-px {
     margin-left: -40px;
+}
+
+.zoom {
+    -webkit-transition: all 0.35s ease-in-out;
+    -moz-transition: all 0.35s ease-in-out;
+    transition: all 0.35s ease-in-out;
+    cursor: -webkit-zoom-in;
+    cursor: -moz-zoom-in;
+    cursor: zoom-in;
+}
+
+.zoom:hover,
+.zoom:active,
+.zoom:focus {
+    /**adjust scale to desired size, 
+    add browser prefixes**/
+    -ms-transform: scale(2.5);
+    -moz-transform: scale(2.5);
+    -webkit-transform: scale(2.5);
+    -o-transform: scale(2.5);
+    transform: scale(2.5);
+    position: relative;
+    z-index: 100;
 }

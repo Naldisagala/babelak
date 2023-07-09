@@ -8,9 +8,47 @@
             <div class="col-md-4">
                 <div class="card h-100">
                     <div class="card-body d-flex align-items-center justify-content-center">
-                        <img class="img-barang w-100"
-                            src="{{ str_contains($barang->gambar, '://') ? $barang->gambar : '/files/product/' . $barang->gambar }}"
-                            alt="{{ $barang->nama_barang }}" style="max-width: 350px">
+
+                        @if (!empty($gallery) && count($gallery) > 1)
+                            <div id="carouselExample-cf" class="carousel carousel-dark slide carousel-fade"
+                                data-bs-ride="carousel">
+                                <ol class="carousel-indicators">
+                                    @foreach ($gallery as $inc => $file)
+                                        <li data-bs-target="#carouselExample-cf" data-bs-slide-to="{{ $inc }}"
+                                            @if ($inc == 0) class="active"
+                                        aria-current="true" @endif>
+                                        </li>
+                                    @endforeach
+                                </ol>
+                                <div class="carousel-inner">
+                                    @foreach ($gallery as $inc => $file)
+                                        <div
+                                            class="carousel-item @if ($inc == 0) active @else carousel-item-start carousel-item-next @endif ">
+                                            <img class="zoom d-block w-100" src="/files/product/{{ $file['name'] }}"
+                                                alt="First slide">
+                                        </div>
+                                    @endforeach
+
+                                </div>
+                                <a class="carousel-control-prev" href="#carouselExample-cf" role="button"
+                                    data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExample-cf" role="button"
+                                    data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </a>
+                            </div>
+                        @else
+                            <img class="img-barang w-100"
+                                src="{{ str_contains($barang->gambar, '://') ? $barang->gambar : '/files/product/' . $barang->gambar }}"
+                                alt="{{ $barang->nama_barang }}" class="zoom" style="max-width: 350px">
+                        @endif
+
+
+
                     </div>
                 </div>
             </div>
@@ -33,7 +71,17 @@
                         <p>
                             <i class="fa fa-credit-card  me-3"></i>
                             <b>Pembayaran yang dipakai</b><br>
-                            <small class="ms-4 ps-2">Semua Metode</small>
+                            @php
+                                $methods = explode(',', $barang->method);
+                                $method = '';
+                                foreach ($methods as $k => $m) {
+                                    if ($k != 0) {
+                                        $method .= ', ';
+                                    }
+                                    $method .= ucfirst($m);
+                                }
+                            @endphp;
+                            <small class="ms-4 ps-2">{{ $method }}</small>
                         </p>
                         <div class="mt-5">
                             <button class="btn btn-primary w-50 me-3">Beli</button>
@@ -68,7 +116,7 @@
                                 </div>
                             </div>
                         </h5>
-                        <div class="chat-area-barang mt-4"
+                        <div class="bg-light-smoth mt-4"
                             style="display: flex; flex-direction: column-reverse;padding:10px;">
                             @if ($barang->status_tawar == 'no')
                                 <span class="text-center text-white fw-bold">Barang Tidak Dapat
@@ -86,9 +134,14 @@
                                     </div>
                                 </form>
                                 <br>
-                                <div>
+                                <div class="mt-5">
                                     @php
-                                        $rekomendasi_tawar = [$barang->harga - ($barang->harga * 5) / 100, $barang->harga - ($barang->harga * 10) / 100, $barang->harga - ($barang->harga * 15) / 100];
+                                        $persen = [5, 10, 15];
+                                        $rekomendasi_tawar = [];
+                                        $price = $barang->harga;
+                                        foreach ($persen as $per) {
+                                            $rekomendasi_tawar[] = $price - ($price * $per) / 100;
+                                        }
                                     @endphp
                                     @foreach ($rekomendasi_tawar as $tawar)
                                         <a style="text-decoration: none"
@@ -103,12 +156,13 @@
                                         style="overflow-y: scroll; display: flex; flex-direction: column; max-height: 250px;">
                                         @if (count($barang->tawar) > 0)
                                             @foreach ($barang->tawar as $tawar)
-                                                <div>
+                                                <div class="mt-3">
                                                     <div class="bubble-chat">
                                                         Saya menawar:
                                                         <b>{{ 'Rp ' . number_format($tawar->harga_tawar, 0, ',', '.') }}</b>
                                                         <br>
-                                                        <small style="font-size: 10px">Status: {{ $tawar->status }}</small>
+                                                        <small style="font-size: 10px">Status:
+                                                            {{ $tawar->status }}</small>
                                                     </div>
                                                 </div>
                                             @endforeach

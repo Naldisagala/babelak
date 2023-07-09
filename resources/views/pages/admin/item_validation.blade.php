@@ -38,7 +38,7 @@
                                         <div class="col-md-12">
                                             <h5><strong>Foto</strong></h5>
                                         </div>
-                                        @if (!empty($gallery))
+                                        @if (!empty($gallery) && count($gallery) > 0)
                                             @foreach ($gallery as $file)
                                                 @if ($file['type'] == 'image')
                                                     <div class="col-md-3">
@@ -51,8 +51,8 @@
                                         @else
                                             <div class="col-md-3">
                                                 <img width="300" class="py-3"
-                                                    src="{{ str_contains($product['gambar'], '://') ? $product['gambar'] : '/files/product/' . $product['gambar'] }}"
-                                                    alt="{{ $product['name'] }}">
+                                                    src="{{ str_contains($product->gambar, '://') ? $product->gambar : '/files/product/' . $product->gambar }}"
+                                                    alt="{{ $product->name }}">
                                             </div>
                                         @endif
                                     </div>

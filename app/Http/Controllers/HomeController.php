@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Gallery;
+use App\Models\Barang;
 
 class HomeController extends Controller
 {
@@ -29,7 +31,13 @@ class HomeController extends Controller
 
     public function barang_detail($id)
     {
-        $this->getBarangById($id);
-        return view('pages.barang',['barang'=> $this->getBarangById($id)]);
+        $barang = $this->getBarangById($id);
+        $gallery = Gallery::where('id_product', '=', $id)->get();
+        // dd($gallery);
+
+        return view('pages.barang',[
+            'barang'  => $barang,
+            'gallery' => $gallery,
+        ]);
     }
 }
