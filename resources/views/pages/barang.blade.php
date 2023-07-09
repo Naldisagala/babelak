@@ -84,8 +84,16 @@
                             <small class="ms-4 ps-2">{{ $method }}</small>
                         </p>
                         <div class="mt-5">
-                            <button class="btn btn-primary w-50 me-3">Beli</button>
-                            <button class="btn btn-primary"><i class="fa-solid fa-cart-shopping"></i></button>
+                            <div class="row">
+                                <div class="col-md-2" style="display: none">
+                                    <input type="number"min="1" value="1" class="form-control" name="qty"
+                                        id="qty" aria-describedby="helpId" placeholder="Qty">
+                                </div>
+                                <div class="col-md-10">
+                                    <button class="btn btn-primary w-50 me-3">Beli</button>
+                                    <button class="btn btn-primary"><i class="fa-solid fa-cart-shopping"></i></button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -107,11 +115,15 @@
                         <h5 class="card-title">
                             <div class="row">
                                 <div class="col-1">
-                                    <img src="{{ url('/image/bangku_kecil.jpeg') }}" class="barang-img-profile"
-                                        alt="Penjual">
+                                    <a href="/toko/{{ $barang->seller->id }}">
+                                        <img src="{{ url('/image/bangku_kecil.jpeg') }}" class="barang-img-profile"
+                                            alt="Penjual">
+                                    </a>
                                 </div>
                                 <div class="col-11 ps-4">
-                                    <h5><strong>{{ $barang->seller->nama_toko }}</strong></h5>
+                                    <a href="/toko/{{ $barang->seller->id }}">
+                                        <h5><strong>{{ $barang->seller->nama_toko }}</strong></h5>
+                                    </a>
                                     <small style="font-size: 12px">{{ $barang->seller->alamat->kota }}</small>
                                 </div>
                             </div>
@@ -147,7 +159,7 @@
                                         <a style="text-decoration: none"
                                             href="/tawar/1/{{ $barang->seller->id }}/{{ $barang->id }}/{{ $tawar }}">
                                             <span
-                                                class="rekom-tawar">{{ 'Rp ' . number_format($tawar, 0, ',', '.') }}</span>
+                                                class="rekom-tawar me-2">{{ 'Rp ' . number_format($tawar, 0, ',', '.') }}</span>
                                         </a>
                                     @endforeach
                                 </div>

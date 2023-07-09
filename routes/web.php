@@ -18,13 +18,8 @@ Route::get('/','HomeController@index' );
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/tawar/{user}/{seller}/{barang}/{harga}','TawarController@sendChatTawar');
-Route::POST('/tawar/{user}/{seller}/{barang}/{harga}','TawarController@sendChatTawar');
-
 Route::get('/barang/{id}','HomeController@barang_detail');
 
-Route::get('/keranjang', 'KeranjangController@index');
-Route::get('/cart-hapus/{id}', 'KeranjangController@hapus');
 
 Route::get('/login-page', function () {
     return view('login');
@@ -73,6 +68,10 @@ Route::group(['middleware' => ['buyer-seller']], function() {
     Route::get('/chat', 'ChatController@index');
     Route::get('/notification', 'NotificationController@index');
     Route::post('/ajax-region', 'ProductController@ajaxRegion');
+    Route::get('/tawar/{user}/{seller}/{barang}/{harga}','TawarController@sendChatTawar');
+    Route::post('/tawar/{user}/{seller}/{barang}/{harga}','TawarController@sendChatTawar');
+    Route::get('/keranjang', 'KeranjangController@index');
+    Route::get('/cart-hapus/{id}', 'KeranjangController@hapus');
 });
 
 Auth::routes();

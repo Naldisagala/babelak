@@ -77,13 +77,12 @@ class Controller extends BaseController
             ->where('id_seller', $key->id_seller)
             ->get();  
             foreach ($cart as $keys) {
-                $keys->harga_akhir = ($keys->tawar != null) ? $keys->tawar->harga_tawar : $keys->barang->harga;
+                $keys->harga_akhir = ($keys->tawar != null) ? $keys->tawar->harga_tawar :( $keys->barang->harga ?? 0);
             }
             $key->nama_toko = $cart[0]->seller->nama_toko;
             $key->kota = $cart[0]->alamatSeller->kota;
             $key->list_barang = $cart;
         }
-          
         
         return $seller;
     }

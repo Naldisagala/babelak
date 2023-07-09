@@ -98,35 +98,52 @@
                         </div>
                     </div>
                 @endforeach
+                <div class="row mb-3">
+                    <div class="card bg-white"
+                        style="border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); padding: 10px;">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-3">
+                                    <label for="exampleInputName">Catatan </label>
+                                </div>
+                                <div class="col-9">
+                                    <input type="text" class="form-control" id="exampleInputName"
+                                        placeholder="Tinggalkan catatan untuk penjual">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="card bg-white"
+                        style="border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); padding: 10px;">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-3">
+                                    <label for="exampleInputName">Harga Pengiriman</label>
+                                </div>
+                                <div class="col-9">
+                                    <div class="text-right">Gratis Ongkir Sistem COD</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col-6">
                 <div class="card bg-white"
                     style="border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); padding: 10px;">
                     <div class="card-body">
                         <div class="row mb-3">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h6 class="font-bold">Ringkasan Belanja</h6>
-                                </div>
-                                <div class="col-md-6">
-                                    <span>Total pesanan (2 Barang)</span>
-                                </div>
-                                <div class="col-md-6 text-end">
-                                    <span>Rp.000 .000</span>
-                                </div>
-                                <div class="col-md-12">
-                                    <hr>
-                                </div>
-                                <div class="col-md-6">
-                                    <h6 class="font-bold">Total Harga</h6>
-                                </div>
-                                <div class="col-md-6 text-end">
-                                    <span>{{ 'Rp ' . number_format(0, 0, ',', '.') }}</span>
-                                </div>
+                            <div class="col">
+                                Total Pembayaran :
+                            </div>
+                            <div class="col">
+                                <div class="text-right">{{ 'Rp ' . number_format(0, 0, ',', '.') }}</div>
                             </div>
                         </div>
                         <div class="row">
-                            <button class="btn btn-primary">Beli</button>
+                            <button style="background: #C65299!important" class="btn btn-primary">Buat Pesanan</button>
                         </div>
                     </div>
                 </div>
