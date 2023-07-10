@@ -30,7 +30,20 @@ class Courier extends Model
 
     public static function typeCourier()
     {
-        return ['jne', 'tiki', 'pos'];
+        return [
+        [
+            'code' => 'jne',
+            "name" => "Jalur Nugraha Ekakurir (JNE)",
+        ], 
+        [
+            'code' => 'tiki',
+            "name" => "Citra Van Titipan Kilat (TIKI)",
+        ], 
+        [
+            'code' => 'pos',
+            "name"=> "POS Indonesia (POS)",
+        ]
+        ];
     }
 
     public static function getOngkir($origin, $destination, $weight, $courier){
@@ -170,8 +183,8 @@ class Courier extends Model
         $cityId     = $singleCity['city_id'];
         $listCourier = [];
         $typeCourir = self::typeCourier();
-        foreach($typeCourir as $code){
-            $listOngkir = self::getOngkir($cityId, $cityId, $weight, $code);
+        foreach($typeCourir as $courier){
+            $listOngkir = self::getOngkir($cityId, $cityId, $weight, $courier['code']);
             if(is_array($listOngkir['data'])){
                 foreach($listOngkir['data'] as $ong){
                     if(!empty($ong['costs'])){
@@ -195,6 +208,5 @@ class Courier extends Model
             }
         }
         return $listCourier;
-
     }
 }

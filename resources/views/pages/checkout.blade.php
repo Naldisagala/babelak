@@ -41,6 +41,9 @@
                         </div>
                     </div>
                 </div>
+                @php
+                    $total = 0;
+                @endphp
                 @foreach ($keranjang as $item)
                     <div class="row mb-3">
                         <div class="card bg-white">
@@ -67,6 +70,9 @@
                                             </div>
                                             <div style="margin-left: 10px">
                                                 <b>{{ $items->barang->nama_barang }}</b><br>
+                                                @php
+                                                    $total += $items->harga_akhir;
+                                                @endphp
                                                 @if ($items->id_tawar == '')
                                                     <h5 class="mt-3">
                                                         @if ($items->harga_akhir < $items->barang->harga)
@@ -117,11 +123,66 @@
                     <div class="card bg-white">
                         <div class="card-body">
                             <div class="row">
+                                {{-- <div class="col-md-12 mb-5">
+                                    <span class="font-bold">Kurir</span>
+                                    <div class="form-check mt-3">
+                                        <input name="default-radio-1" class="form-check-input" type="radio" value=""
+                                            id="defaultRadio1">
+                                        <label class="form-check-label" for="defaultRadio1"> Unchecked </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input name="default-radio-1" class="form-check-input" type="radio" value=""
+                                            id="defaultRadio2" checked="">
+                                        <label class="form-check-label" for="defaultRadio2"> Checked </label>
+                                    </div>
+                                </div> --}}
                                 <div class="col-3">
-                                    <label for="exampleInputName">Harga Pengiriman</label>
+                                    <span class="font-bold">Harga Pengiriman</span>
                                 </div>
-                                <div class="col-9">
-                                    <div class="text-right">Gratis Ongkir Sistem COD</div>
+                                <div class="col-9 text-end">
+                                    <span>Gratis Ongkir Sistem COD</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="card bg-white">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <a class="btn w-100 d-flex justify-content-between" data-bs-toggle="collapse"
+                                        href="#collapse-bank" role="button" aria-expanded="true"
+                                        aria-controls="collapse-bank">
+                                        <span class="font-bold">
+                                            <i class="fa fa-building-columns me-2"></i>
+                                            <span>Transfer Bank</span>
+                                        </span>
+                                        <i class="fa fa-chevron-down"></i>
+                                    </a>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="collapse show" id="collapse-bank" style="">
+                                        <div class="d-grid d-sm-flex px-3 border">
+                                            <div class="col-md-12 mb-4 mt-2">
+                                                <div class="form-check my-2">
+                                                    <input name="bank" class="form-check-input" type="radio"
+                                                        value="" id="bank-bca" checked>
+                                                    <label class="form-check-label ms-2" for="bank-bca"> BCA </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input name="bank" class="form-check-input" type="radio"
+                                                        value="" id="bank-bni">
+                                                    <label class="form-check-label ms-2" for="bank-bni"> BNI </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input name="bank" class="form-check-input" type="radio"
+                                                        value="" id="bank-bri">
+                                                    <label class="form-check-label ms-2" for="bank-bri"> BRI </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -132,11 +193,20 @@
                 <div class="card bg-white">
                     <div class="card-body">
                         <div class="row mb-3">
-                            <div class="col">
-                                Total Pembayaran :
+                            <div class="col-md-6">
+                                <span>Total Pembayaran :</span>
                             </div>
-                            <div class="col">
-                                <div class="text-right">{{ 'Rp ' . number_format(0, 0, ',', '.') }}</div>
+                            <div class="col-md-6 text-end">
+                                <span class="font-bold">{{ 'Rp ' . number_format($total, 0, ',', '.') }}</span>
+                            </div>
+                            <div class="col-md-12">
+                                <hr>
+                            </div>
+                            <div class="col-md-6">
+                                <span class="font-bold">Total Pembayaran :</span>
+                            </div>
+                            <div class="col-md-6 text-end">
+                                <span class="font-bold">{{ 'Rp ' . number_format($total, 0, ',', '.') }}</span>
                             </div>
                         </div>
                         <div class="row">
