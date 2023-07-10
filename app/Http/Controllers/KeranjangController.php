@@ -96,10 +96,9 @@ class KeranjangController extends Controller
             'id_seller' => $id_seller,
         ];
 
-        $cart = Keranjang::where(
-            'id_barang', '=', $id_barang,
-            'id_user', '=', $id_user
-        )->first();
+        $cart = Keranjang::where('id_barang', '=', $id_barang)
+        ->where('id_user', '=', $id_user)
+        ->first();
         if(!empty($cart)){
             return redirect()->back()->with('success','The product is already in the cart!!');
         }else{
@@ -123,10 +122,9 @@ class KeranjangController extends Controller
             'id_seller' => $id_seller,
         ];
 
-        $cart = Keranjang::where(
-            'id_barang', '=', $id_barang,
-            'id_user', '=', $id_user
-            )->first();
+        $cart = Keranjang::where('id_barang', '=', $id_barang)
+        ->where('id_user', '=', $id_user)
+        ->first();
         if(!empty($cart)){
             return redirect('/checkout')->with('success', 'The product is already in the cart!!');
         }else{
