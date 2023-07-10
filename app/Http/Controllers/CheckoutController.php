@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Courier;
+use App\Models\Transaksi;
+use App\Models\Keranjang;
 
 class CheckoutController extends Controller
 {
@@ -33,6 +35,37 @@ class CheckoutController extends Controller
 
     public function checkout(Request $request)
     {
-        
+        $id_user    = auth()->user()->id;
+        $id_serller = $request->get('id_serller');
+        $bank       = $request->get('bank');
+
+        foreach($id_serller as $idslr){
+            $cart_ids = $request->get('cart_id_'.$idslr);
+            $totals   = $request->get('total_'.$idslr);
+            $note    = $request->get('note_'.$idslr);
+
+            for($i = 0; $i < count($totals); $i++){
+                $cart_id = $cart_ids[$i];
+                $total   = $totals[$i];
+
+                $data = [
+                    'id_cart' => $cart_id,
+                    'id_user' => $id_user,
+                    'code_payment' => $bank,
+                    'number_payment' => '',
+                    'total' => $total,
+                    'status' => 'waiting',
+                    'active' => 1,
+                    'note' => $note,
+                ];
+                Transaksi::create($data);
+
+                $keranjang = Keranjang::find($cart_id);
+                $keranjang->status   = 'done';
+                $keranjang->update();
+            }
+        }
+
+        return redirect('/')->with('success', 'Checkout Successfully!');
     }
 }

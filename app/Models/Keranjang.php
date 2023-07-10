@@ -29,6 +29,7 @@ class Keranjang extends Model
         'id_tawar',
         'aktif',
         'id_seller',
+        'status'
     ];
 
     public function user()

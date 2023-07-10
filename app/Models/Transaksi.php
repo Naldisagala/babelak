@@ -16,6 +16,7 @@ class Transaksi extends Model
         'total',
         'status',
         'active',
+        'note',
     ];
 
     public function keranjang()
