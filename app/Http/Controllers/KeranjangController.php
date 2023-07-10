@@ -104,4 +104,28 @@ class KeranjangController extends Controller
             return redirect()->back()->with('success','Product add to Cart Successfully!!');
         }
     }
+
+    public function addCartToCheckout(Request $request)
+    {
+        $id_barang = $request->get('id_barang');
+        $id_user   = $request->get('id_user');
+        $id_seller = $request->get('id_seller');
+
+        $data = [
+            'id_barang' => $id_barang,
+            'id_user'   => $id_user,
+            'gambar'    => '',
+            'id_tawar'  => '',
+            'aktif'     => 1,
+            'id_seller' => $id_seller,
+        ];
+
+        $cart = Keranjang::where('id_barang', '=', $id_barang)->first();
+        if(!empty($cart)){
+            return redirect('/checkout')->with('success', 'The product is already in the cart!!');
+        }else{
+            Keranjang::create($data);
+            return redirect('/checkout')->with('success', 'Product add to Cart Successfully!');
+        }
+    }
 }

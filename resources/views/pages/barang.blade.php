@@ -90,7 +90,15 @@
                                         id="qty" aria-describedby="helpId" placeholder="Qty">
                                 </div>
                                 <div class="col-md-5">
-                                    <button class="btn btn-primary w-100 me-3">Beli</button>
+                                    <form method="POST" action="/add-cart-to-checkout">
+                                        @csrf
+                                        <input type="hidden" name="id_barang" id="id_barang" value="{{ $barang->id }}">
+                                        <input type="hidden" name="id_user" id="id_user"
+                                            value="{{ auth()->user()->id }}">
+                                        <input type="hidden" name="id_seller" id="id_seller"
+                                            value="{{ $barang->seller->id }}">
+                                        <button class="btn btn-primary w-100 me-3">Beli</button>
+                                    </form>
                                 </div>
                                 <div class="col-md-2">
                                     <form method="POST" action="/add-cart">
@@ -145,7 +153,8 @@
                                 <span class="text-center text-white fw-bold">Barang Tidak Dapat
                                     Ditawar</span>
                             @else
-                                <form action="/tawar/1/{{ $barang->seller->id }}/{{ $barang->id }}/null" method="POST">
+                                <form action="/tawar/1/{{ $barang->seller->id }}/{{ $barang->id }}/null"
+                                    method="POST">
                                     @csrf
                                     <div class="input-group mb-3">
                                         <input type="number" class="form-control" name="tawar"
