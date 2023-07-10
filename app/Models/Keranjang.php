@@ -9,6 +9,28 @@ class Keranjang extends Model
 {
     use HasFactory;
 
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'keranjangs';
+    protected $guarded = ['id'];    
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'id_barang',
+        'id_user',
+        'gambar',
+        'id_tawar',
+        'aktif',
+        'id_seller',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class, 'id_user', 'id');

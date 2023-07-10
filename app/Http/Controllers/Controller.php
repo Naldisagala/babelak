@@ -60,9 +60,7 @@ class Controller extends BaseController
     // Fitur Keranjang
     public function cartCount($user = null)
     {
-        $cart = Keranjang::with('user', 'tawar','barang')->where('id_user','=',1)->get();
-
-        return count($cart);
+        return Keranjang::with('user', 'tawar','barang')->where('id_user','=',$user ?? 1)->count();
     }
     public function getCart($user = null)
     {

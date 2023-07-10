@@ -89,9 +89,20 @@
                                     <input type="number"min="1" value="1" class="form-control" name="qty"
                                         id="qty" aria-describedby="helpId" placeholder="Qty">
                                 </div>
-                                <div class="col-md-10">
-                                    <button class="btn btn-primary w-50 me-3">Beli</button>
-                                    <button class="btn btn-primary"><i class="fa-solid fa-cart-shopping"></i></button>
+                                <div class="col-md-5">
+                                    <button class="btn btn-primary w-100 me-3">Beli</button>
+                                </div>
+                                <div class="col-md-2">
+                                    <form method="POST" action="/add-cart">
+                                        @csrf
+                                        <input type="hidden" name="id_barang" id="id_barang" value="{{ $barang->id }}">
+                                        <input type="hidden" name="id_user" id="id_user"
+                                            value="{{ auth()->user()->id }}">
+                                        <input type="hidden" name="id_seller" id="id_seller"
+                                            value="{{ $barang->seller->id }}">
+                                        <button type="submit" class="btn btn-primary"><i
+                                                class="fa-solid fa-cart-shopping"></i></button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

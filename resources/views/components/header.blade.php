@@ -1,7 +1,7 @@
 @php
     use App\Http\Controllers\Controller;
     $controller = new Controller();
-    $count = $controller->cartCount(null);
+    $count = $controller->cartCount(auth()->user()->id);
 @endphp
 <header class="d-flex flex-column h-100">
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg">

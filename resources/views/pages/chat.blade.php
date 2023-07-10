@@ -102,6 +102,7 @@
                         <hr class="line">
                         <div class="card-footer">
                             <form action="/send/message" method="POST">
+                                @csrf
                                 <div class="row">
                                     <div class="col-10">
                                         <div class="form-group">

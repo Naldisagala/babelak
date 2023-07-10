@@ -4,16 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Barang;
+use App\Models\Keranjang;
 
 class KeranjangController extends Controller
 {
     public function index(Request $request)
     {   
-        return view('pages.keranjang',['keranjang'=> $this->getCart(1)]);
+        $id_user = auth()->user()->id;
+        return view('pages.keranjang',['keranjang'=> $this->getCart($id_user)]);
     }
 
     public function checkout(Request $request)
     {
+        $id_user = auth()->user()->id;
         $user = User::select(
             'ud.*', 
             'a.*', 
@@ -52,7 +56,7 @@ class KeranjangController extends Controller
         ->first();
 
         return view('pages.checkout',[
-            'keranjang'=> $this->getCart(1),
+            'keranjang'=> $this->getCart($id_user),
             'user' => $user
         ]);
     }
@@ -75,6 +79,29 @@ class KeranjangController extends Controller
             $this->cartHapus($id);
         }
         return redirect()->back()->with('success','Remove Cart Successfully!!');
-        
+    }
+
+    public function addCart(Request $request)
+    {
+        $id_barang = $request->get('id_barang');
+        $id_user   = $request->get('id_user');
+        $id_seller = $request->get('id_seller');
+
+        $data = [
+            'id_barang' => $id_barang,
+            'id_user'   => $id_user,
+            'gambar'    => '',
+            'id_tawar'  => '',
+            'aktif'     => 1,
+            'id_seller' => $id_seller,
+        ];
+
+        $cart = Keranjang::where('id_barang', '=', $id_barang)->first();
+        if(!empty($cart)){
+            return redirect()->back()->with('success','The product is already in the cart!!');
+        }else{
+            Keranjang::create($data);
+            return redirect()->back()->with('success','Product add to Cart Successfully!!');
+        }
     }
 }
