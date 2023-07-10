@@ -22,6 +22,6 @@ class Seller
                 return $next($request);
             }
         }
-        return redirect('login');
+        return redirect('login-page');
     }
 }
