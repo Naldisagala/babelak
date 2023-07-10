@@ -138,6 +138,24 @@
                                     <div class="col-md-12 mt-3">
                                         <div class="row">
                                             <div class="col-md-2 vertical-top">
+                                                <span class="font-bold">Wight</span>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input required type="number"
+                                                    class="form-control @error('wight') is-invalid @enderror"
+                                                    name="wight" id="wight" placeholder="Stok" min="1"
+                                                    value="{{ old('wight') ?? '' }}">
+                                                @error('wight')
+                                                    <div class="invalid-feedback text-left">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mt-3">
+                                        <div class="row">
+                                            <div class="col-md-2 vertical-top">
                                                 <span class="font-bold">Status Barang</span>
                                             </div>
                                             <div class="col-md-8">
@@ -169,7 +187,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-12 mt-3">
+                                    {{-- <div class="col-md-12 mt-3">
                                         <div class="row">
                                             <div class="col-md-2 vertical-top">
                                                 <span class="font-bold">Lokasi Domisili/ Barang</span>
@@ -184,7 +202,7 @@
                                                                 {{ $message }}
                                                             </div>
                                                         @enderror
-                                                    </div>
+                                                    </div> 
                                                     <div class="col-md-6 mt-3">
                                                         <select required onchange="getRegion(this)" data-type="regency"
                                                             class="chosen form-control @error('province') is-invalid @enderror"
@@ -229,11 +247,11 @@
                                                                 placeholder="Kode Pos" id="postcode"
                                                                 value="{{ old('postcode') ?? '' }}">
                                                         </div>
-                                                    </div>
+                                                    </div> 
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>  --}}
                                 </div>
                                 <div class="row m-4 shadow px-3 py-5 rounded">
                                     <h6 class="font-bold">Tingkat Pemakaian Barang</h6>
@@ -385,16 +403,6 @@
                 console.log(check, type)
             }
         }
-
-        @if (old('regency'))
-            getAjaxRegion('{{ old('regency') }}', 'regency', true)
-        @endif
-        @if (old('district'))
-            getAjaxRegion('{{ old('district') }}', 'district', true)
-        @endif
-        @if (old('village'))
-            getAjaxRegion('{{ old('village') }}', 'village', true)
-        @endif
 
         function getRegion(thisis) {
             let id = $(thisis).val()

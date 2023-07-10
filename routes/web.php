@@ -61,6 +61,14 @@ Route::group(['middleware' => ['seller']], function() {
     Route::get('/sales-revenue', 'OrderController@salesRevenue');
 });
 
+// test courier
+Route::get('/origin={city_origin}&destination={city_destination}&weight={weight}&courier={courier}','CheckoutController@getOngkir');
+Route::get('/province','CheckoutController@getProvince');
+Route::get('/province={id}','CheckoutController@getProvince');
+Route::get('/province_city={id_province}','CheckoutController@getCity');
+Route::get('/province_city={id_province}&city={id_city}','CheckoutController@getCity');
+Route::get('/courier/province={province}&city={city}&weight={weight}','CheckoutController@getListCourier');
+
 Route::group(['middleware' => ['buyer-seller']], function() {
     Route::get('/profile', 'ProfileController@index');
     Route::post('/profile', 'ProfileController@changeProfile');

@@ -41,11 +41,9 @@ class ProductController extends Controller
                 'stock'       => 'required',
                 'description' => 'required',
                 'status'      => 'required',
-                'address'     => 'required',
-                'village'     => 'required',
-                'postcode'    => 'required',
                 'usage'       => 'required',
                 'method'      => 'required',
+                'wight'       => 'required',
                 'image'       => 'required',
                 'image.*'     => 'mimes:jpeg,jpg,png,gif|max:2048'
             ];
@@ -90,9 +88,10 @@ class ProductController extends Controller
                 'status_tawar'  => $data['is_tawar'] ? 'yes' : 'no',
                 'status_barang' => $data['status'] ?? '',
                 'stock'         => $data['stock'],
-                'address'       => $data['address'],
-                'id_village'    => $data['village'],
-                'postcode'      => $data['postcode'],
+                'address'       => $data['address'] ?? null,
+                'id_village'    => $data['village'] ?? null,
+                'postcode'      => $data['postcode'] ?? null,
+                'wight'         => $data['wight'],
                 'usage'         => $data['usage'],
                 'method'        => join(',', $data['method']),
             ];
