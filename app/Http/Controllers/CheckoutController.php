@@ -30,4 +30,9 @@ class CheckoutController extends Controller
         $courier = Courier::getListCourier($province, $city, $weight);
         return response()->json($courier, 200);
     }
+
+    public function checkout(Request $request)
+    {
+        
+    }
 }

@@ -80,6 +80,7 @@ Route::group(['middleware' => ['buyer-seller']], function() {
     Route::post('/tawar/{user}/{seller}/{barang}/{harga}','TawarController@sendChatTawar');
     Route::get('/keranjang', 'KeranjangController@index');
     Route::get('/checkout', 'KeranjangController@checkout');
+    Route::post('/checkout', 'CheckoutController@checkout');
     Route::get('/cart-hapus/{id}', 'KeranjangController@hapus');
     Route::post('/cart-hapus', 'KeranjangController@hapusChecked');
     Route::post('/add-cart', 'KeranjangController@addCart');

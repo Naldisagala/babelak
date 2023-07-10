@@ -60,12 +60,18 @@ class Controller extends BaseController
     // Fitur Keranjang
     public function cartCount($user = null)
     {
-        return Keranjang::with('user', 'tawar','barang')->where('id_user','=',$user ?? 1)->count();
+        return Keranjang::with('user', 'tawar','barang')
+        ->where('id_user','=',$user ?? 1)
+        ->where('aktif','=',1)
+        ->where('status','=','process')
+        ->count();
     }
     public function getCart($user = null)
     {
         $seller = Keranjang::select('id_seller', DB::raw('COUNT(id_seller) as total_barang'))
         ->where('id_user', $user)
+        ->where('aktif','=',1)
+        ->where('status','=','process')
         ->groupBy('id_seller')
         ->get();
         
@@ -73,6 +79,8 @@ class Controller extends BaseController
         foreach ($seller as $key) {
             $cart = Keranjang::with('user', 'tawar', 'barang', 'seller','alamatSeller')
             ->where('id_seller', $key->id_seller)
+            ->where('aktif','=',1)
+            ->where('status','=','process')
             ->get();  
             foreach ($cart as $keys) {
                 $keys->harga_akhir = ($keys->tawar != null) ? $keys->tawar->harga_tawar :( $keys->barang->harga ?? 0);
@@ -90,9 +98,9 @@ class Controller extends BaseController
         $keranjang = Keranjang::find($id);
     
         if ($keranjang) {
-            // $keranjang->active = 0;
-            // $keranjang->save();
-            $keranjang->delete();
+            $keranjang->aktif = 0;
+            $keranjang->save();
+            // $keranjang->delete();
     
             return true;
         }
