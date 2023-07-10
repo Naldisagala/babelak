@@ -58,10 +58,10 @@ class Controller extends BaseController
     }
 
     // Fitur Keranjang
-    public function cartCount($user = null)
+    public function cartCount()
     {
         return Keranjang::with('user', 'tawar','barang')
-        ->where('id_user','=',$user ?? 1)
+        ->where('id_user','=',auth()->user()->id ?? null)
         ->where('aktif','=',1)
         ->where('status','=','process')
         ->count();

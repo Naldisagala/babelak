@@ -84,33 +84,47 @@
                             <small class="ms-4 ps-2">{{ $method }}</small>
                         </p>
                         <div class="mt-5">
+                            @if (!empty(auth()->user()))
+                            @endif
                             <div class="row">
                                 <div class="col-md-2" style="display: none">
                                     <input type="number"min="1" value="1" class="form-control" name="qty"
                                         id="qty" aria-describedby="helpId" placeholder="Qty">
                                 </div>
                                 <div class="col-md-5">
-                                    <form method="POST" action="/add-cart-to-checkout">
-                                        @csrf
-                                        <input type="hidden" name="id_barang" id="id_barang" value="{{ $barang->id }}">
-                                        <input type="hidden" name="id_user" id="id_user"
-                                            value="{{ auth()->user()->id }}">
-                                        <input type="hidden" name="id_seller" id="id_seller"
-                                            value="{{ $barang->seller->id }}">
-                                        <button class="btn btn-primary w-100 me-3">Beli</button>
-                                    </form>
+                                    @if (!empty(auth()->user()))
+                                        <form method="POST" action="/add-cart-to-checkout">
+                                            @csrf
+                                            <input type="hidden" name="id_barang" id="id_barang"
+                                                value="{{ $barang->id }}">
+                                            <input type="hidden" name="id_user" id="id_user"
+                                                value="{{ auth()->user()->id }}">
+                                            <input type="hidden" name="id_seller" id="id_seller"
+                                                value="{{ $barang->seller->id }}">
+                                            <button type="submit" class="btn btn-primary w-100 me-3">Beli</button>
+                                        </form>
+                                    @else
+                                        <a href="/login-page" class="btn btn-primary w-100 me-3">Beli</a>
+                                    @endif
+
                                 </div>
                                 <div class="col-md-2">
-                                    <form method="POST" action="/add-cart">
-                                        @csrf
-                                        <input type="hidden" name="id_barang" id="id_barang" value="{{ $barang->id }}">
-                                        <input type="hidden" name="id_user" id="id_user"
-                                            value="{{ auth()->user()->id }}">
-                                        <input type="hidden" name="id_seller" id="id_seller"
-                                            value="{{ $barang->seller->id }}">
-                                        <button type="submit" class="btn btn-primary"><i
-                                                class="fa-solid fa-cart-shopping"></i></button>
-                                    </form>
+                                    @if (!empty(auth()->user()))
+                                        <form method="POST" action="/add-cart">
+                                            @csrf
+                                            <input type="hidden" name="id_barang" id="id_barang"
+                                                value="{{ $barang->id }}">
+                                            <input type="hidden" name="id_user" id="id_user"
+                                                value="{{ auth()->user()->id }}">
+                                            <input type="hidden" name="id_seller" id="id_seller"
+                                                value="{{ $barang->seller->id }}">
+                                            <button type="submit" class="btn btn-primary"><i
+                                                    class="fa-solid fa-cart-shopping"></i></button>
+                                        </form>
+                                    @else
+                                        <a href="/login-page" class="btn btn-primary"><i
+                                                class="fa-solid fa-cart-shopping"></i></a>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -147,67 +161,69 @@
                                 </div>
                             </div>
                         </h5>
-                        <div class="bg-light-smoth mt-4"
-                            style="display: flex; flex-direction: column-reverse;padding:10px;">
-                            @if ($barang->status_tawar == 'no')
-                                <span class="text-center text-white fw-bold">Barang Tidak Dapat
-                                    Ditawar</span>
-                            @else
-                                <form action="/tawar/1/{{ $barang->seller->id }}/{{ $barang->id }}/null"
-                                    method="POST">
-                                    @csrf
-                                    <div class="input-group mb-3">
-                                        <input type="number" class="form-control" name="tawar"
-                                            placeholder="Ketikkan tawaran" aria-label="Ketikkan tawaran"
-                                            aria-describedby="basic-addon2">
-                                        <button style="background: #CB63A3!important" class="input-group-text"
-                                            id="basic-addon2" type="submit"><i style="color:white;"
-                                                class="fa fa-paper-plane"></i></button>
+                        @if (!empty(auth()->user()))
+                            <div class="bg-light-smoth mt-4"
+                                style="display: flex; flex-direction: column-reverse;padding:10px;">
+                                @if ($barang->status_tawar == 'no')
+                                    <span class="text-center text-white fw-bold">Barang Tidak Dapat
+                                        Ditawar</span>
+                                @else
+                                    <form action="/tawar/1/{{ $barang->seller->id }}/{{ $barang->id }}/null"
+                                        method="POST">
+                                        @csrf
+                                        <div class="input-group mb-3">
+                                            <input type="number" class="form-control" name="tawar"
+                                                placeholder="Ketikkan tawaran" aria-label="Ketikkan tawaran"
+                                                aria-describedby="basic-addon2">
+                                            <button style="background: #CB63A3!important" class="input-group-text"
+                                                id="basic-addon2" type="submit"><i style="color:white;"
+                                                    class="fa fa-paper-plane"></i></button>
+                                        </div>
+                                    </form>
+                                    <br>
+                                    <div class="mt-5">
+                                        @php
+                                            $persen = [5, 10, 15];
+                                            $rekomendasi_tawar = [];
+                                            $price = $barang->harga;
+                                            foreach ($persen as $per) {
+                                                $rekomendasi_tawar[] = $price - ($price * $per) / 100;
+                                            }
+                                        @endphp
+                                        @foreach ($rekomendasi_tawar as $tawar)
+                                            <a style="text-decoration: none"
+                                                href="/tawar/1/{{ $barang->seller->id }}/{{ $barang->id }}/{{ $tawar }}">
+                                                <span
+                                                    class="rekom-tawar me-2">{{ 'Rp ' . number_format($tawar, 0, ',', '.') }}</span>
+                                            </a>
+                                        @endforeach
                                     </div>
-                                </form>
-                                <br>
-                                <div class="mt-5">
-                                    @php
-                                        $persen = [5, 10, 15];
-                                        $rekomendasi_tawar = [];
-                                        $price = $barang->harga;
-                                        foreach ($persen as $per) {
-                                            $rekomendasi_tawar[] = $price - ($price * $per) / 100;
-                                        }
-                                    @endphp
-                                    @foreach ($rekomendasi_tawar as $tawar)
-                                        <a style="text-decoration: none"
-                                            href="/tawar/1/{{ $barang->seller->id }}/{{ $barang->id }}/{{ $tawar }}">
-                                            <span
-                                                class="rekom-tawar me-2">{{ 'Rp ' . number_format($tawar, 0, ',', '.') }}</span>
-                                        </a>
-                                    @endforeach
-                                </div>
-                                <div>
-                                    <div
-                                        style="overflow-y: scroll; display: flex; flex-direction: column; max-height: 250px;">
-                                        @if (count($barang->tawar) > 0)
-                                            @foreach ($barang->tawar as $tawar)
-                                                <div class="mt-3">
-                                                    <div class="bubble-chat">
-                                                        Saya menawar:
-                                                        <b>{{ 'Rp ' . number_format($tawar->harga_tawar, 0, ',', '.') }}</b>
-                                                        <br>
-                                                        <small style="font-size: 10px">Status:
-                                                            {{ $tawar->status }}</small>
+                                    <div>
+                                        <div
+                                            style="overflow-y: scroll; display: flex; flex-direction: column; max-height: 250px;">
+                                            @if (count($barang->tawar) > 0)
+                                                @foreach ($barang->tawar as $tawar)
+                                                    <div class="mt-3">
+                                                        <div class="bubble-chat">
+                                                            Saya menawar:
+                                                            <b>{{ 'Rp ' . number_format($tawar->harga_tawar, 0, ',', '.') }}</b>
+                                                            <br>
+                                                            <small style="font-size: 10px">Status:
+                                                                {{ $tawar->status }}</small>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            @endforeach
-                                        @else
-                                            <br>
-                                            <span style="text-align: center; color: white; font-weight: 600">Silahkan
-                                                Tawar</span>
-                                            <br>
-                                        @endif
+                                                @endforeach
+                                            @else
+                                                <br>
+                                                <span style="text-align: center; color: white; font-weight: 600">Silahkan
+                                                    Tawar</span>
+                                                <br>
+                                            @endif
+                                        </div>
                                     </div>
-                                </div>
-                            @endif
-                        </div>
+                                @endif
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

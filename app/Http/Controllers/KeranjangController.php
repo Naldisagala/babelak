@@ -98,11 +98,17 @@ class KeranjangController extends Controller
 
         $cart = Keranjang::where('id_barang', '=', $id_barang)
         ->where('id_user', '=', $id_user)
-        ->where('aktif','=',1)
         ->where('status','=','process')
         ->first();
         if(!empty($cart)){
-            return redirect()->back()->with('error','The product is already in the cart!!');
+            if($cart->aktif == 1){
+                return redirect()->back()->with('error','The product is already in the cart!!');
+            }else{
+                $keranjang = Keranjang::find($cart->id);
+                $keranjang->aktif   = 1;
+                $keranjang->update();
+                return redirect()->back()->with('success','Product add to Cart Successfully!!');
+            }
         }else{
             Keranjang::create($data);
             return redirect()->back()->with('success','Product add to Cart Successfully!!');
@@ -126,11 +132,17 @@ class KeranjangController extends Controller
 
         $cart = Keranjang::where('id_barang', '=', $id_barang)
         ->where('id_user', '=', $id_user)
-        ->where('aktif','=',1)
         ->where('status','=','process')
         ->first();
         if(!empty($cart)){
-            return redirect('/checkout')->with('error', 'The product is already in the cart!!');
+            if($cart->aktif == 1){
+                return redirect()->back()->with('error','The product is already in the cart!!');
+            }else{
+                $keranjang = Keranjang::find($cart->id);
+                $keranjang->aktif   = 1;
+                $keranjang->update();
+                return redirect()->back()->with('success','Product add to Cart Successfully!!');
+            }
         }else{
             Keranjang::create($data);
             return redirect('/checkout')->with('success', 'Product add to Cart Successfully!');
