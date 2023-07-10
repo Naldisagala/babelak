@@ -146,8 +146,8 @@
         $('.datatables').DataTable({
             autoWidth: true,
             "lengthMenu": [
-                [16, 32, 64, -1],
-                [16, 32, 64, "All"]
+                [10, 20, 50, -1],
+                [10, 20, 50, "All"]
             ],
             dom: '<"dt-top-container"<l><"dt-center-in-div"B><f>r>t<"dt-filter-spacer"f><ip>',
             buttons: [{
@@ -171,8 +171,8 @@
             autoWidth: true,
             "ordering": false,
             "lengthMenu": [
-                [16, 32, 64, -1],
-                [16, 32, 64, "All"]
+                [10, 20, 50, -1],
+                [10, 20, 50, "All"]
             ]
         });
 

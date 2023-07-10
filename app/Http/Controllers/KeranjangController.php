@@ -141,7 +141,7 @@ class KeranjangController extends Controller
                 $keranjang = Keranjang::find($cart->id);
                 $keranjang->aktif   = 1;
                 $keranjang->update();
-                return redirect()->back()->with('success','Product add to Cart Successfully!!');
+                return redirect('/checkout')->with('success', 'Product add to Cart Successfully!');
             }
         }else{
             Keranjang::create($data);
