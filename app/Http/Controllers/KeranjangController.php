@@ -16,9 +16,20 @@ class KeranjangController extends Controller
     {   
         $hapus = $this->cartHapus($id);
         if ($hapus) {
-            return redirect()->back();
+            return redirect()->back()->with('success','Remove Cart Successfully!!');
         } else {
             return redirect()->back();
         }
+    }
+
+    public function hapusChecked(Request $request)
+    {   
+        $id_carts = $request->get('id_carts');
+        $ids = explode(',', $id_carts);
+        foreach($ids as $id){
+            $this->cartHapus($id);
+        }
+        return redirect()->back()->with('success','Remove Cart Successfully!!');
+        
     }
 }

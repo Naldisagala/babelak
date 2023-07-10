@@ -20,8 +20,8 @@
                                 <div class="col-md-6">
                                     <div class="form-check">
                                         <label class="form-check-label">
-                                            <input type="checkbox" class="form-check-input" name="select_all"
-                                                id="select_all" value="1">
+                                            <input onclick="checkAll(this)" type="checkbox" class="form-check-input"
+                                                name="select_all" id="select_all" value="1">
                                             <span class="ms-2">Pilih semua</span>
                                         </label>
                                     </div>
@@ -35,6 +35,9 @@
                         </div>
                     </div>
                 </div>
+                @php
+                    $total = 0;
+                @endphp
                 @foreach ($keranjang as $item)
                     <div class="row mb-3">
                         <div class="card bg-white">
@@ -48,52 +51,59 @@
                                     </div>
                                 </div>
                                 <hr>
-                                @foreach ($item->list_barang as $items)
-                                    @php
-                                        $gambar = $items->barang->gambar;
-                                    @endphp
-                                    <div style="display: flex; justify-content: space-between;">
-                                        <div style="display: flex; align-items: center;">
-                                            <div class="form-check me-2">
-                                                <label class="form-check-label">
-                                                    <input type="checkbox" class="form-check-input" name="barangToko"
-                                                        id="barangToko" value="1">
-                                                </label>
+                                @if (!empty($item->list_barang))
+                                    @foreach ($item->list_barang as $items)
+                                        @php
+                                            $gambar = $items->barang->gambar;
+                                        @endphp
+                                        <div class="d-flex justify-content-between">
+                                            <div class="d-flex align-items-center">
+                                                <div class="form-check me-2">
+                                                    <label class="form-check-label">
+                                                        <input onclick="checkedCart(this)" type="checkbox"
+                                                            class="form-check-input cart-checked" name="barangToko"
+                                                            id="barangToko" value="{{ $items->id }}">
+                                                    </label>
+                                                </div>
+                                                <div class="card">
+                                                    <img class="zoom me-3 rounded-3 shadow" width="100px"
+                                                        src="{{ str_contains($gambar, '://') ? $gambar : '/files/product/' . $gambar }}"
+                                                        alt="{{ $items->nama_barang }}">
+                                                </div>
+                                                <div style="margin-left: 10px">
+                                                    <b>{{ $items->barang->nama_barang }}</b><br>
+                                                    @php
+                                                        $total += $items->harga_akhir;
+                                                    @endphp
+                                                    @if ($items->id_tawar == '')
+                                                        <small>
+                                                            <span>Harga: </span>
+                                                            @if ($items->harga_akhir < $items->barang->harga)
+                                                                <span class="text-strike-through text-danger">
+                                                                    {{ 'Rp ' . number_format($items->barang->harga, 0, ',', '.') }}</span>
+                                                                <span class="font-bold text-success">
+                                                                    {{ ' Rp ' . number_format($items->harga_akhir, 0, ',', '.') }}</span>
+                                                            @else
+                                                                <span class="font-bold text-success">
+                                                                    {{ ' Rp ' . number_format($items->harga_akhir, 0, ',', '.') }}</span>
+                                                            @endif
+                                                        </small>
+                                                    @else
+                                                        <small><span class="font-bold">Harga:
+                                                                {{ 'Rp ' . number_format($items->harga_akhir, 0, ',', '.') }}</span></small>
+                                                    @endif
+                                                </div>
                                             </div>
-                                            <div class="card">
-                                                <img class="zoom me-3 rounded-3 shadow" width="100px"
-                                                    src="{{ str_contains($gambar, '://') ? $gambar : '/files/product/' . $gambar }}"
-                                                    alt="{{ $items->nama_barang }}">
-                                            </div>
-                                            <div style="margin-left: 10px">
-                                                <b>{{ $items->barang->nama_barang }}</b><br>
-                                                @if ($items->id_tawar == '')
-                                                    <small>
-                                                        <span>Harga: </span>
-                                                        @if ($items->harga_akhir < $items->barang->harga)
-                                                            <span class="text-strike-through text-danger">
-                                                                {{ 'Rp ' . number_format($items->barang->harga, 0, ',', '.') }}</span>
-                                                            <span class="font-bold text-success">
-                                                                {{ ' Rp ' . number_format($items->harga_akhir, 0, ',', '.') }}</span>
-                                                        @else
-                                                            <span class="font-bold text-success">
-                                                                {{ ' Rp ' . number_format($items->harga_akhir, 0, ',', '.') }}</span>
-                                                        @endif
-                                                    </small>
-                                                @else
-                                                    <small><span class="font-bold">Harga:
-                                                            {{ 'Rp ' . number_format($items->harga_akhir, 0, ',', '.') }}</span></small>
-                                                @endif
+                                            <div class="d-flex align-items-center">
+                                                <span><a href="/cart-hapus/{{ $items->id }}"><i
+                                                            class="fas fa-trash-alt"></i></a></span>
                                             </div>
                                         </div>
-                                        <div style="display: flex; align-items: center;">
-                                            <span><a href="/cart-hapus/{{ $items->id }}"><i
-                                                        class="fas fa-trash-alt"></i></a></span>
-                                        </div>
-                                    </div>
-                                    <br>
-                                @endforeach
-
+                                        <br>
+                                    @endforeach
+                                @else
+                                    <p class="text-center">(Kosong)</p>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -112,7 +122,7 @@
                                     <span>Total pesanan (2 Barang)</span>
                                 </div>
                                 <div class="col-md-6 text-end">
-                                    <span>Rp.000 .000</span>
+                                    <span>{{ 'Rp ' . number_format($total, 0, ',', '.') }}</span>
                                 </div>
                                 <div class="col-md-12">
                                     <hr>
@@ -121,12 +131,13 @@
                                     <h6 class="font-bold">Total Harga</h6>
                                 </div>
                                 <div class="col-md-6 text-end">
-                                    <span>{{ 'Rp ' . number_format(0, 0, ',', '.') }}</span>
+                                    <span>{{ 'Rp ' . number_format($total, 0, ',', '.') }}</span>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <button class="btn btn-primary">Beli</button>
+                            <a class="btn btn-primary @if ($total == 0) disabled @endif"
+                                href="/">Beli</a>
                         </div>
                     </div>
                 </div>
@@ -134,7 +145,6 @@
         </div>
     </div>
 @endsection
-
 
 @section('modal')
     <div class="modal fade" id="removeCartChecked" tabindex="-1" aria-hidden="true">
@@ -144,9 +154,10 @@
                     <h5 class="modal-title" id="exampleModalLabel2">Perhatian</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="/become-seller" method="POST">
+                <form action="/cart-hapus" method="POST">
                     @csrf
                     <div class="modal-body">
+                        <input type="hidden" name="id_carts" id="id_carts">
                         <p>Apakah kamu yakin ingin menghapus keranjang yg di tandai ini?</p>
                     </div>
                     <div class="modal-footer">
@@ -159,4 +170,48 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        function checkAll(thisis) {
+            let check = $(thisis).prop('checked');
+            $('.cart-checked').prop('checked', check)
+            if (check) {
+                let carts = ''
+                $('.cart-checked').each(function(i, data) {
+                    carts += (i == 0 ? '' : ',') + data.value
+                });
+                $('#id_carts').val(carts)
+            } else {
+                $('#id_carts').val('')
+            }
+        }
+
+        function checkedCart(thisis) {
+            let check = $(thisis).prop('checked');
+            let val = $(thisis).val()
+            let id_carts = $('#id_carts').val();
+            if (check) {
+                if (id_carts == '') {
+                    $('#id_carts').val(val)
+                } else {
+                    let split = id_carts.split(',')
+                    if (!split.includes(val)) {
+                        id_carts += `,${val}`
+                        $('#id_carts').val(id_carts)
+                    }
+                }
+            } else {
+                let split = id_carts.split(',')
+                let carts = ''
+                $.each(split, function(i, data) {
+                    if (data != val) {
+                        carts += (i == 0 ? '' : ',') + data
+                    }
+                });
+                $('#id_carts').val(carts)
+            }
+        }
+    </script>
 @endsection

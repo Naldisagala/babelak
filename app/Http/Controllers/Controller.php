@@ -92,8 +92,9 @@ class Controller extends BaseController
         $keranjang = Keranjang::find($id);
     
         if ($keranjang) {
-            $keranjang->active = 0;
-            $keranjang->save();
+            // $keranjang->active = 0;
+            // $keranjang->save();
+            $keranjang->delete();
     
             return true;
         }
