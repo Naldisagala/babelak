@@ -20,6 +20,9 @@ Route::get('/home', 'HomeController@index');
 
 Route::get('/barang/{id}','HomeController@barang_detail');
 
+Route::get('/login', function () {
+    return view('login');
+});
 
 Route::get('/login-page', function () {
     return view('login');

@@ -93,16 +93,20 @@
                                 </div>
                                 <div class="col-md-5">
                                     @if (!empty(auth()->user()))
-                                        <form method="POST" action="/add-cart-to-checkout">
-                                            @csrf
-                                            <input type="hidden" name="id_barang" id="id_barang"
-                                                value="{{ $barang->id }}">
-                                            <input type="hidden" name="id_user" id="id_user"
-                                                value="{{ auth()->user()->id }}">
-                                            <input type="hidden" name="id_seller" id="id_seller"
-                                                value="{{ $barang->seller->id }}">
-                                            <button type="submit" class="btn btn-primary w-100 me-3">Beli</button>
-                                        </form>
+                                        @if ($barang->seller->id != auth()->user()->id)
+                                            <form method="POST" action="/add-cart-to-checkout">
+                                                @csrf
+                                                <input type="hidden" name="id_barang" id="id_barang"
+                                                    value="{{ $barang->id }}">
+                                                <input type="hidden" name="id_user" id="id_user"
+                                                    value="{{ auth()->user()->id }}">
+                                                <input type="hidden" name="id_seller" id="id_seller"
+                                                    value="{{ $barang->seller->id }}">
+                                                <button type="submit" class="btn btn-primary w-100 me-3">Beli</button>
+                                            </form>
+                                        @else
+                                            <p>Barang Sendiri!</p>
+                                        @endif
                                     @else
                                         <a href="/login-page" class="btn btn-primary w-100 me-3">Beli</a>
                                     @endif
@@ -110,17 +114,19 @@
                                 </div>
                                 <div class="col-md-2">
                                     @if (!empty(auth()->user()))
-                                        <form method="POST" action="/add-cart">
-                                            @csrf
-                                            <input type="hidden" name="id_barang" id="id_barang"
-                                                value="{{ $barang->id }}">
-                                            <input type="hidden" name="id_user" id="id_user"
-                                                value="{{ auth()->user()->id }}">
-                                            <input type="hidden" name="id_seller" id="id_seller"
-                                                value="{{ $barang->seller->id }}">
-                                            <button type="submit" class="btn btn-primary"><i
-                                                    class="fa-solid fa-cart-shopping"></i></button>
-                                        </form>
+                                        @if ($barang->seller->id != auth()->user()->id)
+                                            <form method="POST" action="/add-cart">
+                                                @csrf
+                                                <input type="hidden" name="id_barang" id="id_barang"
+                                                    value="{{ $barang->id }}">
+                                                <input type="hidden" name="id_user" id="id_user"
+                                                    value="{{ auth()->user()->id }}">
+                                                <input type="hidden" name="id_seller" id="id_seller"
+                                                    value="{{ $barang->seller->id }}">
+                                                <button type="submit" class="btn btn-primary"><i
+                                                        class="fa-solid fa-cart-shopping"></i></button>
+                                            </form>
+                                        @endif
                                     @else
                                         <a href="/login-page" class="btn btn-primary"><i
                                                 class="fa-solid fa-cart-shopping"></i></a>
@@ -161,7 +167,7 @@
                                 </div>
                             </div>
                         </h5>
-                        @if (!empty(auth()->user()))
+                        @if (!empty(auth()->user()) && $barang->seller->id != auth()->user()->id)
                             <div class="bg-light-smoth mt-4"
                                 style="display: flex; flex-direction: column-reverse;padding:10px;">
                                 @if ($barang->status_tawar == 'no')
