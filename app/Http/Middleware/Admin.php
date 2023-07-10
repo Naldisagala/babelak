@@ -22,6 +22,10 @@ class Admin
                 return $next($request);
             }
         }
-        return redirect('login-page');
+        if(!empty(auth()->user())){
+            return redirect('home');
+        }else{
+            return redirect('login-page');
+        }
     }
 }

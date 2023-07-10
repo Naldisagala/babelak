@@ -49,7 +49,6 @@ Route::group(['middleware' => ['admin']], function() {
 });
 
 Route::group(['middleware' => ['buyer']], function() {
-    Route::get('/my-orders', 'OrderController@myorders');
     Route::post('/become-seller', 'SellerController@register');
 });
 
@@ -75,6 +74,7 @@ Route::get('/courier/province={province}&city={city}&weight={weight}','CheckoutC
 Route::group(['middleware' => ['buyer-seller']], function() {
     Route::get('/profile', 'ProfileController@index');
     Route::post('/profile', 'ProfileController@changeProfile');
+    Route::get('/my-orders', 'OrderController@myorders');
     Route::post('/change-password', 'ProfileController@changePassword');
     Route::get('/chat', 'ChatController@index');
     Route::get('/notification', 'NotificationController@index');

@@ -80,19 +80,11 @@
                                                                             <hr>
                                                                         </div>
                                                                         <div class="col-md-4">
-                                                                            <ul class="list-style-none">
-                                                                                <li><span>Total Pembayaran</span></li>
-                                                                                <li><strong>Rp. 000.000</strong></li>
-                                                                            </ul>
+                                                                            <span>Total Pembayaran</span>
                                                                         </div>
                                                                         <div
                                                                             class="col-md-8 d-flex align-items-center justify-content-end">
-                                                                            <button type="button"
-                                                                                class="btn btn-primary mx-3">Pesanan
-                                                                                Diterima</button>
-                                                                            <a href="/chat" type="button"
-                                                                                class="btn btn-secondary">Chat
-                                                                                Penjual</a>
+                                                                            <span><strong>Rp. 000.000</strong></span>
                                                                         </div>
                                                                     </div>
                                                                 </div>

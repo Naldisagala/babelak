@@ -9,6 +9,7 @@ class PaymentController extends Controller
 {
     public function confirmation()
     {
+        
         return view('pages.admin.payment_confirmation', []);
     }
 }
