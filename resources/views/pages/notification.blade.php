@@ -10,7 +10,7 @@
 @section('content')
     <div class="container mb-5">
         <div class="mb-5">
-            <h4 class="card-title"><strong>Notifikasi</strong></h4>
+            <h4 class="card-title"><strong>@yield('title')</strong></h4>
         </div>
         <div class="card h-100">
             <div class="card-body">

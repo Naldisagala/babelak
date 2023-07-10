@@ -71,6 +71,7 @@ Route::group(['middleware' => ['buyer-seller']], function() {
     Route::get('/tawar/{user}/{seller}/{barang}/{harga}','TawarController@sendChatTawar');
     Route::post('/tawar/{user}/{seller}/{barang}/{harga}','TawarController@sendChatTawar');
     Route::get('/keranjang', 'KeranjangController@index');
+    Route::get('/checkout', 'KeranjangController@checkout');
     Route::get('/cart-hapus/{id}', 'KeranjangController@hapus');
     Route::post('/cart-hapus', 'KeranjangController@hapusChecked');
 });

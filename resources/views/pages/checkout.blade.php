@@ -3,13 +3,13 @@
 
 <!-- isi bagian judul halaman -->
 <!-- cara penulisan isi section yang pendek -->
-@section('title', 'Keranjang')
+@section('title', 'Detail Belanja')
 
 <!-- isi bagian konten -->
 <!-- cara penulisan isi section yang panjang -->
 @section('content')
     <div class="container">
-        <h3 class="py-3 font-bold">Keranjang Belanja</h3>
+        <h3 class="py-3 font-bold">@yield('title')</h3>
         <br>
         <div class="row">
             <div class="col-6">
@@ -17,19 +17,25 @@
                     <div class="card bg-white">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-check">
-                                        <label class="form-check-label">
-                                            <input type="checkbox" class="form-check-input" name="select_all"
-                                                id="select_all" value="1">
-                                            <span class="ms-2">Pilih semua</span>
-                                        </label>
-                                    </div>
+                                <div class="col-md-12">
+                                    <i class="fa fa-location-dot me-3"></i>
+                                    <span class="font-bold ps-md-2">Alamat Pengiriman</span>
+                                    <hr>
                                 </div>
-                                <div class="col-md-6 d-flex align-items-end justify-content-end">
-                                    <a href="javascript.void(0)" data-bs-toggle="modal" data-bs-target="#becomeSeller">
-                                        Hapus
-                                    </a>
+                                <div class="col-md-6 ps-md-5">
+                                    <span class="font-bold ">{{ $user->name }}</span>
+                                </div>
+                                <div class="col-md-6 text-end">
+                                    <span class="font-bold">{{ $user->hp }}</span>
+                                </div>
+                                <div class="col-md-12 ps-md-5 my-3">
+                                    <span>
+                                        {{ !empty($user->address) ? $user->address . ', ' : '' }}
+                                        {{ 'Kel. ' . ucwords(strtolower($user->name_village)) }},
+                                        {{ 'Kec. ' . ucwords(strtolower($user->name_district)) }},
+                                        {{ ucwords(strtolower($user->name_regencie)) }} -
+                                        {{ ucwords(strtolower($user->name_province)) }}
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -52,14 +58,8 @@
                                     @php
                                         $gambar = $items->barang->gambar;
                                     @endphp
-                                    <div style="display: flex; justify-content: space-between;">
-                                        <div style="display: flex; align-items: center;">
-                                            <div class="form-check me-2">
-                                                <label class="form-check-label">
-                                                    <input type="checkbox" class="form-check-input" name="barangToko"
-                                                        id="barangToko" value="1">
-                                                </label>
-                                            </div>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="d-flex align-items-center">
                                             <div class="card">
                                                 <img class="zoom me-3 rounded-3 shadow" width="100px"
                                                     src="{{ str_contains($gambar, '://') ? $gambar : '/files/product/' . $gambar }}"
@@ -68,21 +68,21 @@
                                             <div style="margin-left: 10px">
                                                 <b>{{ $items->barang->nama_barang }}</b><br>
                                                 @if ($items->id_tawar == '')
-                                                    <small>
-                                                        <span>Harga: </span>
+                                                    <h5 class="mt-3">
                                                         @if ($items->harga_akhir < $items->barang->harga)
                                                             <span class="text-strike-through text-danger">
                                                                 {{ 'Rp ' . number_format($items->barang->harga, 0, ',', '.') }}</span>
-                                                            <span class="font-bold text-success">
+                                                            <span class="font-bold ">
                                                                 {{ ' Rp ' . number_format($items->harga_akhir, 0, ',', '.') }}</span>
                                                         @else
-                                                            <span class="font-bold text-success">
+                                                            <span class="font-bold ">
                                                                 {{ ' Rp ' . number_format($items->harga_akhir, 0, ',', '.') }}</span>
                                                         @endif
-                                                    </small>
+                                                    </h5>
                                                 @else
-                                                    <small><span class="font-bold">Harga:
-                                                            {{ 'Rp ' . number_format($items->harga_akhir, 0, ',', '.') }}</span></small>
+                                                    <h5 class="mt-3"><span class="font-bold">Harga:
+                                                            {{ 'Rp ' . number_format($items->harga_akhir, 0, ',', '.') }}</span>
+                                                    </h5>
                                                 @endif
                                             </div>
                                         </div>
@@ -99,15 +99,14 @@
                     </div>
                 @endforeach
                 <div class="row mb-3">
-                    <div class="card bg-white"
-                        style="border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); padding: 10px;">
+                    <div class="card bg-white">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-3">
                                     <label for="exampleInputName">Catatan </label>
                                 </div>
                                 <div class="col-9">
-                                    <input type="text" class="form-control" id="exampleInputName"
+                                    <input type="text" class="form-control" id="note"
                                         placeholder="Tinggalkan catatan untuk penjual">
                                 </div>
                             </div>
@@ -115,8 +114,7 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="card bg-white"
-                        style="border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); padding: 10px;">
+                    <div class="card bg-white">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-3">
@@ -131,8 +129,7 @@
                 </div>
             </div>
             <div class="col-6">
-                <div class="card bg-white"
-                    style="border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); padding: 10px;">
+                <div class="card bg-white">
                     <div class="card-body">
                         <div class="row mb-3">
                             <div class="col">
@@ -143,7 +140,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <button style="background: #C65299!important" class="btn btn-primary">Buat Pesanan</button>
+                            <button class="btn btn-primary">Buat Pesanan</button>
                         </div>
                     </div>
                 </div>

@@ -13,7 +13,7 @@
                 <div class="col-md-6 px-4 mt-3">
                     <div class="row mb-4">
                         <div class="col-md-12 mx-auto">
-                            <h5><strong>Chat</strong></h5>
+                            <h5><strong>@yield('title')</strong></h5>
                             <div class="input-group">
                                 <input placeholder="Search" class="form-control border-end-0 border" type="search"
                                     value="search" id="search-chat">

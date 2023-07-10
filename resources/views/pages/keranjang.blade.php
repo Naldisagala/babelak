@@ -3,13 +3,13 @@
 
 <!-- isi bagian judul halaman -->
 <!-- cara penulisan isi section yang pendek -->
-@section('title', 'Keranjang')
+@section('title', 'Keranjang Belanja')
 
 <!-- isi bagian konten -->
 <!-- cara penulisan isi section yang panjang -->
 @section('content')
     <div class="container">
-        <h3 class="py-3 font-bold">Keranjang Belanja</h3>
+        <h3 class="py-3 font-bold">@yield('title')</h3>
         <br>
         <div class="row">
             <div class="col-6">
@@ -110,8 +110,7 @@
                 @endforeach
             </div>
             <div class="col-6">
-                <div class="card bg-white"
-                    style="border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); padding: 10px;">
+                <div class="card bg-white">
                     <div class="card-body">
                         <div class="row mb-3">
                             <div class="row">
@@ -137,7 +136,7 @@
                         </div>
                         <div class="row">
                             <a class="btn btn-primary @if ($total == 0) disabled @endif"
-                                href="/">Beli</a>
+                                href="/checkout">Beli</a>
                         </div>
                     </div>
                 </div>
