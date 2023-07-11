@@ -52,6 +52,11 @@ class User extends Authenticatable
         return $this->hasMany(Tawar::class, 'id_user', 'id');
     }
 
+    public function alamat()
+    {
+        return $this->belongsTo(Alamat::class, 'id', 'id_user');
+    }
+
     public function sum_product($id)
     {
         return Barang::where('id_seller', '=', $id)->count();

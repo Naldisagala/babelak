@@ -81,10 +81,10 @@
                                                             @if ($items->harga_akhir < $items->barang->harga)
                                                                 <span class="text-strike-through text-danger">
                                                                     {{ 'Rp ' . number_format($items->barang->harga, 0, ',', '.') }}</span>
-                                                                <span class="font-bold text-success">
+                                                                <span class="font-bold">
                                                                     {{ ' Rp ' . number_format($items->harga_akhir, 0, ',', '.') }}</span>
                                                             @else
-                                                                <span class="font-bold text-success">
+                                                                <span class="font-bold">
                                                                     {{ ' Rp ' . number_format($items->harga_akhir, 0, ',', '.') }}</span>
                                                             @endif
                                                         </small>

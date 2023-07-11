@@ -25,18 +25,27 @@
                                         <hr>
                                     </div>
                                     <div class="col-md-6 ps-md-5">
-                                        <span class="font-bold ">{{ $user->name }}</span>
+                                        <span class="font-bold ">{{ Str::ucfirst($user->name) }}</span>
                                     </div>
                                     <div class="col-md-6 text-end">
                                         <span class="font-bold">{{ $user->hp }}</span>
                                     </div>
                                     <div class="col-md-12 ps-md-5 my-3">
+                                        @php
+                                            $isAddress = false;
+                                        @endphp
                                         <span>
-                                            {{ !empty($user->address) ? $user->address . ', ' : '' }}
-                                            {{ 'Kel. ' . ucwords(strtolower($user->name_village)) }},
-                                            {{ 'Kec. ' . ucwords(strtolower($user->name_district)) }},
-                                            {{ ucwords(strtolower($user->name_regencie)) }} -
-                                            {{ ucwords(strtolower($user->name_province)) }}
+                                            @if (!empty($user->alamat))
+                                                @php
+                                                    $isAddress = true;
+                                                @endphp
+                                                {{ !empty($user->address) ? $user->address . ', ' : '' }}
+                                                {{ 'Kel. ' . $user->alamat }},
+                                                {{ 'Kec. ' . ucwords(strtolower($user->kec)) }},
+                                                {{ ucwords(strtolower($user->kota)) }} -
+                                                {{ ucwords(strtolower($user->provinsi)) }} -
+                                                {{ $user->kode_pos }}
+                                            @endif
                                         </span>
                                     </div>
                                 </div>
@@ -219,7 +228,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <button type="submit" @if ($total == 0) disabled @endif
+                                <button type="submit" @if ($total == 0 || !$isAddress) disabled @endif
                                     class="btn btn-primary">Buat Pesanan</button>
                             </div>
                         </div>
