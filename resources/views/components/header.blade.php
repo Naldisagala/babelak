@@ -34,6 +34,11 @@
                     <li class="nav-item">
                         <a class="nav-link mx-2" href="#"><i class="fa-regular fa-bell"></i></a>
                     </li>
+                    @if (!empty(auth()->user()))
+                        <li class="nav-item d-flex align-items-center justify-content-center">
+                            <span>{{ ucfirst(auth()->user()->name) }}</span>
+                        </li>
+                    @endif
                     <li class="nav-item dropdown">
                         <a class="nav-link mx-2" aria-current="page" href="#" data-bs-toggle="dropdown"><i
                                 class="fa-regular fa-user"></i></a>
