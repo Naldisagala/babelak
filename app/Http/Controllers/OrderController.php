@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Keranjang;
 use App\Models\Transaksi;
 
 class OrderController extends Controller
@@ -53,7 +54,15 @@ class OrderController extends Controller
 
     public function soldOrders()
     {
-        return view('pages.order.soldorders', []);
+        $productPackaging = Transaksi::where('status','=','packaging')->get();
+        $productDelivery  = Transaksi::where('status','=','delivery')->get();
+        $productDone      = Transaksi::where('status','=','done')->get();
+
+        return view('pages.order.soldorders', [
+            'productPackaging' => $productPackaging,
+            'productDelivery'  => $productDelivery,
+            'productDone'      => $productDone,
+        ]);
     }
 
     public function salesRevenue()

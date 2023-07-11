@@ -71,7 +71,7 @@
                                                 <table class="table table-borderless datatables-not-order">
                                                     <thead>
                                                         <tr>
-                                                            <th>Upload Bukti Pembayaran Pemesanan</th>
+                                                            <th></th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -150,7 +150,7 @@
                                                 <table class="table table-borderless datatables-not-order">
                                                     <thead>
                                                         <tr>
-                                                            <th>Sedang Dikemas</th>
+                                                            <th></th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -212,7 +212,7 @@
                                                 <table class="table table-borderless datatables-not-order">
                                                     <thead>
                                                         <tr>
-                                                            <th>Sedang Dikirim</th>
+                                                            <th></th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -276,7 +276,7 @@
                                                 <table class="table table-borderless datatables-not-order">
                                                     <thead>
                                                         <tr>
-                                                            <th>Selesai</th>
+                                                            <th></th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
