@@ -81,6 +81,7 @@
                                                                     <div class="card-body bg-light-smoth shadow">
                                                                         <div class="row">
                                                                             <div class="col-md-6">
+                                                                                <small>Nama Penjual</small>
                                                                                 <h6>{{ ucfirst($product->keranjang->user_seller->name) }}
                                                                                 </h6>
                                                                             </div>
@@ -160,6 +161,7 @@
                                                                     <div class="card-body bg-light-smoth shadow">
                                                                         <div class="row">
                                                                             <div class="col-md-6">
+                                                                                <small>Nama Penjual</small>
                                                                                 <h6>{{ ucfirst($product->keranjang->user_seller->name) }}
                                                                                 </h6>
                                                                             </div>
@@ -222,6 +224,7 @@
                                                                     <div class="card-body bg-light-smoth shadow">
                                                                         <div class="row">
                                                                             <div class="col-md-6">
+                                                                                <small>Nama Penjual</small>
                                                                                 <h6>{{ ucfirst($product->keranjang->user_seller->name) }}
                                                                                 </h6>
                                                                             </div>
@@ -286,6 +289,7 @@
                                                                     <div class="card-body bg-light-smoth shadow">
                                                                         <div class="row">
                                                                             <div class="col-md-6">
+                                                                                <small>Nama Penjual</small>
                                                                                 <h6>{{ ucfirst($product->keranjang->user_seller->name) }}
                                                                                 </h6>
                                                                             </div>

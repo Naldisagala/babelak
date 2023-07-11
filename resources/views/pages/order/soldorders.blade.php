@@ -72,35 +72,47 @@
                                                                     <div class="card-body bg-light-smoth shadow">
                                                                         <div class="row">
                                                                             <div class="col-md-6">
-                                                                                <h6>Nama Pembeli</h6>
+                                                                                <small>Nama Pembeli</small>
+                                                                                <h6>{{ ucfirst($product->keranjang->user->name) }}
+                                                                                </h6>
                                                                             </div>
                                                                             <div class="col-md-6 text-end">
-                                                                                <span>Sedang Dikemas</span>
+                                                                                <span>{{ ucfirst($product->status) }}</span>
                                                                             </div>
                                                                             <div class="col-md-12">
                                                                                 <hr>
                                                                             </div>
                                                                             <div class="col-md-2">
                                                                                 <img class="card-img-top"
-                                                                                    src="/image/default.jpg"
-                                                                                    alt="Card image cap">
+                                                                                    src="{{ str_contains($product->keranjang->barang->gambar, '://') ? $product->keranjang->barang->gambar : '/files/product/' . $product->keranjang->barang->gambar }}"
+                                                                                    alt="{{ $product->keranjang->barang->nama_barang }}">
                                                                             </div>
                                                                             <div
                                                                                 class="col-md-10 d-flex align-items-center justify-content-start">
                                                                                 <ul class="list-style-none">
-                                                                                    <li><span>Nama Barang</span></li>
-                                                                                    <li><strong>Rp. 000.000</strong></li>
+                                                                                    <li><span>{{ $product->keranjang->barang->nama_barang }}</span>
+                                                                                    </li>
+                                                                                    <li><strong>{{ 'Rp ' . number_format($product->total, 0, ',', '.') }}</strong>
+                                                                                    </li>
                                                                                 </ul>
                                                                             </div>
                                                                             <div class="col-md-12">
                                                                                 <hr>
                                                                             </div>
                                                                             <div class="col-md-4">
-                                                                                <span>Total Pembayaran</span>
+                                                                                <ul class="list-style-none">
+                                                                                    <li><span>Total Pembayaran</span></li>
+                                                                                    <li><strong>{{ 'Rp ' . number_format($product->total, 0, ',', '.') }}</strong>
+                                                                                    </li>
+                                                                                </ul>
                                                                             </div>
                                                                             <div
                                                                                 class="col-md-8 d-flex align-items-center justify-content-end">
-                                                                                <span><strong>Rp. 000.000</strong></span>
+                                                                                <button type="button"
+                                                                                    data-id="{{ $product->id }}"
+                                                                                    onclick="showModalNumberResi(this)"
+                                                                                    class="btn btn-primary mx-3">Masukan No
+                                                                                    Resi</button>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -124,35 +136,38 @@
                                                                     <div class="card-body bg-light-smoth shadow">
                                                                         <div class="row">
                                                                             <div class="col-md-6">
-                                                                                <h6>Nama Pembeli</h6>
+                                                                                <small>Nama Pembeli</small>
+                                                                                <h6>{{ ucfirst($product->keranjang->user->name) }}
+                                                                                </h6>
                                                                             </div>
                                                                             <div class="col-md-6 text-end">
-                                                                                <span>Sedang Dikemas</span>
+                                                                                <span>{{ ucfirst($product->status) }}</span>
                                                                             </div>
                                                                             <div class="col-md-12">
                                                                                 <hr>
                                                                             </div>
                                                                             <div class="col-md-2">
                                                                                 <img class="card-img-top"
-                                                                                    src="/image/default.jpg"
-                                                                                    alt="Card image cap">
+                                                                                    src="{{ str_contains($product->keranjang->barang->gambar, '://') ? $product->keranjang->barang->gambar : '/files/product/' . $product->keranjang->barang->gambar }}"
+                                                                                    alt="{{ $product->keranjang->barang->nama_barang }}">
                                                                             </div>
                                                                             <div
                                                                                 class="col-md-10 d-flex align-items-center justify-content-start">
                                                                                 <ul class="list-style-none">
-                                                                                    <li><span>Nama Barang</span></li>
-                                                                                    <li><strong>Rp. 000.000</strong></li>
+                                                                                    <li><span>{{ $product->keranjang->barang->nama_barang }}</span>
+                                                                                    </li>
+                                                                                    <li><strong>{{ 'Rp ' . number_format($product->total, 0, ',', '.') }}</strong>
+                                                                                    </li>
                                                                                 </ul>
                                                                             </div>
                                                                             <div class="col-md-12">
                                                                                 <hr>
                                                                             </div>
-                                                                            <div class="col-md-4">
+                                                                            <div class="col-md-6">
                                                                                 <span>Total Pembayaran</span>
                                                                             </div>
-                                                                            <div
-                                                                                class="col-md-8 d-flex align-items-center justify-content-end">
-                                                                                <span><strong>Rp. 000.000</strong></span>
+                                                                            <div class="col-md-6">
+                                                                                <span><strong>{{ 'Rp ' . number_format($product->total, 0, ',', '.') }}</strong></span>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -176,35 +191,38 @@
                                                                     <div class="card-body bg-light-smoth shadow">
                                                                         <div class="row">
                                                                             <div class="col-md-6">
-                                                                                <h6>Nama Pembeli</h6>
+                                                                                <small>Nama Pembeli</small>
+                                                                                <h6>{{ ucfirst($product->keranjang->user->name) }}
+                                                                                </h6>
                                                                             </div>
                                                                             <div class="col-md-6 text-end">
-                                                                                <span>Sedang Dikemas</span>
+                                                                                <span>{{ ucfirst($product->status) }}</span>
                                                                             </div>
                                                                             <div class="col-md-12">
                                                                                 <hr>
                                                                             </div>
                                                                             <div class="col-md-2">
                                                                                 <img class="card-img-top"
-                                                                                    src="/image/default.jpg"
-                                                                                    alt="Card image cap">
+                                                                                    src="{{ str_contains($product->keranjang->barang->gambar, '://') ? $product->keranjang->barang->gambar : '/files/product/' . $product->keranjang->barang->gambar }}"
+                                                                                    alt="{{ $product->keranjang->barang->nama_barang }}">
                                                                             </div>
                                                                             <div
                                                                                 class="col-md-10 d-flex align-items-center justify-content-start">
                                                                                 <ul class="list-style-none">
-                                                                                    <li><span>Nama Barang</span></li>
-                                                                                    <li><strong>Rp. 000.000</strong></li>
+                                                                                    <li><span>{{ $product->keranjang->barang->nama_barang }}</span>
+                                                                                    </li>
+                                                                                    <li><strong>{{ 'Rp ' . number_format($product->total, 0, ',', '.') }}</strong>
+                                                                                    </li>
                                                                                 </ul>
                                                                             </div>
                                                                             <div class="col-md-12">
                                                                                 <hr>
                                                                             </div>
-                                                                            <div class="col-md-4">
+                                                                            <div class="col-md-6">
                                                                                 <span>Total Pembayaran</span>
                                                                             </div>
-                                                                            <div
-                                                                                class="col-md-8 d-flex align-items-center justify-content-end">
-                                                                                <span><strong>Rp. 000.000</strong></span>
+                                                                            <div class="col-md-6">
+                                                                                <span><strong>{{ 'Rp ' . number_format($product->total, 0, ',', '.') }}</strong></span>
                                                                             </div>
                                                                         </div>
                                                                     </div>

@@ -48,12 +48,14 @@
                                         </tr>
                                     @endforeach
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td colspan="4">Total</td>
-                                        <td class="text-end">{{ 'Rp ' . number_format($total, 0, ',', '.') }}</td>
-                                    </tr>
-                                </tfoot>
+                                @if (count($transaction) > 0)
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="4">Total</td>
+                                            <td class="text-end">{{ 'Rp ' . number_format($total, 0, ',', '.') }}</td>
+                                        </tr>
+                                    </tfoot>
+                                @endif
                             </table>
                         </div>
                     </div>

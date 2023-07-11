@@ -11,11 +11,23 @@ class OrderController extends Controller
 {
     public function myOrders()
     {
-        $productWaiting   = Transaksi::where('status','=','waiting')
-        ->orWhere('status','=','process')->get();
-        $productPackaging = Transaksi::where('status','=','packaging')->get();
-        $productDelivery  = Transaksi::where('status','=','delivery')->get();
-        $productDone      = Transaksi::where('status','=','done')->get();
+        $id_user = auth()->user()->id;
+        $productWaiting   = Transaksi::where('id_user', '=', $id_user)
+        ->where('status','=','waiting')
+        ->orWhere('status','=','process')
+        ->get();
+        
+        $productPackaging = Transaksi::where('id_user', '=', $id_user)
+        ->where('status','=','packaging')
+        ->get();
+        
+        $productDelivery  = Transaksi::where('id_user', '=', $id_user)
+        ->where('status','=','delivery')
+        ->get();
+        
+        $productDone      = Transaksi::where('id_user', '=', $id_user)
+        ->where('status','=','done')
+        ->get();
 
         return view('pages.order.myorders', [
             'productWaiting'   => $productWaiting,
@@ -54,9 +66,36 @@ class OrderController extends Controller
 
     public function soldOrders()
     {
-        $productPackaging = Transaksi::where('status','=','packaging')->get();
-        $productDelivery  = Transaksi::where('status','=','delivery')->get();
-        $productDone      = Transaksi::where('status','=','done')->get();
+        $id_user = auth()->user()->id;
+        $productPackaging = Transaksi::select(
+            'k.*', 'transaksis.*'
+        )
+        ->leftJoin('keranjangs as k', [
+            ['k.id', '=', 'transaksis.id_cart'],
+        ])
+        ->where('id_seller','=',$id_user)
+        ->where('transaksis.status','=','packaging')
+        ->get();
+
+        $productDelivery  = Transaksi::select(
+            'k.*', 'transaksis.*'
+        )
+        ->leftJoin('keranjangs as k', [
+            ['k.id', '=', 'transaksis.id_cart'],
+        ])
+        ->where('id_seller','=',$id_user)
+        ->where('transaksis.status','=','delivery')
+        ->get();
+
+        $productDone      = Transaksi::select(
+            'k.*', 'transaksis.*'
+        )
+        ->leftJoin('keranjangs as k', [
+            ['k.id', '=', 'transaksis.id_cart'],
+        ])
+        ->where('id_seller','=',$id_user)
+        ->where('transaksis.status','=','done')
+        ->get();
 
         return view('pages.order.soldorders', [
             'productPackaging' => $productPackaging,
