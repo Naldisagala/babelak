@@ -15,7 +15,7 @@
         <div class="card h-100">
             <div class="card-body">
                 <div class="table-responsive text-nowrap">
-                    <table class="table table-borderless table-hover">
+                    <table class="table table-borderless table-hover datatables-not-order">
                         <thead>
                             <tr>
                                 <th></th>

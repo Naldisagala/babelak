@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Barang;
 use App\Models\Tawar;
 use App\Models\Notification;
+use App\Models\Chat;
 use App\Models\Keranjang;
 
 
@@ -127,9 +128,33 @@ class Controller extends BaseController
             $notif = Notification::where('to', '=', auth()->user()->id)
             ->where('is_read','=','0')
             ->orderBy('id', 'DESC')
-            ->skip(0)->take(10)
+            ->skip(0)->take(5)
             ->get();
         }
         return $notif;
+    }
+
+    public function countChat()
+    {
+        $chat = 0;
+        if(!empty(auth()->user())){
+        $chat = Chat::where('to', '=', auth()->user()->id)
+            ->where('is_read','=','0')
+            ->count();
+        }
+        return $chat;
+    }
+
+    public function showChatHeader()
+    {
+        $chat = [];
+        if(!empty(auth()->user())){
+            $chat = Chat::where('to', '=', auth()->user()->id)
+            ->where('is_read','=','0')
+            ->orderBy('id', 'DESC')
+            ->skip(0)->take(5)
+            ->get();
+        }
+        return $chat;
     }
 }

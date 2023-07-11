@@ -2,8 +2,10 @@
     use App\Http\Controllers\Controller;
     $controller = new Controller();
     $count = $controller->cartCount();
-    $notification = $controller->showNotifHeader();
+    $showNotification = $controller->showNotifHeader();
+    $showChat = $controller->showChatHeader();
     $countNotif = $controller->countNotif();
+    $countChat = $controller->countChat();
 @endphp
 <header class="d-flex flex-column h-100">
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg">
@@ -31,6 +33,40 @@
                 <ul class="navbar-nav mb-md-0 flex-row">
                     @if (auth()->user()->role != 'admin')
                         <li class="nav-item dropdown">
+                            <button
+                                class="btn text-white btn-white btn-icon rounded-pill dropdown-toggle hide-arrow me-4"
+                                href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-regular fa-message me-2"></i>
+                                @if ($countChat > 0)
+                                    <span
+                                        class="badge ms-2 rounded-pill badge-center h-px-20 w-px-20 bg-label-primary">{{ $countChat }}</span>
+                                @endif
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end" style="height: 500px; overflow-y: scroll;">
+                                @if (count($showChat) > 0)
+                                    @foreach ($showChat as $chat)
+                                        <li>
+                                            <a class="dropdown-item text-wrap" href="{{ $chat->link ?? '#' }}">
+                                                <p class="font-bold">Dari : {{ $chat->from_user->name }}</p>
+                                                <p>{{ $chat->message }}</p>
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                    <li>
+                                        <a class="dropdown-item text-wrap text-center border-top" href="/chat">
+                                            Lihat Semua
+                                        </a>
+                                    </li>
+                                @else
+                                    <li>
+                                        <a class="dropdown-item text-wrap" href="#">
+                                            Kosong
+                                        </a>
+                                    </li>
+                                @endif
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
                             <button class="btn text-white btn-white btn-icon rounded-pill dropdown-toggle hide-arrow"
                                 href="#" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa-regular fa-bell"></i>
@@ -39,9 +75,9 @@
                                         class="badge ms-2 rounded-pill badge-center h-px-20 w-px-20 bg-label-primary">{{ $countNotif }}</span>
                                 @endif
                             </button>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                @if (count($notification) > 0)
-                                    @foreach ($notification as $notif)
+                            <ul class="dropdown-menu dropdown-menu-end" style="height: 500px; overflow-y: scroll;">
+                                @if (count($showNotification) > 0)
+                                    @foreach ($showNotification as $notif)
                                         <li>
                                             <a class="dropdown-item text-wrap" href="{{ $notif->link ?? '#' }}">
                                                 <p class="font-bold">Dari : {{ $notif->from_user->name }}</p>
