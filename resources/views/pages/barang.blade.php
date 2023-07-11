@@ -174,7 +174,7 @@
                                     <span class="text-center text-white fw-bold">Barang Tidak Dapat
                                         Ditawar</span>
                                 @else
-                                    <form action="/tawar/1/{{ $barang->seller->id }}/{{ $barang->id }}/null"
+                                    <form action="/tawar/{{auth()->user()->id}}/{{ $barang->seller->id }}/{{ $barang->id }}/null"
                                         method="POST">
                                         @csrf
                                         <div class="input-group mb-3">
@@ -198,7 +198,7 @@
                                         @endphp
                                         @foreach ($rekomendasi_tawar as $tawar)
                                             <a style="text-decoration: none"
-                                                href="/tawar/1/{{ $barang->seller->id }}/{{ $barang->id }}/{{ $tawar }}">
+                                                href="/tawar/{{auth()->user()->id}}/{{ $barang->seller->id }}/{{ $barang->id }}/{{ $tawar }}">
                                                 <span
                                                     class="rekom-tawar me-2">{{ 'Rp ' . number_format($tawar, 0, ',', '.') }}</span>
                                             </a>
