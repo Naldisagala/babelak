@@ -3,7 +3,7 @@
 
 <!-- isi bagian judul halaman -->
 <!-- cara penulisan isi section yang pendek -->
-@section('title', 'Pesanan Saya')
+@section('title', 'Register')
 
 
 <!-- isi bagian konten -->
@@ -43,7 +43,7 @@
                                 <div class="form-floating">
                                     <input type="text" class="form-control" name="username" id="floatingInput"
                                         value="{{ old('username') }}" placeholder="Username">
-                                    <label for="floatingInput">Masukkan Usename</label>
+                                    <label for="floatingInput">Masukkan Username</label>
                                     @if ($errors->any())
                                         <small style="color:red">*{{ $errors->first('username') }}</small>
                                     @endif
@@ -64,7 +64,7 @@
                         <div class="form-floating">
                             <input type="text" class="form-control" name="hp" id="floatingPassword"
                                 value="{{ old('hp') }}" placeholder="no hp">
-                            <label for="floatingPassword">&nbsp&nbsp&nbsp Masukkan no handphone</label>
+                            <label for="floatingPassword">&nbsp&nbsp&nbsp Masukkan No Handphone</label>
                             @if ($errors->any())
                                 <small style="color:red">*{{ $errors->first('hp') }}</small>
                             @endif
@@ -86,20 +86,11 @@
                             @if ($errors->any())
                                 <small style="color:red">*{{ $errors->first('password_confirm') }}</small>
                             @endif
-                        </div>
-
-                        <div class="checkbox mb-3 row my-3">
-                            <label class="col-7">
-                                <input type="checkbox" value="remember-me"> Ingat saya
-                            </label>
-                            <label class="col-5">
-                                <a>Lupa Password?</a>
-                            </label>
-                        </div>
-                        <button class="w-100 btn  btn-primary fw-bold" type="submit">Registration</button>
+                        </div> <br>
+                                                
+                        <button class="w-100 btn  btn-primary fw-bold" type="submit">Daftar</button>
                         <hr style="width: 100%">
                         <div style="text-align: center">
-                            <br>
                             Sudah punya akun? <a href="/login-page">Login</a>
                         </div>
                     </div>

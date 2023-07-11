@@ -23,7 +23,13 @@
                         <div class="carousel-caption text-start">
                             <h1 class="crsl-text">TEMUKAN BARANG BERHARGA ANDA</h1>
                             <p class="crsl-text">Menawarkan berbagai barang yang layak pakai dan terjangkau</p>
-                            <p><a class="btn btn-lg btn-primary" href="../login-page">Gabung bersama kami</a></p>
+                                <p>
+                                    @if (Auth::check())
+                                    <br><br>
+                                    @else
+                                    <a class="btn btn-lg btn-primary" href="../login-page">Gabung bersama kami</a>
+                                    @endif
+                                </p>
                         </div>
                     </div>
                 </div>
