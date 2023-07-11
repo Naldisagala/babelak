@@ -59,6 +59,32 @@ class TawarController extends Controller
         }else{
             return back()->withInput()->with('error', 'Data tidak disimpan!');
         }
+    }
 
+    public function seller(Request $request)
+    {
+        $id       = $request->get('id_chat');
+        $status   = $request->get('status');
+        $id_tawar = $request->get('id_tawar');
+        $from     = $request->get('from');
+        $to       = $request->get('to');
+
+        dd(auth()->user()->id);
+
+        $tawar = Tawar::find($id_tawar);
+        $tawar->status = $status;
+        $tawar->update();
+
+        Chat::create([
+            'from'     => $to,
+            'to'       => $from,
+            'id_tawar' => $id_tawar,
+            'message'  => 'Pengajuan penawaran harga Rp '.
+                number_format($tawar->harga_tawar, 2, ',', '.').
+                ' pada barang '.$tawar->barang->nama_barang." ini, $status!",
+            'is_read' => 0,
+        ]);
+        
+        return back()->withInput()->with('success', "Tawar berhasil $status!");
     }
 }

@@ -62,9 +62,10 @@ class User extends Authenticatable
         return Barang::where('id_seller', '=', $id)->count();
     }
 
+
     public function detail()
     {
-        return $this->hasMany(UserDetail::class);
+        return $this->belongsTo(UserDetail::class, 'id', 'id_user');
     }
 
     public function isAdmin()

@@ -11,7 +11,9 @@ class NotificationController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $notification = Notification::where('to','=', $user->id)->get();
+        $notification = Notification::where('to','=', $user->id)
+        ->orderBy('id', 'DESC')
+        ->get();
         return view('pages.notification', [
             'notification' => $notification
         ]);

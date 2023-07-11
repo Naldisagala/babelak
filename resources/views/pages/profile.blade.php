@@ -25,7 +25,7 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <img src="{{ !empty($user['photo']) ? '/files/profile/' . $user['photo'] : '/image/default.jpg' }}"
-                                            alt="default" class="d-block rounded w-100"id="imgProfile" />
+                                            alt="{{ $user['name'] }}" class="d-block rounded w-100"id="imgProfile" />
                                         <input type="hidden" name="old_photo" id="old_photo"
                                             value="{{ $user['photo'] ?? '' }}">
                                         <label class="btn btn-outline-primary w-100 mt-4">

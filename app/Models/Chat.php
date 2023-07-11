@@ -44,4 +44,11 @@ class Chat extends Model
     {
         return $this->belongsTo(User::class, 'to', 'id');
     }
+
+    public function chat_last($user_id)
+    {
+        return self::where('from','=', $user_id)
+        ->orderBy('id', 'DESC')
+        ->first();
+    }
 }

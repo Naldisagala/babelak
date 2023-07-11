@@ -80,10 +80,12 @@ Route::group(['middleware' => ['buyer-seller']], function() {
     Route::post('/proof-payment', 'OrderController@proofPayment');
     Route::post('/change-password', 'ProfileController@changePassword');
     Route::get('/chat', 'ChatController@index');
+    Route::get('/chat/{username}', 'ChatController@personal');
     Route::get('/notification', 'NotificationController@index');
     Route::post('/ajax-region', 'ProductController@ajaxRegion');
     Route::get('/tawar/{user}/{seller}/{barang}/{harga}','TawarController@sendChatTawar');
     Route::post('/tawar/{user}/{seller}/{barang}/{harga}','TawarController@sendChatTawar');
+    Route::post('/tawar-seller','TawarController@seller');
     Route::get('/keranjang', 'KeranjangController@index');
     Route::get('/checkout', 'KeranjangController@checkout');
     Route::post('/checkout', 'CheckoutController@checkout');

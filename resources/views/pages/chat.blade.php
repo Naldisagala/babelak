@@ -8,7 +8,7 @@
 
 <!-- isi bagian konten -->
 @section('content')
-    <div class="container-xxl flex-grow-1 container-p-y">
+    <div class="container">
         <div class="row">
             <div class="col-md-6 px-4 mt-3">
                 <div class="row mb-4">
@@ -38,27 +38,26 @@
                                     </tr>
                                 </thead>
                                 <tbody class="table-border-bottom-0">
-                                    @for ($i = 0; $i < 10; $i++)
+                                    @foreach ($users_chat as $user)
+                                        @php
+                                            $last = $user->chat_last($user->from);
+                                        @endphp
                                         <tr>
                                             <td>
-                                                <div class="row">
+                                                <a href="/chat/{{ $user->from_user->username }}" class="row">
                                                     <div class="col-2 d-flex align-items-center justify-content-center">
-                                                        <img width="50" src="/image/default.jpg" alt="Default"
-                                                            class="rounded-circle">
+                                                        <img width="50"
+                                                            src="{{ !empty($user->from_user->detail->photo) ? '/files/profile/' . $user->from_user->detail->photo : '/image/default.jpg' }}"
+                                                            alt="{{ $user->from_user->name }}" class="rounded-circle">
                                                     </div>
                                                     <div class="col-10">
-                                                        <span><strong>Nama</strong></span>
-                                                        <span class="text-short-summary">Lorem ipsum dolor sit amet
-                                                            consectetur
-                                                            adipisicing
-                                                            elit. Quos quisquam sapiente iste quis provident nihil magni
-                                                            voluptatibus
-                                                            eos, aperiam praesentium.</span>
+                                                        <span><strong>{{ $user->from_user->name }}</strong></span>
+                                                        <span class="text-short-summary">{{ $last->message }}</span>
                                                     </div>
-                                                </div>
+                                                </a>
                                             </td>
                                         </tr>
-                                    @endfor
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -76,31 +75,131 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-2 d-flex align-items-center justify-content-center">
-                                <img width="50" src="/image/default.jpg" alt="Default" class="rounded-circle">
+                                <img width="50"
+                                    src="{{ !empty($current->detail->photo) ? '/files/profile/' . $current->detail->photo : '/image/default.jpg' }}"
+                                    alt="{{ $current->name }}" class="rounded-circle">
                             </div>
                             <div class="col-10 d-flex align-items-center justify-content-start">
-                                <span><strong>Nama</strong></span>
+                                <span><strong>{{ $current->name }}</strong></span>
                             </div>
                         </div>
                     </div>
                     <hr class="line">
                     <div class="card-body bg-light-smoth ps ps--active-y both-scrollbars-scroll" id="vertical-chat">
-                        @for ($i = 0; $i < 50; $i++)
-                            @if ($i % 2 == 0)
-                                <div class="d-flex align-items-center justify-content-start">
-                                    <div class="card p-3 w-50 text-start my-2">
-                                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio sapiente nam
-                                        suscipit?
+                        @foreach ($list_chat as $chat)
+                            @if ($chat->from == auth()->user()->id)
+                                <div class="d-flex align-items-center justify-content-end">
+                                    <div class="card p-3 w-50 text-start my-2 bg-primary text-white">
+                                        {{ $chat->message }}
+                                        @if (!empty($chat->id_tawar))
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-3">
+                                                    <img width="50"
+                                                        src="{{ str_contains($chat->tawar->barang->gambar, '://') ? $chat->tawar->barang->gambar : '/files/product/' . $chat->tawar->barang->gambar }}"
+                                                        alt="{{ $chat->tawar->barang->nama_barang }}">
+                                                </div>
+                                                <div class="col-9 d-flex align-items-center justify-content-start">
+                                                    <span>{{ $chat->tawar->barang->nama_barang }}</span>
+                                                </div>
+                                                @if ($chat->tawar->status == 'waiting')
+                                                    <div class="col-md-6">
+                                                        <form action="/tawar-seller" method="post">
+                                                            @csrf
+                                                            <input type="hidden" name="id_chat" id="id_chat_decline"
+                                                                value="{{ $chat->id }}">
+                                                            <input type="hidden" name="status" id="status_decline"
+                                                                value="ditolak">
+                                                            <input type="hidden" name="id_tawar" id="id_tawar_decline"
+                                                                value="{{ $chat->id_tawar }}">
+                                                            <input type="hidden" name="from" id="from_decline"
+                                                                value="{{ $chat->from }}">
+                                                            <input type="hidden" name="to" id="to_decline"
+                                                                value="{{ $chat->to }}">
+                                                            <button type="submit"
+                                                                class="btn btn-sm btn-outline-light w-100 mt-3">Tolak</button>
+                                                        </form>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <form action="/tawar-seller" method="post">
+                                                            @csrf
+                                                            <input type="hidden" name="id_chat" id="id_chat_accept"
+                                                                value="{{ $chat->id }}">
+                                                            <input type="hidden" name="status" id="status_accept"
+                                                                value="diterima">
+                                                            <input type="hidden" name="id_tawar" id="id_tawar_accept"
+                                                                value="{{ $chat->id_tawar }}">
+                                                            <input type="hidden" name="from" id="from_accept"
+                                                                value="{{ $chat->from }}">
+                                                            <input type="hidden" name="to" id="to_accept"
+                                                                value="{{ $chat->to }}">
+                                                            <button type="submit"
+                                                                class="btn btn-sm btn-light w-100 mt-3">Terima</button>
+                                                        </form>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             @else
-                                <div class="d-flex align-items-center justify-content-end">
+                                <div class="d-flex align-items-center justify-content-start">
                                     <div class="card p-3 w-50 text-start my-2">
-                                        Lorem ipsum dolor sit amet.
+                                        {{ $chat->message }}
+                                        @if (!empty($chat->id_tawar))
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-3">
+                                                    <img width="50"
+                                                        src="{{ str_contains($chat->tawar->barang->gambar, '://') ? $chat->tawar->barang->gambar : '/files/product/' . $chat->tawar->barang->gambar }}"
+                                                        alt="{{ $chat->tawar->barang->nama_barang }}">
+                                                </div>
+                                                <div class="col-9 d-flex align-items-center justify-content-start">
+                                                    <span>{{ $chat->tawar->barang->nama_barang }}</span>
+                                                </div>
+                                                @if ($chat->tawar->status == 'waiting')
+                                                    <div class="col-md-6">
+                                                        <form action="/tawar-seller" method="post">
+                                                            @csrf
+                                                            <input type="hidden" name="id_chat" id="id_chat_decline"
+                                                                value="{{ $chat->id }}">
+                                                            <input type="hidden" name="status" id="status_decline"
+                                                                value="ditolak">
+                                                            <input type="hidden" name="id_tawar" id="id_tawar_decline"
+                                                                value="{{ $chat->id_tawar }}">
+                                                            <input type="hidden" name="from" id="from_decline"
+                                                                value="{{ $chat->from }}">
+                                                            <input type="hidden" name="to" id="to_decline"
+                                                                value="{{ $chat->to }}">
+                                                            <button type="submit"
+                                                                class="btn btn-sm btn-outline-primary w-100 mt-3">Tolak</button>
+                                                        </form>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <form action="/tawar-seller" method="post">
+                                                            @csrf
+                                                            <input type="hidden" name="id_chat" id="id_chat_accept"
+                                                                value="{{ $chat->id }}">
+                                                            <input type="hidden" name="status" id="status_accept"
+                                                                value="diterima">
+                                                            <input type="hidden" name="id_tawar" id="id_tawar_accept"
+                                                                value="{{ $chat->id_tawar }}">
+                                                            <input type="hidden" name="from" id="from_accept"
+                                                                value="{{ $chat->from }}">
+                                                            <input type="hidden" name="to" id="to_accept"
+                                                                value="{{ $chat->to }}">
+                                                            <button type="submit"
+                                                                class="btn btn-sm btn-primary w-100 mt-3">Terima</button>
+                                                        </form>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        @endif
                                     </div>
+
                                 </div>
                             @endif
-                        @endfor
+                        @endforeach
                         <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
                             <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
                         </div>
