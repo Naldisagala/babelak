@@ -62,6 +62,7 @@ Route::group(['middleware' => ['seller']], function() {
 
     Route::get('/sold-orders', 'OrderController@soldOrders');
     Route::get('/sales-revenue', 'OrderController@salesRevenue');
+    Route::post('/resi', 'OrderController@resi');
 });
 
 // test courier

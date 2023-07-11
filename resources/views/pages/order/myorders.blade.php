@@ -405,9 +405,9 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                            Close
+                            Batal
                         </button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
             </div>
@@ -428,7 +428,6 @@
             let id = $(thisis).data('id')
             let code_payment = $(thisis).data('code_payment')
             let number_payment = $(thisis).data('number_payment')
-            console.log(code_payment)
 
             $('#keterangan-rek').html('Kirim Bukti Pembayaran ke : <br> Bank : ' + code_payment + '<br> Rek : ' +
                 (number_payment == '' ? ' - ' : number_payment))

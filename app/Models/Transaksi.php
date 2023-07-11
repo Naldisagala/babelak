@@ -19,6 +19,7 @@ class Transaksi extends Model
         'note',
         'bukti',
         'description',
+        'resi',
     ];
 
     public function keranjang()

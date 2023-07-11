@@ -104,6 +104,19 @@ class OrderController extends Controller
         ]);
     }
 
+    public function resi(Request $request)
+    {
+        $id      = $request->get('id_data');
+        $no_resi = $request->get('no_resi');
+
+        $transaksi = Transaksi::find($id);
+        $transaksi->resi  = $no_resi;
+        $transaksi->status = 'delivery';
+        $transaksi->update();
+
+        return redirect()->back()->with('success','Add Receipt Number Successfully!!');
+    }
+
     public function salesRevenue()
     {
         return view('pages.order.salesrevenue', []);

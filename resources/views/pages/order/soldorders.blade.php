@@ -166,7 +166,7 @@
                                                                             <div class="col-md-6">
                                                                                 <span>Total Pembayaran</span>
                                                                             </div>
-                                                                            <div class="col-md-6">
+                                                                            <div class="col-md-6 text-end">
                                                                                 <span><strong>{{ 'Rp ' . number_format($product->total, 0, ',', '.') }}</strong></span>
                                                                             </div>
                                                                         </div>
@@ -221,7 +221,7 @@
                                                                             <div class="col-md-6">
                                                                                 <span>Total Pembayaran</span>
                                                                             </div>
-                                                                            <div class="col-md-6">
+                                                                            <div class="col-md-6 text-end">
                                                                                 <span><strong>{{ 'Rp ' . number_format($product->total, 0, ',', '.') }}</strong></span>
                                                                             </div>
                                                                         </div>
@@ -243,4 +243,50 @@
             </div>
         </div>
     </div>
+@endsection
+@section('modal')
+    <div class="modal fade" id="modalProof" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <form method="POST" action="/resi">
+                    @csrf
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel2">Nomor Resi</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12 mb-2">
+                                <div class="form-group">
+                                    <label for="bukti">No. Resi</label>
+                                    <input type="hidden" name="id_data" id="id_data">
+                                    <input required type="text" class="form-control" name="no_resi" id="no_resi"
+                                        placeholder="Masukan No Resi">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                            Batal
+                        </button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@endsection
+@section('script')
+    <script>
+        function showModalNumberResi(thisis) {
+            let id = $(thisis).data('id')
+            $('#id_data').val(id)
+            $('#modalProof').modal({
+                backdrop: 'static',
+                keyboard: false
+            })
+            $('#modalProof').modal('show');
+        }
+    </script>
 @endsection
