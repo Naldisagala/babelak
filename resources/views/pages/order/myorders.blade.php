@@ -116,6 +116,23 @@
                                                                             </div>
                                                                             <div
                                                                                 class="col-md-8 d-flex align-items-center justify-content-end">
+                                                                                @if ($product->status == 'waiting')
+                                                                                    <button type="button"
+                                                                                        data-id="{{ $product->id }}"
+                                                                                        data-code_payment="{{ $product->code_payment }}"
+                                                                                        data-number_payment="{{ $product->number_payment }}"
+                                                                                        onclick="showModalProof(this)"
+                                                                                        class="btn btn-primary mx-3">Upload
+                                                                                        Bukti</button>
+                                                                                @else
+                                                                                    <button type="button"
+                                                                                        class="btn btn-primary mx-3"
+                                                                                        data-src="{{ $product->bukti }}"
+                                                                                        data-description="{{ $product->description }}"
+                                                                                        onclick="showViewProof(this)">
+                                                                                        Lihat Bukti
+                                                                                    </button>
+                                                                                @endif
 
                                                                                 <a href="/chat"
                                                                                     class="btn btn-secondary">Chat
@@ -328,4 +345,98 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('modal')
+    <!-- Modal -->
+    <div class="modal modal-top fade" id="viewProof" tabindex="-1" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog">
+            <form class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTopTitle">
+                        Bukti Pembayaran
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img id="img-pembayaran" src="/image/default.jpg" class="w-100" alt="Bukti Pembayaran">
+                    <p class="my-3" id="description-pembayaran"></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalProof" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <form method="POST" action="/proof-payment" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel2">Bukti Pembayaran</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12 mb-2">
+                                <div class="form-group">
+                                    <label for="bukti">Bukti</label>
+                                    <input type="hidden" name="id_data" id="id_data">
+                                    <input required type="file" class="form-control" name="bukti" id="bukti"
+                                        placeholder="Masukan Bukti">
+                                    <small>Format: image</small>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <div class="form-group">
+                                    <label for="description">Keterangan</label>
+                                    <textarea class="form-control" name="description" id="description" rows="3" placeholder="Keterangan"></textarea>
+                                </div>
+                                <p class="mt-4" id="keterangan-rek">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, eum omnis rem culpa
+                                    cum laborum explicabo natus, inventore accusantium commodi hic iusto! Sed, quo.
+                                    Quisquam, eveniet incidunt! Eos, consequuntur unde.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@endsection
+@section('script')
+    <script>
+        function showViewProof(thisis) {
+            let src = $(thisis).data('src')
+            let description = $(thisis).data('description')
+            $('#img-pembayaran').attr('src', '/files/order/proof/' + src)
+            $('#description-pembayaran').text('Keterangan : ' + description)
+            $('#viewProof').modal('show');
+        }
+
+        function showModalProof(thisis) {
+            let id = $(thisis).data('id')
+            let code_payment = $(thisis).data('code_payment')
+            let number_payment = $(thisis).data('number_payment')
+            console.log(code_payment)
+
+            $('#keterangan-rek').html('Kirim Bukti Pembayaran ke : <br> Bank : ' + code_payment + '<br> Rek : ' +
+                (number_payment == '' ? ' - ' : number_payment))
+
+            $('#id_data').val(id)
+            $('#bukti').val('');
+            $('#description').val('');
+            $('#modalProof').modal({
+                backdrop: 'static',
+                keyboard: false
+            })
+            $('#modalProof').modal('show');
+        }
+    </script>
 @endsection

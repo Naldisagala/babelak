@@ -8,9 +8,10 @@ use App\Models\Transaksi;
 
 class OrderController extends Controller
 {
-    public function myorders()
+    public function myOrders()
     {
-        $productWaiting   = Transaksi::where('status','=','waiting')->get();
+        $productWaiting   = Transaksi::where('status','=','waiting')
+        ->orWhere('status','=','process')->get();
         $productPackaging = Transaksi::where('status','=','packaging')->get();
         $productDelivery  = Transaksi::where('status','=','delivery')->get();
         $productDone      = Transaksi::where('status','=','done')->get();
@@ -21,6 +22,33 @@ class OrderController extends Controller
             'productDelivery'  => $productDelivery,
             'productDone'      => $productDone,
         ]);
+    }
+
+    public function proofPayment(Request $request)
+    {
+        $user        = auth()->user();
+        $bukti       = $request->bukti;
+        $id          = $request->get('id_data');
+        $description = $request->get('description');
+
+        $validInput = [
+            'bukti' => 'required|mimes:png,jpg,jpeg|max:2048'
+        ];
+        $validator = \Validator::make($request->all(), $validInput);
+        if ($validator->fails())
+        {
+            return redirect('/my-orders')->with('error', $validator->errors()->all());
+        }
+        $file = 'file-' . date('Ymdms').'.'.$bukti->extension();
+        $bukti->move(public_path('files/order/proof'), $file);
+
+        $transaksi = Transaksi::find($id);
+        $transaksi->description  = $description;
+        $transaksi->bukti  = $file;
+        $transaksi->status = 'process';
+        $transaksi->update();
+
+        return redirect()->back()->with('success','Proof Payment Successfully!!');
     }
 
     public function soldOrders()

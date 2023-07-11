@@ -40,9 +40,10 @@ class CheckoutController extends Controller
         $bank       = $request->get('bank');
 
         foreach($id_serller as $idslr){
-            $cart_ids = $request->get('cart_id_'.$idslr);
-            $totals   = $request->get('total_'.$idslr);
-            $note    = $request->get('note_'.$idslr);
+            $cart_ids       = $request->get('cart_id_'.$idslr);
+            $totals         = $request->get('total_'.$idslr);
+            $note           = $request->get('note_'.$idslr);
+            $number_payment = $request->get('number_payment_'.$idslr);
 
             for($i = 0; $i < count($totals); $i++){
                 $cart_id = $cart_ids[$i];
@@ -52,7 +53,7 @@ class CheckoutController extends Controller
                     'id_cart' => $cart_id,
                     'id_user' => $id_user,
                     'code_payment' => $bank,
-                    'number_payment' => '',
+                    'number_payment' => $number_payment,
                     'total' => $total,
                     'status' => 'waiting',
                     'active' => 1,

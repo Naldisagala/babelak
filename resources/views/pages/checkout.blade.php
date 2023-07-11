@@ -114,7 +114,11 @@
                                             <label for="exampleInputName">Catatan </label>
                                         </div>
                                         <div class="col-9">
-                                            <input type="text" class="form-control" id="note"
+                                            <input type="hidden" class="form-control"
+                                                id="number_payment_{{ $item->id_seller }}"
+                                                name="number_payment_{{ $item->id_seller }}"
+                                                value="{{ rand(1000000, 9999999) }}">
+                                            <input type="text" class="form-control" id="note_{{ $item->id_seller }}"
                                                 name="note_{{ $item->id_seller }}"
                                                 placeholder="Tinggalkan catatan untuk penjual">
                                         </div>

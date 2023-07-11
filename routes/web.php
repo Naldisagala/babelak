@@ -74,7 +74,8 @@ Route::get('/courier/province={province}&city={city}&weight={weight}','CheckoutC
 Route::group(['middleware' => ['buyer-seller']], function() {
     Route::get('/profile', 'ProfileController@index');
     Route::post('/profile', 'ProfileController@changeProfile');
-    Route::get('/my-orders', 'OrderController@myorders');
+    Route::get('/my-orders', 'OrderController@myOrders');
+    Route::post('/proof-payment', 'OrderController@proofPayment');
     Route::post('/change-password', 'ProfileController@changePassword');
     Route::get('/chat', 'ChatController@index');
     Route::get('/notification', 'NotificationController@index');
