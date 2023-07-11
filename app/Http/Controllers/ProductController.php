@@ -10,6 +10,7 @@ use App\Models\District;
 use App\Models\Village;
 use App\Models\Gallery;
 use App\Models\Barang;
+use App\Models\Transaksi;
 
 class ProductController extends Controller
 {
@@ -225,6 +226,10 @@ class ProductController extends Controller
 
     public function booking()
     {
-        return view('pages.admin.booking', []);
+        $transaction   = Transaksi::where('status','!=','waiting')
+        ->where('status','!=','process')->get();
+        return view('pages.admin.booking', [
+            'transaction' => $transaction
+        ]);
     }
 }

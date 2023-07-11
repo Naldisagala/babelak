@@ -127,11 +127,12 @@
                                             <div class="col-md-9">
                                                 <span>
                                                     {{ $product->address }},<br>
-                                                    {{ 'Kel. ' . ucwords(strtolower($product->village)) }},
-                                                    {{ 'Kec. ' . ucwords(strtolower($product->district)) }},
-                                                    {{ 'Kota/Kab. ' . ucwords(strtolower($product->regencie)) }},
-                                                    {{ 'Prov. ' . ucwords(strtolower($product->province)) }},</span>
-                                                <span>Nama jalan, Kota Kecamatan, Kelurahan Kodepos</span>
+                                                    {{ 'Kel. ' . $product->alamat->alamat }},<br>
+                                                    {{ 'Kec. ' . $product->alamat->kec }},<br>
+                                                    {{ 'Kota/Kab. ' . $product->alamat->kota }},<br>
+                                                    {{ 'Prov. ' . $product->alamat->provinsi }},<br>
+                                                    {{ !empty($product->alamat->kode_pos) ? 'Kode Pos. ' . $product->alamat->kode_pos : '' }}
+                                                </span>
                                             </div>
                                         </div>
                                         <div class="col-md-12 row py-2">

@@ -45,6 +45,7 @@ Route::group(['middleware' => ['admin']], function() {
     Route::post('/'.env("URL_ADMIN", 'admin').'/item-validation', 'ProductController@productValidationAction');
     Route::get('/'.env("URL_ADMIN", 'admin').'/booking', 'ProductController@booking');
     Route::get('/'.env("URL_ADMIN", 'admin').'/payment-confirmation', 'PaymentController@confirmation');
+    Route::post('/'.env("URL_ADMIN", 'admin').'/payment-confirmation', 'PaymentController@proof');
     Route::get('/'.env("URL_ADMIN", 'admin').'/report-finance', 'ReportController@finance');
 });
 

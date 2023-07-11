@@ -119,6 +119,7 @@
     <!-- / Layout wrapper -->
 
     @yield('modal')
+    @yield('script')
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
@@ -222,8 +223,8 @@
             autoWidth: true,
             "ordering": false,
             "lengthMenu": [
-                [16, 32, 64, -1],
-                [16, 32, 64, "All"]
+                [10, 20, 50, -1],
+                [10, 20, 50, "All"]
             ]
         });
 
