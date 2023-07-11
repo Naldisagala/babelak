@@ -129,6 +129,18 @@ class OrderController extends Controller
 
     public function salesRevenue()
     {
-        return view('pages.order.salesrevenue', []);
+        $id_user = auth()->user()->id;
+        $transaction = Transaksi::select(
+            'k.*', 'transaksis.*'
+        )
+        ->leftJoin('keranjangs as k', [
+            ['k.id', '=', 'transaksis.id_cart'],
+        ])
+        ->where('id_seller','=',$id_user)
+        ->where('transaksis.status', '=', 'done')->get();
+        
+        return view('pages.order.salesrevenue', [
+            'transaction' => $transaction
+        ]);
     }
 }
