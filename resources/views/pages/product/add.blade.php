@@ -67,10 +67,10 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="col-md-2 vertical-top">
+                                    <div class="col-md-2 vertical-top hidden">
                                         <span class="font-bold">Video</span>
                                     </div>
-                                    <div class="col-md-10">
+                                    <div class="col-md-10 hidden">
                                         <div class="row" id="wrapper-video">
                                             <div class="col-md-12 text-end">
                                                 <button type="button" data-check="0" data-inc="0" id="add-video"
