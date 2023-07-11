@@ -27,22 +27,33 @@
                                         <th class="text-center">Nama</th>
                                         <th class="text-center">Methode</th>
                                         <th class="text-center">Jumlah</th>
-                                        <th class="text-center">Kategori</th>
                                     </tr>
                                 </thead>
+                                @php
+                                    $total = 0;
+                                @endphp
                                 <tbody class="table-border-bottom-0">
-                                    @for ($i = 1; $i <= 100; $i++)
+                                    @foreach ($transaction as $i => $product)
+                                        @php
+                                            $total += $product->total;
+                                        @endphp
                                         <tr>
-                                            <td>{{ $i }}</td>
-                                            <td>{{ date('d/m/Y h:m') }}</td>
-                                            <td class="text-center">Nama Pengirim</td>
-                                            <td class="text-center">BCA</td>
-                                            <td class="text-center">Rp. 000.000</td>
-                                            <td class="text-center">Pemasukan</td>
+                                            <td>{{ ++$i }}</td>
+                                            <td>{{ date('d/m/Y h:m', strtotime($product->created_at)) }}</td>
+                                            <td class="text-center">{{ ucfirst($product->keranjang->user_seller->name) }}
+                                            </td>
+                                            <td class="text-center">{{ $product->code_payment }}</td>
+                                            <td class="text-end">
+                                                {{ 'Rp ' . number_format($product->total, 0, ',', '.') }}</td>
                                         </tr>
-                                    @endfor
-
+                                    @endforeach
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="4">Total</td>
+                                        <td class="text-end">{{ 'Rp ' . number_format($total, 0, ',', '.') }}</td>
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
                     </div>
