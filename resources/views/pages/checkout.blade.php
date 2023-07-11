@@ -107,6 +107,9 @@
                                             </div>
                                             <input type="hidden" name="cart_id_{{ $item->id_seller }}[]"
                                                 id="cart_id_{{ $items->id }}" value="{{ $items->id }}">
+                                            <input type="hidden" name="product_name_{{ $item->id_seller }}[]"
+                                                id="product_name_{{ $items->id }}"
+                                                value="{{ $items->barang->nama_barang }}">
                                             <input type="hidden" name="total_{{ $item->id_seller }}[]"
                                                 id="total_{{ $items->id }}" value="{{ $items->harga_akhir }}">
                                         </div>

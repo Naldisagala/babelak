@@ -22,7 +22,7 @@
             <li class="btn-group">
                 <button type="button" class="btn btn-white btn-icon rounded-pill dropdown-toggle hide-arrow"
                     data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fa fa-bell"></i>
+                    <i class="fa-regular fa-bell"></i>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end" style="">
                     <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>

@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\DB;
 use App\Models\Barang;
 use App\Models\Tawar;
+use App\Models\Notification;
 use App\Models\Keranjang;
 
 
@@ -106,5 +107,29 @@ class Controller extends BaseController
         }
     
         return false;
+    }
+
+    public function countNotif()
+    {
+        $notif = 0;
+        if(!empty(auth()->user())){
+        $notif = Notification::where('to', '=', auth()->user()->id)
+            ->where('is_read','=','0')
+            ->count();
+        }
+        return $notif;
+    }
+
+    public function showNotifHeader()
+    {
+        $notif = [];
+        if(!empty(auth()->user())){
+            $notif = Notification::where('to', '=', auth()->user()->id)
+            ->where('is_read','=','0')
+            ->orderBy('id', 'DESC')
+            ->skip(0)->take(10)
+            ->get();
+        }
+        return $notif;
     }
 }

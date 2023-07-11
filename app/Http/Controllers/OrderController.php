@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Keranjang;
 use App\Models\Transaksi;
+use App\Models\Notification;
 
 class OrderController extends Controller
 {
@@ -52,6 +53,7 @@ class OrderController extends Controller
         {
             return redirect('/my-orders')->with('error', $validator->errors()->all());
         }
+
         $file = 'file-' . date('Ymdms').'.'.$bukti->extension();
         $bukti->move(public_path('files/order/proof'), $file);
 
@@ -60,6 +62,18 @@ class OrderController extends Controller
         $transaksi->bukti  = $file;
         $transaksi->status = 'process';
         $transaksi->update();
+
+        $admin = User::where('role','=','admin')->first();
+        $description = "Menunggu konfirmasi bukti pembayaran dari produk ". 
+        $transaksi->keranjang->barang->nama_barang;
+        Notification::create([
+            'from'        => $user->id,
+            'to'          => $admin->id,
+            'type'        => 'bukti-pembayaran',
+            'description' => $description,
+            'is_read'     => 0,
+            'link'        => '/'.env("URL_ADMIN", 'admin').'/payment-confirmation'
+        ]);
 
         return redirect()->back()->with('success','Proof Payment Successfully!!');
     }
@@ -114,6 +128,18 @@ class OrderController extends Controller
         $transaksi->status = 'delivery';
         $transaksi->update();
 
+        $user = auth()->user();
+        $description = "Pesanan dari produk ". 
+        $transaksi->keranjang->barang->nama_barang. " sudah dikirim dengan No. Resi :" . $no_resi;
+        Notification::create([
+            'from'        => $user->id,
+            'to'          => $transaksi->id_user,
+            'type'        => 'pengiriman',
+            'description' => $description,
+            'is_read'     => 0,
+            'link'        => '/my-orders'
+        ]);
+
         return redirect()->back()->with('success','Add Receipt Number Successfully!!');
     }
 
@@ -123,6 +149,18 @@ class OrderController extends Controller
         $transaksi = Transaksi::find($id);
         $transaksi->status = 'done';
         $transaksi->update();
+
+        $user = auth()->user();
+        $description = "Pesanan dari produk ". 
+        $transaksi->keranjang->barang->nama_barang. " sudah diterima";
+        Notification::create([
+            'from'        => $user->id,
+            'to'          => $transaksi->keranjang->user_seller->id,
+            'type'        => 'penyelesaian-pesanan',
+            'description' => $description,
+            'is_read'     => 0,
+            'link'        => '/sold-orders'
+        ]);
 
         return redirect()->back()->with('success','Order received Successfully!!');
     }

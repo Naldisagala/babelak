@@ -11,6 +11,8 @@ use App\Models\Village;
 use App\Models\Gallery;
 use App\Models\Barang;
 use App\Models\Transaksi;
+use App\Models\Notification;
+use App\Models\User;
 
 class ProductController extends Controller
 {
@@ -108,6 +110,19 @@ class ProductController extends Controller
                     ]);
                 }
             }
+
+            $user = auth()->user();
+            $admin = User::where('role','=','admin')->first();
+            $description = "Terdapat barang masuk (". 
+            $product->nama_barang. ") mohon untuk dicek";
+            Notification::create([
+                'from'        => $user->id,
+                'to'          => $admin->id,
+                'type'        => 'barang-masuk',
+                'description' => $description,
+                'is_read'     => 0,
+                'link'        => '/'.env("URL_ADMIN", 'admin').'/items-enter'
+            ]);
 
             return back()->with('success', 'Successfully add product');
         }catch(\Exception $e){
@@ -220,6 +235,19 @@ class ProductController extends Controller
         $product = Barang::find($id);
         $product->status   = $status;
         $product->update();
+
+        $user = auth()->user();
+        $description = "Barang berhasil ".
+        ($status == 'decline' ? 'ditolak' : 'diterima') ." (". 
+        $product->nama_barang. ")";
+        Notification::create([
+            'from'        => $user->id,
+            'to'          => $product->id_seller,
+            'type'        => 'barang-masuk-'.($status == 'decline' ? 'tolak' : 'terima'),
+            'description' => $description,
+            'is_read'     => 0,
+            'link'        => '/my-products'
+        ]);
 
         return back()->with('success', 'Product Successfully '.ucfirst($status).'!');
     }

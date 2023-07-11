@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Courier;
 use App\Models\Transaksi;
 use App\Models\Keranjang;
+use App\Models\Notification;
+use App\Models\User;
 
 class CheckoutController extends Controller
 {
@@ -41,6 +43,7 @@ class CheckoutController extends Controller
 
         foreach($id_serller as $idslr){
             $cart_ids       = $request->get('cart_id_'.$idslr);
+            $product_name   = $request->get('product_name_'.$idslr);
             $totals         = $request->get('total_'.$idslr);
             $note           = $request->get('note_'.$idslr);
             $number_payment = $request->get('number_payment_'.$idslr);
@@ -48,6 +51,16 @@ class CheckoutController extends Controller
             for($i = 0; $i < count($totals); $i++){
                 $cart_id = $cart_ids[$i];
                 $total   = $totals[$i];
+
+                $description = "Menunggu bukti pembayaran dari produk ". $product_name;
+                Notification::create([
+                    'from'        => $id_user,
+                    'to'          => $id_user,
+                    'type'        => 'checkout',
+                    'description' => $description,
+                    'is_read'     => 0,
+                    'link'        => '/my-orders'
+                ]);
 
                 $data = [
                     'id_cart' => $cart_id,

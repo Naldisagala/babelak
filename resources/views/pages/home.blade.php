@@ -68,10 +68,13 @@
                                 <a href="/barang/{{ $item->id }}"><img class="img-product" width="100%" height="100%"
                                         src="{{ str_contains($item->gambar, '://') ? $item->gambar : '/files/product/' . $item->gambar }}"
                                         alt="{{ $item->nama_barang }}"></a>
-                                <div class="card-body">
+                                <div class="card-body pb-0">
                                     <h6>{{ $item->nama_barang }}</h6>
-                                    <small><i class="fa-solid fa-location-dot"></i> {{ $item->alamat->kota }}</small>
-                                    <h5 class="text-end alig">{{ 'Rp ' . number_format($item->harga, 0, ',', '.') }}</h5>
+                                    <small><i class="fa-solid fa-location-dot pe-2"></i> {{ $item->alamat->kota }}</small>
+                                    <hr>
+                                    <h5 cl22ass="text-end alig mt-3 pb-2 font-bold">
+                                        {{ 'Rp ' . number_format($item->harga, 0, ',', '.') }}
+                                    </h5>
                                     {{-- <p class="text-end" style="text-decoration: line-through;">Rp 100.000</p> --}}
                                 </div>
                             </div>

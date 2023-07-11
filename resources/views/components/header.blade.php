@@ -2,6 +2,8 @@
     use App\Http\Controllers\Controller;
     $controller = new Controller();
     $count = $controller->cartCount();
+    $notification = $controller->showNotifHeader();
+    $countNotif = $controller->countNotif();
 @endphp
 <header class="d-flex flex-column h-100">
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg">
@@ -27,13 +29,44 @@
             </form>
             @if (Auth::check())
                 <ul class="navbar-nav mb-md-0 flex-row">
-                    <li class="nav-item">
-                        <a class="nav-link mx-2" aria-current="page" href="#"><i
-                                class="fa-regular fa-envelope"></i></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link mx-2" href="#"><i class="fa-regular fa-bell"></i></a>
-                    </li>
+                    @if (auth()->user()->role != 'admin')
+                        <li class="nav-item dropdown">
+                            <button class="btn text-white btn-white btn-icon rounded-pill dropdown-toggle hide-arrow"
+                                href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-regular fa-bell"></i>
+                                @if ($countNotif > 0)
+                                    <span
+                                        class="badge ms-2 rounded-pill badge-center h-px-20 w-px-20 bg-label-primary">{{ $countNotif }}</span>
+                                @endif
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                @if (count($notification) > 0)
+                                    @foreach ($notification as $notif)
+                                        <li>
+                                            <a class="dropdown-item text-wrap" href="{{ $notif->link ?? '#' }}">
+                                                <p class="font-bold">Dari : {{ $notif->from_user->name }}</p>
+                                                <p>{{ $notif->description }}</p>
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                    @if (count($notification) >= 10)
+                                        <li>
+                                            <a class="dropdown-item text-wrap text-center border-top"
+                                                href="/notification">
+                                                Lihat Semua
+                                            </a>
+                                        </li>
+                                    @endif
+                                @else
+                                    <li>
+                                        <a class="dropdown-item text-wrap" href="#">
+                                            Kosong
+                                        </a>
+                                    </li>
+                                @endif
+                            </ul>
+                        </li>
+                    @endif
                     <li class="nav-item dropdown">
                         <a class="nav-link mx-2" aria-current="page" href="#" data-bs-toggle="dropdown"><i
                                 class="fa-regular fa-user"></i></a>
@@ -82,7 +115,7 @@
                             </li>
                         </ul>
                     </li>
-                    @if (!empty(auth()->user()))
+                    @if (auth()->user()->role != 'admin')
                         <li class="nav-item d-flex align-items-center justify-content-center">
                             <span>{{ ucfirst(auth()->user()->name) }}</span>
                         </li>
