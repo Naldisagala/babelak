@@ -91,6 +91,7 @@ Route::group(['middleware' => ['buyer-seller']], function() {
     Route::post('/cart-hapus', 'KeranjangController@hapusChecked');
     Route::post('/add-cart', 'KeranjangController@addCart');
     Route::post('/add-cart-to-checkout', 'KeranjangController@addCartToCheckout');
+    Route::post('/done-order', 'OrderController@doneOrder');
 });
 
 Auth::routes();

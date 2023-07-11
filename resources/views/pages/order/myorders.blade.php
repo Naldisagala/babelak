@@ -85,7 +85,7 @@
                                                                                 <h6>{{ ucfirst($product->keranjang->user_seller->name) }}
                                                                                 </h6>
                                                                             </div>
-                                                                            <div class="col-md-6 text-end">
+                                                                            <div class="col-md-6 text-md-end">
                                                                                 <span>{{ ucfirst($product->status) }}</span>
                                                                             </div>
                                                                             <div class="col-md-12">
@@ -165,7 +165,7 @@
                                                                                 <h6>{{ ucfirst($product->keranjang->user_seller->name) }}
                                                                                 </h6>
                                                                             </div>
-                                                                            <div class="col-md-6 text-end">
+                                                                            <div class="col-md-6 text-md-end">
                                                                                 <span>{{ ucfirst($product->status) }}</span>
                                                                             </div>
                                                                             <div class="col-md-12">
@@ -228,7 +228,7 @@
                                                                                 <h6>{{ ucfirst($product->keranjang->user_seller->name) }}
                                                                                 </h6>
                                                                             </div>
-                                                                            <div class="col-md-6 text-end">
+                                                                            <div class="col-md-6 text-md-end">
                                                                                 <span>{{ ucfirst($product->status) }}</span>
                                                                             </div>
                                                                             <div class="col-md-12">
@@ -261,6 +261,8 @@
                                                                             <div
                                                                                 class="col-md-8 d-flex align-items-center justify-content-end">
                                                                                 <button type="button"
+                                                                                    onclick="showModalDone(this)"
+                                                                                    data-id="{{ $product->id }}"
                                                                                     class="btn btn-primary mx-3">Pesanan
                                                                                     Diterima</button>
                                                                                 <a href="/chat"
@@ -293,7 +295,7 @@
                                                                                 <h6>{{ ucfirst($product->keranjang->user_seller->name) }}
                                                                                 </h6>
                                                                             </div>
-                                                                            <div class="col-md-6 text-end">
+                                                                            <div class="col-md-6 text-md-end">
                                                                                 <span>{{ ucfirst($product->status) }}</span>
                                                                             </div>
                                                                             <div class="col-md-12">
@@ -316,19 +318,11 @@
                                                                             <div class="col-md-12">
                                                                                 <hr>
                                                                             </div>
-                                                                            <div class="col-md-4">
-                                                                                <ul class="list-style-none">
-                                                                                    <li><span>Total Pembayaran</span></li>
-                                                                                    <li><strong>{{ 'Rp ' . number_format($product->total, 0, ',', '.') }}</strong>
-                                                                                    </li>
-                                                                                </ul>
+                                                                            <div class="col-md-6">
+                                                                                <span>Total Pembayaran</span>
                                                                             </div>
-                                                                            <div
-                                                                                class="col-md-8 d-flex align-items-center justify-content-end">
-
-                                                                                <a href="/chat"
-                                                                                    class="btn btn-secondary">Chat
-                                                                                    Penjual</a>
+                                                                            <div class="col-md-6 text-md-end">
+                                                                                <span><strong>{{ 'Rp ' . number_format($product->total, 0, ',', '.') }}</strong></span>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -413,6 +407,30 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="modalDone" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel2">Perhatian</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="/done-order" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <input type="hidden" name="id" id="id_data_done">
+                        <p>Apakah kamu yakin ingin menyelesaikan pesanan ini?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                            Batal
+                        </button>
+                        <button type="submit" class="btn btn-primary">Ya</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
 @section('script')
     <script>
@@ -422,6 +440,17 @@
             $('#img-pembayaran').attr('src', '/files/order/proof/' + src)
             $('#description-pembayaran').text('Keterangan : ' + description)
             $('#viewProof').modal('show');
+        }
+
+        function showModalDone(thisis) {
+            let id = $(thisis).data('id')
+
+            $('#id_data_done').val(id)
+            $('#modalDone').modal({
+                backdrop: 'static',
+                keyboard: false
+            })
+            $('#modalDone').modal('show');
         }
 
         function showModalProof(thisis) {

@@ -76,7 +76,7 @@
                                                                                 <h6>{{ ucfirst($product->keranjang->user->name) }}
                                                                                 </h6>
                                                                             </div>
-                                                                            <div class="col-md-6 text-end">
+                                                                            <div class="col-md-6 text-md-end">
                                                                                 <span>{{ ucfirst($product->status) }}</span>
                                                                             </div>
                                                                             <div class="col-md-12">
@@ -140,7 +140,7 @@
                                                                                 <h6>{{ ucfirst($product->keranjang->user->name) }}
                                                                                 </h6>
                                                                             </div>
-                                                                            <div class="col-md-6 text-end">
+                                                                            <div class="col-md-6 text-md-end">
                                                                                 <span>{{ ucfirst($product->status) }}</span>
                                                                             </div>
                                                                             <div class="col-md-12">
@@ -166,7 +166,7 @@
                                                                             <div class="col-md-6">
                                                                                 <span>Total Pembayaran</span>
                                                                             </div>
-                                                                            <div class="col-md-6 text-end">
+                                                                            <div class="col-md-6 text-md-end">
                                                                                 <span><strong>{{ 'Rp ' . number_format($product->total, 0, ',', '.') }}</strong></span>
                                                                             </div>
                                                                         </div>
@@ -195,7 +195,7 @@
                                                                                 <h6>{{ ucfirst($product->keranjang->user->name) }}
                                                                                 </h6>
                                                                             </div>
-                                                                            <div class="col-md-6 text-end">
+                                                                            <div class="col-md-6 text-md-end">
                                                                                 <span>{{ ucfirst($product->status) }}</span>
                                                                             </div>
                                                                             <div class="col-md-12">
@@ -221,7 +221,7 @@
                                                                             <div class="col-md-6">
                                                                                 <span>Total Pembayaran</span>
                                                                             </div>
-                                                                            <div class="col-md-6 text-end">
+                                                                            <div class="col-md-6 text-md-end">
                                                                                 <span><strong>{{ 'Rp ' . number_format($product->total, 0, ',', '.') }}</strong></span>
                                                                             </div>
                                                                         </div>

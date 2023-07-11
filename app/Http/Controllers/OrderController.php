@@ -117,6 +117,16 @@ class OrderController extends Controller
         return redirect()->back()->with('success','Add Receipt Number Successfully!!');
     }
 
+    public function doneOrder(Request $request)
+    {
+        $id = $request->get('id');
+        $transaksi = Transaksi::find($id);
+        $transaksi->status = 'done';
+        $transaksi->update();
+
+        return redirect()->back()->with('success','Order received Successfully!!');
+    }
+
     public function salesRevenue()
     {
         return view('pages.order.salesrevenue', []);

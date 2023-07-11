@@ -45,7 +45,7 @@
                                                                 <li><span>{{ ucfirst($product->user->name) }}</span></li>
                                                             </ul>
                                                         </div>
-                                                        <div class="col-md-3 text-end">
+                                                        <div class="col-md-3 text-md-end">
                                                             <span>{{ ucfirst($product->keranjang->user_seller->name) }}</span>
                                                         </div>
                                                         <div class="col-md-12">

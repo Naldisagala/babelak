@@ -43,7 +43,7 @@
                                             <td class="text-center">{{ ucfirst($product->keranjang->user_seller->name) }}
                                             </td>
                                             <td class="text-center">{{ $product->code_payment }}</td>
-                                            <td class="text-end">
+                                            <td class="text-md-end">
                                                 {{ 'Rp ' . number_format($product->total, 0, ',', '.') }}</td>
                                         </tr>
                                     @endforeach
@@ -52,7 +52,7 @@
                                     <tfoot>
                                         <tr>
                                             <td colspan="4">Total</td>
-                                            <td class="text-end">{{ 'Rp ' . number_format($total, 0, ',', '.') }}</td>
+                                            <td class="text-md-end">{{ 'Rp ' . number_format($total, 0, ',', '.') }}</td>
                                         </tr>
                                     </tfoot>
                                 @endif
