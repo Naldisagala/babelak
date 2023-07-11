@@ -22,12 +22,12 @@
                     <div class="container">
                         <div class="carousel-caption text-start">
                             <h1 class="crsl-text">TEMUKAN BARANG BERHARGA ANDA</h1>
-                            <p class="crsl-text">Menawarkan berbagai barang yang layak pakai dan terjangkau</p>
+                            <p class="crsl-text-small">Menawarkan berbagai barang yang layak pakai dan terjangkau</p>
                                 <p>
                                     @if (Auth::check())
                                     <br><br>
                                     @else
-                                    <a class="btn btn-lg btn-primary" href="../login-page">Gabung bersama kami</a>
+                                    <a class="btn btn-lg btn-primary" href="../login-page">Gabung Bersama kami</a>
                                     @endif
                                 </p>
                         </div>
@@ -48,7 +48,7 @@
                     <div class="container">
                         <div class="carousel-caption text-end">
                             <h1 class="crsl-text">JADILAH SELLER BABELAK</h1>
-                            <p class="crsl-text">Jangkau seluruh pelanggan setiap harinya</p>
+                            <p class="crsl-text-small">Jangkau seluruh pelanggan setiap harinya</p>
                             <p><br></p>
                         </div>
                     </div>

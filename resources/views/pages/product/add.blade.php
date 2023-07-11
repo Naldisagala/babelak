@@ -118,12 +118,12 @@
                                         </div>
                                     </div>
                                     <input type="hidden" name="stock" id="stock" value="1">
-                                    <div class="col-md-12 mt-3 hidden">
+                                    {{-- <div class="col-md-12 mt-3 hidden">
                                         <div class="row">
                                             <div class="col-md-2 vertical-top">
                                                 <span class="font-bold">Stok</span>
                                             </div>
-                                            {{-- <div class="col-md-8">
+                                             <div class="col-md-8">
                                                 <input required type="number"
                                                     class="form-control @error('stock') is-invalid @enderror"
                                                     name="stock" id="stock" placeholder="Stok" min="1"
@@ -133,9 +133,9 @@
                                                         {{ $message }}
                                                     </div>
                                                 @enderror
-                                            </div> --}}
+                                            </div>
                                         </div>
-                                    </div>
+                                    </div> 
                                     <div class="col-md-12 mt-3">
                                         <div class="row">
                                             <div class="col-md-2 vertical-top">
@@ -153,7 +153,7 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>--}}
                                     <div class="col-md-12 mt-3">
                                         <div class="row">
                                             <div class="col-md-2 vertical-top">
@@ -181,6 +181,24 @@
                                                 <textarea name="description" placeholder="Deskripsi Barang"
                                                     class="form-control @error('description') is-invalid @enderror" id="description" cols="30" rows="7">{{ old('description') ?? '' }}</textarea>
                                                 @error('description')
+                                                    <div class="invalid-feedback text-left">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mt-3">
+                                        <div class="row">
+                                            <div class="col-md-2 vertical-top">
+                                                <span class="font-bold">Lokasi Barang</span>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input required type="text"
+                                                    class="form-control @error('lokasi_barang') is-invalid @enderror"
+                                                    name="lokasi_barang" id="lokasi_barang" placeholder="Lokasi Barang"
+                                                    value="{{ old('lokasi_barang') ?? '' }}">
+                                                @error('lokasi_barang')
                                                     <div class="invalid-feedback text-left">
                                                         {{ $message }}
                                                     </div>

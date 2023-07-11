@@ -12,6 +12,7 @@ body {
 .kiri .imglogo {
     padding-left: 210px;
     padding-top: 280px;
+
 }
 .log {
     background-color: white;
@@ -105,7 +106,7 @@ body {
 .btn-cart {
     text-align: center;
     color: white !important;
-    background: #cb63a3;
+    background: #d98cbb;
     width: 50px;
     margin-left: 5px;
     border: none;
@@ -292,9 +293,14 @@ body {
 .crsl-text {
     font-weight: bold;
     color: black;
-    text-shadow: 3px 3px 1px white;
+    text-shadow: 3px 3px 1px black;
 }
 .crsl-text2 {
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 1px black;
+}
+.crsl-text-small {
     font-weight: bold;
     color: white;
     text-shadow: 2px 2px 1px black;
@@ -303,7 +309,7 @@ body {
 
 /* awal footer */
 footer {
-    background-color: #000;
+    background-color: #f1e7e7;
 }
 /* akhir footer */
 .mt-11 {
@@ -320,7 +326,6 @@ main {
 
 .list-style-none {
     list-style-type: none;
-    padding-left: 0;
 }
 
 .bg-light-smoth {

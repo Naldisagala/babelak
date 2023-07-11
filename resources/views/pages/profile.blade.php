@@ -61,7 +61,7 @@
                                                 </div>
                                             @enderror
                                         </div>
-                                        <div class="form-group my-3">
+                                        {{-- <div class="form-group my-3">
                                             <label for="nik">NIK</label>
                                             <input type="text" class="form-control @error('nik') is-invalid @enderror"
                                                 name="nik" id="nik" placeholder="NIK"
@@ -71,7 +71,7 @@
                                                     {{ $message }}
                                                 </div>
                                             @enderror
-                                        </div>
+                                        </div> --}}
                                         <div class="form-group my-3">
                                             <label for="telp">Nomor Handphone</label>
                                             <input type="text" class="form-control @error('hp') is-invalid @enderror"
@@ -97,10 +97,10 @@
                                         <div class="form-group my-3">
                                             <label for="institute_name">Nama Institut</label>
                                             <input type="text"
-                                                class="form-control @error('institute') is-invalid @enderror"
+                                                class="form-control {{-- @error('institute') is-invalid @enderror" --}}
                                                 name="institute" id="institute_name" placeholder="Nama Institut"
                                                 value="{{ old('institute') ?? $user['institute'] }}">
-                                            @error('institute')
+                                             @error('institute')
                                                 <div class="invalid-feedback text-left">
                                                     {{ $message }}
                                                 </div>
@@ -195,7 +195,7 @@
                                                 <div class="col-md-6 mt-3">
                                                     <select required class="chosen form-control" name="id_village"
                                                         id="village">
-                                                        <option value="" disabled selected>Pilih Desa</option>
+                                                        <option value="" disabled selected>Pilih Kelurahan</option>
                                                         @if (!empty($villages))
                                                             @foreach ($villages as $vil)
                                                                 <option
@@ -239,7 +239,7 @@
                                                     </div>
                                                 @enderror
                                             </div>
-                                            <div class="form-group my-3">
+                                            {{-- <div class="form-group my-3">
                                                 <label for="saldo">Saldo</label>
                                                 <input type="number"
                                                     class="form-control @error('saldo') is-invalid @enderror"
@@ -250,7 +250,7 @@
                                                         {{ $message }}
                                                     </div>
                                                 @enderror
-                                            </div>
+                                            </div> --}}
                                             <div class="form-group my-3">
                                                 <label for="rekening">No Rekening</label>
                                                 <input type="text"

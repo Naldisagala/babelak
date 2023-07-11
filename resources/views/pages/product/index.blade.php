@@ -3,7 +3,7 @@
 
 <!-- isi bagian judul halaman -->
 <!-- cara penulisan isi section yang pendek -->
-@section('title', 'Produk Saya')
+@section('title', 'Barang Saya')
 
 
 <!-- isi bagian konten -->
@@ -19,7 +19,7 @@
 
                     <div class="tab-content">
                         <div role="tabpanel">
-                            <h4 class="mb-5"><strong>@yield('title')</strong></h4>
+                            <h4 class="mb-2"><strong>@yield('title')</strong></h4>
                             <div class="d-flex align-items-center justify-content-end">
                                 <a href="/product" class="btn btn-primary mb-4">
                                     <i class="fa fa-plus me-2"></i>
@@ -31,8 +31,8 @@
                                     <thead class="bg-light-smoth">
                                         <tr>
                                             <th>No.</th>
-                                            <th>ID Product</th>
-                                            <th>Info Product</th>
+                                            <th>ID Barang</th>
+                                            <th>Info Barang</th>
                                             <th class="text-center">Harga</th>
                                             <th class="text-center">Status</th>
                                             <th></th>

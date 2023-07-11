@@ -6,10 +6,10 @@
     </li>
     @if (auth()->user()->role == 'seller')
         <li class="nav-item">
-            <a href="/my-orders" class="nav-link px-5 {{ $active_tab == 'my-orders' ? 'active' : '' }}"
+            {{-- <a href="/my-orders" class="nav-link px-5 {{ $active_tab == 'my-orders' ? 'active' : '' }}"
                 aria-selected="false">
                 Pesanan Saya
-            </a>
+            </a> --}}
         </li>
         <li class="nav-item">
             <a href="/my-products" class="nav-link px-5 {{ $active_tab == 'my-products' ? 'active' : '' }}"
