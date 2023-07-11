@@ -49,14 +49,11 @@
                                             </a>
                                         </li>
                                     @endforeach
-                                    @if (count($notification) >= 10)
-                                        <li>
-                                            <a class="dropdown-item text-wrap text-center border-top"
-                                                href="/notification">
-                                                Lihat Semua
-                                            </a>
-                                        </li>
-                                    @endif
+                                    <li>
+                                        <a class="dropdown-item text-wrap text-center border-top" href="/notification">
+                                            Lihat Semua
+                                        </a>
+                                    </li>
                                 @else
                                     <li>
                                         <a class="dropdown-item text-wrap" href="#">
