@@ -133,9 +133,17 @@ class KeranjangController extends Controller
     {
         $id = $request->get('id');
         $check = $request->get('check');
-        $keranjang = Keranjang::find($id);
-        $keranjang->is_checkout   = $check;
-        $keranjang->update();
+        $type = $request->get('type');
+        if($type == "all"){
+            $keranjang = Keranjang::where('id_user','=', auth()->user()->id)
+            ->where('status','=','process')
+            ->update(['is_checkout' => $check]);
+        }else{
+            $keranjang = Keranjang::find($id);
+            $keranjang->is_checkout   = $check;
+            $keranjang->update();
+        }
+        
         return response()->json([
             'data'     => $keranjang,
         ], 200);

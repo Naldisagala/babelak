@@ -177,15 +177,30 @@
         function checkAll(thisis) {
             let check = $(thisis).prop('checked');
             $('.cart-checked').prop('checked', check)
-            if (check) {
-                let carts = ''
-                $('.cart-checked').each(function(i, data) {
-                    carts += (i == 0 ? '' : ',') + data.value
-                });
-                $('#id_carts').val(carts)
-            } else {
-                $('#id_carts').val('')
-            }
+            $.ajax({
+                url: "{{ url('/ajax-cart-to-checkout') }}",
+                method: 'post',
+                data: {
+                    _token: '<?= csrf_token() ?>',
+                    check: (check ? 1 : 0),
+                    type: 'all'
+                },
+                success: function(result) {
+                    console.log('result', result)
+                    if (check) {
+                        let carts = ''
+                        $('.cart-checked').each(function(i, data) {
+                            carts += (i == 0 ? '' : ',') + data.value
+                        });
+                        $('#id_carts').val(carts)
+                    } else {
+                        $('#id_carts').val('')
+                    }
+                },
+                error: function(error) {
+                    console.log(error)
+                }
+            });
         }
 
         function checkedCart(thisis) {
@@ -198,35 +213,36 @@
                 data: {
                     _token: '<?= csrf_token() ?>',
                     id: val,
-                    check: (check ? 1 : 0)
+                    check: (check ? 1 : 0),
+                    type: 'one'
                 },
                 success: function(result) {
                     console.log('result', result)
+                    if (check) {
+                        if (id_carts == '') {
+                            $('#id_carts').val(val)
+                        } else {
+                            let split = id_carts.split(',')
+                            if (!split.includes(val)) {
+                                id_carts += `,${val}`
+                                $('#id_carts').val(id_carts)
+                            }
+                        }
+                    } else {
+                        let split = id_carts.split(',')
+                        let carts = ''
+                        $.each(split, function(i, data) {
+                            if (data != val) {
+                                carts += (i == 0 ? '' : ',') + data
+                            }
+                        });
+                        $('#id_carts').val(carts)
+                    }
                 },
                 error: function(error) {
                     console.log(error)
                 }
             });
-            if (check) {
-                if (id_carts == '') {
-                    $('#id_carts').val(val)
-                } else {
-                    let split = id_carts.split(',')
-                    if (!split.includes(val)) {
-                        id_carts += `,${val}`
-                        $('#id_carts').val(id_carts)
-                    }
-                }
-            } else {
-                let split = id_carts.split(',')
-                let carts = ''
-                $.each(split, function(i, data) {
-                    if (data != val) {
-                        carts += (i == 0 ? '' : ',') + data
-                    }
-                });
-                $('#id_carts').val(carts)
-            }
         }
     </script>
 @endsection
