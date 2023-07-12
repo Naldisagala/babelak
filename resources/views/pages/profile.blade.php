@@ -375,11 +375,11 @@
                         $('#district').empty().append(
                             '<option selected disabled value="">Pilih Kecamatan</option>');
                         $('#village').empty().append(
-                            '<option selected disabled value="">Pilih Desa</option>');
+                            '<option selected disabled value="">Pilih Kelurahan</option>');
                         $('#village').trigger("chosen:updated");
                     } else if (type == 'village') {
                         $('#village').empty().append(
-                            '<option selected disabled value="">Pilih Desa</option>');
+                            '<option selected disabled value="">Pilih Kelurahan</option>');
                     }
                     $(data).each(function(index, item) {
                         let selected = ''
