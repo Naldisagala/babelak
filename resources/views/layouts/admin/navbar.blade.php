@@ -1,3 +1,9 @@
+@php
+    use App\Http\Controllers\Controller;
+    $controller = new Controller();
+    $notification = $controller->showNotifHeader();
+    $countNotif = $controller->countNotif();
+@endphp
 <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
     id="layout-navbar">
     <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
@@ -20,18 +26,37 @@
         <ul class="navbar-nav flex-row align-items-center ms-auto">
 
             <li class="btn-group">
-                <button type="button" class="btn btn-white btn-icon rounded-pill dropdown-toggle hide-arrow"
+                <button type="button" class="btn btn-white btn-icon rounded-pill dropdown-toggle hide-arrow me-3"
                     data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="fa-regular fa-bell"></i>
+                    @if ($countNotif > 0)
+                        <span
+                            class="badge ms-2 rounded-pill badge-center h-px-20 w-px-20 bg-label-primary">{{ $countNotif }}</span>
+                    @endif
                 </button>
-                <ul class="dropdown-menu dropdown-menu-end" style="">
-                    <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
-                    <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
-                    <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    @if (count($notification) > 0)
+                        @foreach ($notification as $notif)
+                            <li>
+                                <a class="dropdown-item text-wrap" href="{{ $notif->link ?? '#' }}">
+                                    <p class="font-bold">Dari : {{ $notif->from_user->name }}</p>
+                                    <p>{{ $notif->description }}</p>
+                                </a>
+                            </li>
+                        @endforeach
+                        <li>
+                            <a class="dropdown-item text-wrap text-center border-top"
+                                href="/{{ env('URL_ADMIN', 'admin') }}/notification">
+                                Lihat Semua
+                            </a>
+                        </li>
+                    @else
+                        <li>
+                            <a class="dropdown-item text-wrap" href="#">
+                                Kosong
+                            </a>
+                        </li>
+                    @endif
                 </ul>
             </li>
 
