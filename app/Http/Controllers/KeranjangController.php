@@ -131,25 +131,41 @@ class KeranjangController extends Controller
 
     public function ajaxCartToCheckout(Request $request)
     {
-        $id = $request->get('id');
+        $id    = $request->get('id');
         $check = $request->get('check');
-        $type = $request->get('type');
+        $type  = $request->get('type');
+        $total = 0;
+        $keranjang = [];
         if($type == "all"){
-            $keranjangs = Keranjang::where('id_user','=', auth()->user()->id)
+            $keranjangs = Keranjang::with('barang')
+            ->where('aktif', '=', 1)
+            ->where('id_user','=', auth()->user()->id)
             ->where('status','=','process')->get();
-            foreach($keranjang as $k){
+            foreach($keranjangs as $k){
                 $keranjang = Keranjang::find($k->id);
                 $keranjang->is_checkout   = $check;
                 $keranjang->update();
             }
+            $keranjang = $keranjangs;
         }else{
             $keranjang = Keranjang::find($id);
             $keranjang->is_checkout   = $check;
             $keranjang->update();
         }
-        
+
+        $keranjangs = Keranjang::with('barang')
+            ->where('aktif', '=', 1)
+            ->where('id_user','=', auth()->user()->id)
+            ->where('status','=','process')->get();
+        foreach($keranjangs as $k){
+            if($k->is_checkout == 1){
+                $total += $k->barang->harga;
+            }
+        }
+
         return response()->json([
-            'data'     => $keranjang,
+            'data'  => $keranjang,
+            'total' => $total
         ], 200);
     }
 }
