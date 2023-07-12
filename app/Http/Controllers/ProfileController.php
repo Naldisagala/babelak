@@ -124,6 +124,7 @@ class ProfileController extends Controller
             $dataDetail = array_slice($data, 4, 3);
             $dataDetail['id_user'] = $id;
             $dataDetail['photo']   = $file ?? $o_photo;
+            $dataDetail['institute'] = $request->get('institute');
 
             User::where('id', '=', $id)->update($dataUser);
             $province = Province::where('id', '=', $data['province'])->first();

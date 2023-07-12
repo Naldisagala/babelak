@@ -96,10 +96,8 @@
                                         </div>
                                         <div class="form-group my-3">
                                             <label for="institute_name">Nama Institut</label>
-                                            <input type="text"
-                                                class="form-control {{-- @error('institute') is-invalid @enderror" --}}
-                                                name="institute"
-                                                id="institute_name" placeholder="Nama Institut"
+                                            <input type="text" class="form-control {{-- @error('institute') is-invalid @enderror" --}}"
+                                                name="institute" id="institute_name" placeholder="Nama Institut"
                                                 value="{{ old('institute') ?? $user['institute'] }}">
                                             @error('institute')
                                                 <div class="invalid-feedback text-left">
