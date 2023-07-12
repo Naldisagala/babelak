@@ -135,6 +135,7 @@ class KeranjangController extends Controller
         $check = $request->get('check');
         $type  = $request->get('type');
         $total = 0;
+        $barang_count = 0;
         $keranjang = [];
         if($type == "all"){
             $keranjangs = Keranjang::with('barang')
@@ -160,12 +161,14 @@ class KeranjangController extends Controller
         foreach($keranjangs as $k){
             if($k->is_checkout == 1){
                 $total += $k->barang->harga;
+                $barang_count++;
             }
         }
 
         return response()->json([
             'data'  => $keranjang,
-            'total' => $total
+            'total' => $total,
+            'count' => $barang_count,
         ], 200);
     }
 }

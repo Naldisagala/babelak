@@ -37,6 +37,7 @@
                 </div>
                 @php
                     $total = 0;
+                    $barang_count = 0;
                 @endphp
                 @foreach ($keranjang as $item)
                     <div class="row mb-3">
@@ -75,6 +76,7 @@
                                                     <b>{{ $items->barang->nama_barang }}</b><br>
                                                     @php
                                                         if ($items->is_checkout == 1) {
+                                                            $barang_count++;
                                                             $total += $items->harga_akhir;
                                                         }
                                                     @endphp
@@ -121,7 +123,7 @@
                                     <h6 class="font-bold">Ringkasan Belanja</h6>
                                 </div>
                                 <div class="col-md-6">
-                                    <span>Total pesanan (2 Barang)</span>
+                                    <span>Total pesanan (<span id="count_barang">{{ $barang_count }}</span> Barang)</span>
                                 </div>
                                 <div class="col-md-6 text-end">
                                     <span class="total-all">{{ 'Rp ' . number_format($total, 0, ',', '.') }}</span>
@@ -190,6 +192,8 @@
                 success: function(result) {
                     console.log('result', result)
                     let total = parseInt(result.total);
+                    let count = parseInt(result.count);
+                    $('#count_barang').text(count)
                     $('.total-all').text(formatRupiah(total.toString(), 'Rp. '))
                     if (check) {
                         let carts = ''
@@ -223,6 +227,8 @@
                 success: function(result) {
                     console.log('result', result)
                     let total = parseInt(result.total);
+                    let count = parseInt(result.count);
+                    $('#count_barang').text(count)
                     $('.total-all').text(formatRupiah(total.toString(), 'Rp. '))
                     if (check) {
                         if (id_carts == '') {
