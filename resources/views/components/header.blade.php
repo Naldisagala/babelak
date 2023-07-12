@@ -8,7 +8,8 @@
 <header class="d-flex flex-column h-100">
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg">
         <div class="container">
-            <a class="navbar-brand" href="/home">
+            <a class="navbar-brand"
+                href="/{{ auth()->user() ? (auth()->user()->role == 'admin' ? env('URL_ADMIN', 'admin') . '/dashboard' : 'home') : 'home' }}">
                 <img class="img-size hidden md:block" src="{{ url('/image/logo.png') }}" alt="logo">
                 <img width="20" class="block md:hidden" src="{{ url('/image/Logo_white.svg') }}" alt="logo">
             </a>
