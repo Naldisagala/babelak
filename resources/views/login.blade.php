@@ -31,12 +31,18 @@
                             <input type="email" class="form-control" name="email" id="floatingInput"
                                 placeholder="name@example.com">
                             <label for="floatingInput">Masukkan Email</label>
+                            @if ($errors->any())
+                                <small style="color:red">*{{ $errors->first('email') }}</small>
+                            @endif
                         </div>
                         <h6 class="mt-4">Password</h6>
                         <div class="form-floating">
                             <input type="password" class="form-control" name="password" id="floatingPassword"
                                 placeholder="Password">
                             <label for="floatingPassword">Password</label>
+                            @if ($errors->any())
+                                <small style="color:red">*{{ $errors->first('password') }}</small>
+                            @endif
                         </div>
 
                         <div class="checkbox mb-3 row my-3">

@@ -91,7 +91,7 @@
                         <button class="w-100 btn  btn-primary fw-bold" type="submit">Daftar</button>
                         <hr style="width: 100%">
                         <div style="text-align: center">
-                            Sudah punya akun? <a href="/login-page">Login</a>
+                            Sudah punya akun? <a href="/login-page">Masuk</a>
                         </div>
                     </div>
                 </form>

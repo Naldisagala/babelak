@@ -3,7 +3,7 @@
 
 <!-- isi bagian judul halaman -->
 <!-- cara penulisan isi section yang pendek -->
-@section('title', 'Profil')
+@section('title', 'Profile')
 
 
 <!-- isi bagian konten -->
@@ -61,17 +61,7 @@
                                                 </div>
                                             @enderror
                                         </div>
-                                        <div class="form-group my-3">
-                                            <label for="nik">NIK</label>
-                                            <input type="text" class="form-control @error('nik') is-invalid @enderror"
-                                                name="nik" id="nik" placeholder="NIK"
-                                                value="{{ old('nik') ?? $user['nik'] }}">
-                                            @error('nik')
-                                                <div class="invalid-feedback text-left">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                        </div>
+                                        
                                         <div class="form-group my-3">
                                             <label for="telp">Nomor Handphone</label>
                                             <input type="text" class="form-control @error('hp') is-invalid @enderror"
