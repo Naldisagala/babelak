@@ -74,7 +74,9 @@
                                                 <div style="margin-left: 10px">
                                                     <b>{{ $items->barang->nama_barang }}</b><br>
                                                     @php
-                                                        $total += $items->harga_akhir;
+                                                        if ($items->is_checkout == 1) {
+                                                            $total += $items->harga_akhir;
+                                                        }
                                                     @endphp
                                                     @if ($items->id_tawar == '')
                                                         <small>
