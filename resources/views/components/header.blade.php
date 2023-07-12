@@ -74,9 +74,9 @@
                                 <li>
                                     <a class="dropdown-item" href="/profile">Profile</a>
                                 </li>
-                                <li>
+                                {{-- <li>
                                     <a class="dropdown-item" href="/my-orders">Pesanan Saya</a>
-                                </li>
+                                </li> --}}
                                 <li>
                                     <a class="dropdown-item" href="/my-products">Barang Saya</a>
                                 </li>
