@@ -52,7 +52,7 @@ class CheckoutController extends Controller
                 $cart_id = $cart_ids[$i];
                 $total   = $totals[$i];
 
-                $description = "Menunggu bukti pembayaran dari produk ". $product_name;
+                $description = "Menunggu bukti pembayaran dari produk ". $product_name[$i];
                 Notification::create([
                     'from'        => $id_user,
                     'to'          => $id_user,
