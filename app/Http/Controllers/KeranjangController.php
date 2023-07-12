@@ -101,12 +101,13 @@ class KeranjangController extends Controller
         $id_seller = $request->get('id_seller');
 
         $data = [
-            'id_barang' => $id_barang,
-            'id_user'   => $id_user,
-            'gambar'    => '',
-            'id_tawar'  => '',
-            'aktif'     => 1,
-            'id_seller' => $id_seller,
+            'id_barang'   => $id_barang,
+            'id_user'     => $id_user,
+            'gambar'      => '',
+            'id_tawar'    => '',
+            'aktif'       => 1,
+            'id_seller'   => $id_seller,
+            'is_checkout' => 1
         ];
 
         $cart = Keranjang::where('id_barang', '=', $id_barang)
