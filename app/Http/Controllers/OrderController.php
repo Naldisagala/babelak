@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Keranjang;
 use App\Models\Transaksi;
 use App\Models\Notification;
+use App\Models\User;
 
 class OrderController extends Controller
 {
