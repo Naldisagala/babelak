@@ -161,7 +161,7 @@
                                         <span class="font-bold">Harga Pengiriman</span>
                                     </div>
                                     <div class="col-9 text-end">
-                                        <span>Gratis Ongkir</span>
+                                        <span>Hubungi penjual terlebih dahulu</span>
                                     </div>
                                 </div>
                             </div>
