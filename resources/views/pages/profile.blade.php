@@ -61,7 +61,7 @@
                                                 </div>
                                             @enderror
                                         </div>
-                                        {{-- <div class="form-group my-3">
+                                        <div class="form-group my-3">
                                             <label for="nik">NIK</label>
                                             <input type="text" class="form-control @error('nik') is-invalid @enderror"
                                                 name="nik" id="nik" placeholder="NIK"
@@ -71,7 +71,7 @@
                                                     {{ $message }}
                                                 </div>
                                             @enderror
-                                        </div> --}}
+                                        </div>
                                         <div class="form-group my-3">
                                             <label for="telp">Nomor Handphone</label>
                                             <input type="text" class="form-control @error('hp') is-invalid @enderror"
@@ -98,9 +98,10 @@
                                             <label for="institute_name">Nama Institut</label>
                                             <input type="text"
                                                 class="form-control {{-- @error('institute') is-invalid @enderror" --}}
-                                                name="institute" id="institute_name" placeholder="Nama Institut"
+                                                name="institute"
+                                                id="institute_name" placeholder="Nama Institut"
                                                 value="{{ old('institute') ?? $user['institute'] }}">
-                                             @error('institute')
+                                            @error('institute')
                                                 <div class="invalid-feedback text-left">
                                                     {{ $message }}
                                                 </div>
@@ -225,7 +226,7 @@
                                             </div>
                                         </div>
 
-                                        @if ($user['is_seller'] == 1)
+                                        @if ($user['role'] == 'seller')
                                             <h5 class="font-bold mt-5">Seller</h5>
                                             <div class="form-group my-3">
                                                 <label for="nama_toko">Nama Toko</label>

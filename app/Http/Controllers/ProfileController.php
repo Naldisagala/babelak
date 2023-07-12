@@ -77,11 +77,12 @@ class ProfileController extends Controller
 
     public function changeProfile(Request $request)
     {
-        $user      = auth()->user();
-        $id        = $user->id;
-        $photo     = $request->photo;
-        $o_photo   = $request->get('old_photo');
-        $is_seller = $user->is_seller;
+        $user        = auth()->user();
+        $id          = $user->id;
+        $photo       = $request->photo;
+        $o_photo     = $request->get('old_photo');
+        $is_seller   = $user->is_seller;
+        $role_seller = ($user->role == 'seller' ? true : false);
 
         $valid   = [
             'name'          => 'required',
@@ -89,26 +90,29 @@ class ProfileController extends Controller
             'email'         => 'required|email:dns',
             'hp'            => 'required',
             'nik'           => 'required',
-            'institute'     => 'required',
             'address'       => 'required',
             'id_village'    => 'required',
             'province'      => 'required',
             'regency'       => 'required',
             'district'      => 'required',
             'postcode'      => 'required',
-            'nama_toko'     => 'required',
-            'saldo'         => 'required',
-            'rekening'      => 'required',
-            'type_rekening' => 'required',
         ];
+
+
+        if($role_seller){
+            $valid['nama_toko']     = 'required';
+            $valid['saldo']         = 'required';
+            $valid['rekening']      = 'required';
+            $valid['type_rekening'] = 'required';
+        }
 
         if(!empty($photo)){
             $valid['photo'] = 'required|mimes:png,jpg,jpeg|max:2048';
         }
 
-        $data = $request->validate($valid);
-
+        
         try{
+            $data = $request->validate($valid);
             $file = null;
             if(!empty($photo)){
                 $file = 'file-' . date('Ymdms').'.'.$request->photo->extension();
@@ -117,7 +121,7 @@ class ProfileController extends Controller
 
             
             $dataUser   = array_slice($data, 0, 4);
-            $dataDetail = array_slice($data, 4, 4);
+            $dataDetail = array_slice($data, 4, 3);
             $dataDetail['id_user'] = $id;
             $dataDetail['photo']   = $file ?? $o_photo;
 
