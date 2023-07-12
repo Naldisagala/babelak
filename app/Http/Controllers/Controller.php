@@ -68,12 +68,15 @@ class Controller extends BaseController
         ->where('status','=','process')
         ->count();
     }
-    public function getCart($user = null)
+    public function getCart($user = null, $is_checkout = false)
     {
         $seller = Keranjang::select('id_seller', DB::raw('COUNT(id_seller) as total_barang'))
         ->where('id_user', $user)
-        ->where('aktif','=',1)
-        ->where('status','=','process')
+        ->where('aktif','=',1);
+        if($is_checkout){
+            $seller= $seller->where('is_checkout','=',1);
+        }
+        $seller = $seller->where('status','=','process')
         ->groupBy('id_seller')
         ->get();
         
@@ -81,8 +84,11 @@ class Controller extends BaseController
         foreach ($seller as $key) {
             $cart = Keranjang::with('user', 'tawar', 'barang', 'seller','alamatSeller')
             ->where('id_seller', $key->id_seller)
-            ->where('aktif','=',1)
-            ->where('status','=','process')
+            ->where('aktif','=',1);
+            if($is_checkout){
+                $cart = $cart->where('is_checkout','=',1);
+            }
+            $cart = $cart->where('status','=','process')
             ->get();  
             foreach ($cart as $keys) {
                 $keys->harga_akhir = ($keys->tawar != null) ? $keys->tawar->harga_tawar :( $keys->barang->harga ?? 0);

@@ -61,6 +61,7 @@
                                                 <div class="form-check me-2">
                                                     <label class="form-check-label">
                                                         <input onclick="checkedCart(this)" type="checkbox"
+                                                            {{ $items->is_checkout == 1 ? 'checked' : '' }}
                                                             class="form-check-input cart-checked" name="barangToko"
                                                             id="barangToko" value="{{ $items->id }}">
                                                     </label>
@@ -191,6 +192,21 @@
             let check = $(thisis).prop('checked');
             let val = $(thisis).val()
             let id_carts = $('#id_carts').val();
+            $.ajax({
+                url: "{{ url('/ajax-cart-to-checkout') }}",
+                method: 'post',
+                data: {
+                    _token: '<?= csrf_token() ?>',
+                    id: val,
+                    check: (check ? 1 : 0)
+                },
+                success: function(result) {
+                    console.log('result', result)
+                },
+                error: function(error) {
+                    console.log(error)
+                }
+            });
             if (check) {
                 if (id_carts == '') {
                     $('#id_carts').val(val)

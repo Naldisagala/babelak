@@ -35,7 +35,7 @@ class KeranjangController extends Controller
         ->first();
 
         return view('pages.checkout',[
-            'keranjang'=> $this->getCart($id_user),
+            'keranjang'=> $this->getCart($id_user, true),
             'user' => $user
         ]);
     }
@@ -126,5 +126,17 @@ class KeranjangController extends Controller
             Keranjang::create($data);
             return redirect('/checkout')->with('success', 'Product add to Cart Successfully!');
         }
+    }
+
+    public function ajaxCartToCheckout(Request $request)
+    {
+        $id = $request->get('id');
+        $check = $request->get('check');
+        $keranjang = Keranjang::find($id);
+        $keranjang->is_checkout   = $check;
+        $keranjang->update();
+        return response()->json([
+            'data'     => $keranjang,
+        ], 200);
     }
 }
