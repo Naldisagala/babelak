@@ -231,7 +231,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <button type="submit" @if ($total == 0 || !$isAddress) disabled @endif
+                                <button type="submit" @if ($total == 0) disabled @endif
                                     class="btn btn-primary">Buat Pesanan</button>
                             </div>
                         </div>
