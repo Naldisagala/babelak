@@ -107,7 +107,7 @@ class ProfileController extends Controller
         }
 
         if(!empty($photo)){
-            $valid['photo'] = 'required|mimes:png,jpg,jpeg|max:2048';
+            $valid['photo'] = 'required|mimes:png,jpg,jpeg|max:10240';
         }
 
         
