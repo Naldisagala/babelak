@@ -179,8 +179,8 @@
                                         method="POST">
                                         @csrf
                                         <div class="input-group mb-3">
-                                            <input type="number" class="form-control" name="tawar"
-                                                placeholder="Ketikkan tawaran" aria-label="Ketikkan tawaran"
+                                            <input type="number" required class="form-control" name="tawar"
+                                                placeholder="Ketikkan tawaran" aria-label="Maukan tawaran"
                                                 aria-describedby="basic-addon2">
                                             <button style="background: #CB63A3!important" class="input-group-text"
                                                 id="basic-addon2" type="submit"><i style="color:white;"

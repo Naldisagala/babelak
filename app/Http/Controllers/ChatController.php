@@ -59,7 +59,9 @@ class ChatController extends Controller
         })->orWhere(function($query) use ($from_user, $to_user){
             $query->where('dari', '=', $to_user);
             $query->where('ke', '=', $from_user);
-        })->get();
+        })
+        ->orderBy('created_at', 'asc')
+        ->get();
 
         return [
             'users_chat' => $users_chat,
