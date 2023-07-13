@@ -45,7 +45,7 @@ class ChatController extends Controller
         $users_chat = $users_chat->get()->unique('dari');
         $user_chat  = $users_chat->first();
 
-        $from_user = $user_chat->from ?? null;
+        $from_user = $user_chat->dari ?? null;
         $to_user = $user->id;
         if(!empty($username)){
             $current = User::where('username', '=', $username)->first();

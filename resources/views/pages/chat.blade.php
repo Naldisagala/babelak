@@ -249,7 +249,7 @@
                                         <input type="hidden" name="id_from" id="id_from"
                                             value="{{ auth()->user()->id }}">
                                         <input type="hidden" name="id_to" id="id_to"
-                                            value="{{ $current->id }}">
+                                            value="{{ $current->id ?? null }}">
                                         <input type="text" required class="form-control" name="send"
                                             id="" typing typing aria-describedby="helpId"
                                             placeholder="Tulis pesan disini">
