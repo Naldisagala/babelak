@@ -48,6 +48,7 @@ Route::group(['middleware' => ['admin']], function() {
     Route::post('/'.env("URL_ADMIN", 'admin').'/payment-confirmation', 'PaymentController@proof');
     Route::get('/'.env("URL_ADMIN", 'admin').'/report-finance', 'ReportController@finance');
     Route::get('/'.env("URL_ADMIN", 'admin').'/notification', 'NotificationController@index');
+    Route::get('/'.env("URL_ADMIN", 'admin').'/transfer/{id}', 'ReportController@transfer');
 });
 
 Route::group(['middleware' => ['buyer']], function() {

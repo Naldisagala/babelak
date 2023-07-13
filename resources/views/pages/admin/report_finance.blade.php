@@ -26,6 +26,7 @@
                                         <th>Tanggal/Waktu</th>
                                         <th class="text-center">Nama</th>
                                         <th class="text-center">Methode</th>
+                                        <th class="text-center">Transfer</th>
                                         <th class="text-center">Jumlah</th>
                                     </tr>
                                 </thead>
@@ -43,6 +44,15 @@
                                             <td class="text-center">{{ ucfirst($product->keranjang->user_seller->name) }}
                                             </td>
                                             <td class="text-center">{{ $product->code_payment }}</td>
+                                            <td class="text-center">
+                                                @if (!empty($product->is_transfer))
+                                                    <span>Sudah Ditrasfer</span>
+                                                @else
+                                                    <a class="btn btn-outline-primary"
+                                                        href="/{{ env('URL_ADMIN', 'admin') }}/transfer/{{ $product->id }}"
+                                                        role="button">Tranfer</a>
+                                                @endif
+                                            </td>
                                             <td class="text-md-end">
                                                 {{ 'Rp ' . number_format($product->total, 0, ',', '.') }}</td>
                                         </tr>
@@ -51,7 +61,7 @@
                                 @if (count($transaction) > 0)
                                     <tfoot>
                                         <tr>
-                                            <td colspan="4">Total</td>
+                                            <td colspan="5">Total</td>
                                             <td class="text-md-end">{{ 'Rp ' . number_format($total, 0, ',', '.') }}</td>
                                         </tr>
                                     </tfoot>
