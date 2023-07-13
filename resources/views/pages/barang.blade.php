@@ -112,7 +112,7 @@
                                     @endif
 
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-1">
                                     @if (!empty(auth()->user()))
                                         @if ($barang->seller->id != auth()->user()->id)
                                             <form method="POST" action="/add-cart">
@@ -131,6 +131,12 @@
                                         <a href="/login-page" class="btn btn-primary"><i
                                                 class="fa-solid fa-cart-shopping"></i></a>
                                     @endif
+                                </div>
+                                <div class="col-md-3">
+                                    <a class="btn btn-outline-primary"
+                                        href="/chat/{{ $barang->user->username }}/{{ $barang->id }}" role="button">
+                                        Tanyakan Barang
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -159,11 +165,17 @@
                                             alt="Penjual">
                                     </a>
                                 </div>
-                                <div class="col-11 ps-4">
+                                <div class="col-9 ps-4">
                                     <a href="/toko/{{ $barang->seller->id }}">
                                         <h5><strong>{{ $barang->seller->nama_toko }}</strong></h5>
                                     </a>
                                     <small style="font-size: 12px">{{ $barang->seller->alamat->kota }}</small>
+                                </div>
+                                <div class="col-md-2">
+                                    <a class="btn btn-outline-primary" href="/chat/{{ $barang->user->username }}"
+                                        role="button">
+                                        <i class="fa-regular fa-comments"></i>
+                                    </a>
                                 </div>
                             </div>
                         </h5>

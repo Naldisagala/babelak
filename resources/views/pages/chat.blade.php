@@ -102,42 +102,6 @@
                                                 <div class="col-9 d-flex align-items-center justify-content-start">
                                                     <span>{{ $chat->tawar->barang->nama_barang }}</span>
                                                 </div>
-                                                @if ($chat->tawar->status == 'waiting')
-                                                    <div class="col-md-6">
-                                                        <form action="/tawar-seller" method="post">
-                                                            @csrf
-                                                            <input type="hidden" name="id_chat" id="id_chat_decline"
-                                                                value="{{ $chat->id }}">
-                                                            <input type="hidden" name="status" id="status_decline"
-                                                                value="ditolak">
-                                                            <input type="hidden" name="id_tawar" id="id_tawar_decline"
-                                                                value="{{ $chat->id_tawar }}">
-                                                            <input type="hidden" name="from" id="from_decline"
-                                                                value="{{ $chat->dari }}">
-                                                            <input type="hidden" name="to" id="to_decline"
-                                                                value="{{ $chat->ke }}">
-                                                            <button type="submit"
-                                                                class="btn btn-sm btn-outline-light w-100 mt-3">Tolak</button>
-                                                        </form>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <form action="/tawar-seller" method="post">
-                                                            @csrf
-                                                            <input type="hidden" name="id_chat" id="id_chat_accept"
-                                                                value="{{ $chat->id }}">
-                                                            <input type="hidden" name="status" id="status_accept"
-                                                                value="diterima">
-                                                            <input type="hidden" name="id_tawar" id="id_tawar_accept"
-                                                                value="{{ $chat->id_tawar }}">
-                                                            <input type="hidden" name="from" id="from_accept"
-                                                                value="{{ $chat->dari }}">
-                                                            <input type="hidden" name="to" id="to_accept"
-                                                                value="{{ $chat->ke }}">
-                                                            <button type="submit"
-                                                                class="btn btn-sm btn-light w-100 mt-3">Terima</button>
-                                                        </form>
-                                                    </div>
-                                                @endif
                                             </div>
                                         @endif
                                     </div>
@@ -157,41 +121,46 @@
                                                 <div class="col-9 d-flex align-items-center justify-content-start">
                                                     <span>{{ $chat->tawar->barang->nama_barang }}</span>
                                                 </div>
-                                                @if ($chat->tawar->status == 'waiting')
-                                                    <div class="col-md-6">
-                                                        <form action="/tawar-seller" method="post">
-                                                            @csrf
-                                                            <input type="hidden" name="id_chat" id="id_chat_decline"
-                                                                value="{{ $chat->id }}">
-                                                            <input type="hidden" name="status" id="status_decline"
-                                                                value="ditolak">
-                                                            <input type="hidden" name="id_tawar" id="id_tawar_decline"
-                                                                value="{{ $chat->id_tawar }}">
-                                                            <input type="hidden" name="from" id="from_decline"
-                                                                value="{{ $chat->dari }}">
-                                                            <input type="hidden" name="to" id="to_decline"
-                                                                value="{{ $chat->ke }}">
-                                                            <button type="submit"
-                                                                class="btn btn-sm btn-outline-primary w-100 mt-3">Tolak</button>
-                                                        </form>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <form action="/tawar-seller" method="post">
-                                                            @csrf
-                                                            <input type="hidden" name="id_chat" id="id_chat_accept"
-                                                                value="{{ $chat->id }}">
-                                                            <input type="hidden" name="status" id="status_accept"
-                                                                value="diterima">
-                                                            <input type="hidden" name="id_tawar" id="id_tawar_accept"
-                                                                value="{{ $chat->id_tawar }}">
-                                                            <input type="hidden" name="from" id="from_accept"
-                                                                value="{{ $chat->dari }}">
-                                                            <input type="hidden" name="to" id="to_accept"
-                                                                value="{{ $chat->ke }}">
-                                                            <button type="submit"
-                                                                class="btn btn-sm btn-primary w-100 mt-3">Terima</button>
-                                                        </form>
-                                                    </div>
+                                                @if ($chat->to_user->role == 'seller')
+                                                    @if ($chat->tawar->status == 'waiting')
+                                                        <div class="col-md-6">
+                                                            <form action="/tawar-seller" method="post">
+                                                                @csrf
+                                                                <input type="hidden" name="id_chat" id="id_chat_decline"
+                                                                    value="{{ $chat->id }}">
+                                                                <input type="hidden" name="status" id="status_decline"
+                                                                    value="ditolak">
+                                                                <input type="hidden" name="id_tawar" id="id_tawar_decline"
+                                                                    value="{{ $chat->id_tawar }}">
+                                                                <input type="hidden" name="from" id="from_decline"
+                                                                    value="{{ $chat->dari }}">
+                                                                <input type="hidden" name="to" id="to_decline"
+                                                                    value="{{ $chat->ke }}">
+                                                                <button type="submit"
+                                                                    class="btn btn-sm btn-outline-primary w-100 mt-3">Tolak</button>
+                                                            </form>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <form action="/tawar-seller" method="post">
+                                                                @csrf
+                                                                <input type="hidden" name="id_chat" id="id_chat_accept"
+                                                                    value="{{ $chat->id }}">
+                                                                <input type="hidden" name="status" id="status_accept"
+                                                                    value="diterima">
+                                                                <input type="hidden" name="id_tawar"
+                                                                    id="id_tawar_accept" value="{{ $chat->id_tawar }}">
+                                                                <input type="hidden" name="from" id="from_accept"
+                                                                    value="{{ $chat->dari }}">
+                                                                <input type="hidden" name="to" id="to_accept"
+                                                                    value="{{ $chat->ke }}">
+                                                                <button type="submit"
+                                                                    class="btn btn-sm btn-primary w-100 mt-3">Terima</button>
+                                                            </form>
+                                                        </div>
+                                                    @endif
+                                                @else
+                                                    <hr class="mt-3">
+                                                    <span class="text-center">{{ ucfirst($chat->tawar->status) }}</span>
                                                 @endif
                                             </div>
                                         @endif
