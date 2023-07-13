@@ -58,7 +58,8 @@
                                                 <td class="text-end">
                                                     {{ 'Rp ' . number_format($product['harga'], 2, ',', '.') }}</td>
                                                 <td class="text-center">
-                                                    {{ $product['stock'] > 0 ? 'Tersedia' : 'Tidak Tersedia' }}</td>
+                                                    {{ $product['status'] == 'accept' ? 'Tersedia' : 'Menunggu Konfirmasi' }}
+                                                </td>
                                                 <td class="text-end">
                                                     <a href="/product/{{ $product['id'] }}" class="btn btn-primary mx-2">
                                                         <i class="fa fa-eye"></i>

@@ -118,13 +118,13 @@
                                         </div>
                                     </div>
                                     <input type="hidden" name="stock" id="stock" value="1">
-                                     <div class="col-md-12 mt-3 hidden">
+                                    <div class="col-md-12 mt-3 hidden">
                                         <div class="row">
                                             <div class="col-md-2 vertical-top">
                                                 <span class="font-bold">Stok</span>
                                             </div>
-                                             <div class="col-md-8">
-                                                <input required type="number"
+                                            <div class="col-md-8">
+                                                <input type="number"
                                                     class="form-control @error('stock') is-invalid @enderror"
                                                     name="stock" id="stock" placeholder="Stok" min="1"
                                                     value="{{ old('stock') ?? '' }}">
@@ -135,16 +135,16 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                    </div> --}}
-                                    <div class="col-md-12 mt-3">
+                                    </div>
+                                    <div class="col-md-12 mt-3 hidden">
                                         <div class="row">
                                             <div class="col-md-2 vertical-top">
                                                 <span class="font-bold">Weight</span>
                                             </div>
                                             <div class="col-md-8">
-                                                <input required type="number"
+                                                <input type="number"
                                                     class="form-control @error('wight') is-invalid @enderror"
-                                                    name="wight" id="wight" placeholder="Stok" min="1"
+                                                    name="wight" id="wight" placeholder="Weight" min="1"
                                                     value="{{ old('wight') ?? '' }}">
                                                 @error('wight')
                                                     <div class="invalid-feedback text-left">
@@ -194,7 +194,8 @@
                                                 <span class="font-bold">Lokasi Barang</span>
                                             </div>
                                             <div class="col-md-8">
-                                                <input required type="text"
+                                                <span>Lokasi barang disesuaikan dari alamat user</span>
+                                                {{-- <input required type="text"
                                                     class="form-control @error('lokasi_barang') is-invalid @enderror"
                                                     name="lokasi_barang" id="lokasi_barang" placeholder="Lokasi Barang"
                                                     value="{{ old('lokasi_barang') ?? '' }}">
@@ -202,7 +203,7 @@
                                                     <div class="invalid-feedback text-left">
                                                         {{ $message }}
                                                     </div>
-                                                @enderror
+                                                @enderror --}}
                                             </div>
                                         </div>
                                     </div>
@@ -338,8 +339,7 @@
                                                 <button type="submit" class="btn btn-primary w-100"> Tambah</button>
                                             </div>
                                             <div class="col-md-6">
-                                                <button type="reset"
-                                                    class="btn btn-outline-secondary w-100">Batal</button>
+                                                <a href="/my-products" class="btn btn-outline-secondary w-100">Kembali</a>
                                             </div>
                                         </div>
                                     </div>
