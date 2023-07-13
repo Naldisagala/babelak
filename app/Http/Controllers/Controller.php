@@ -160,7 +160,7 @@ class Controller extends BaseController
     {
         $chat = 0;
         if(!empty(auth()->user())){
-        $chat = Chat::where('to', '=', auth()->user()->id)
+        $chat = Chat::where('ke', '=', auth()->user()->id)
             ->where('is_read','=','0')
             ->count();
         }
@@ -171,7 +171,7 @@ class Controller extends BaseController
     {
         $chat = [];
         if(!empty(auth()->user())){
-            $chat = Chat::where('to', '=', auth()->user()->id)
+            $chat = Chat::where('ke', '=', auth()->user()->id)
             ->where('is_read','=','0')
             ->orderBy('id', 'DESC')
             ->skip(0)->take(5)

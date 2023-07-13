@@ -4,6 +4,8 @@
     $count = $controller->cartCount();
     $notification = $controller->showNotifHeader();
     $countNotif = $controller->countNotif();
+    $chats = $controller->showChatHeader();
+    $countChat = $controller->countChat();
 @endphp
 <header class="d-flex flex-column h-100">
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg">
@@ -32,6 +34,41 @@
             @if (Auth::check())
                 <ul class="navbar-nav mb-md-0 flex-row">
                     @if (auth()->user()->role != 'admin')
+                        <li class="nav-item dropdown me-3">
+                            <button class="btn text-white btn-white btn-icon rounded-pill dropdown-toggle hide-arrow"
+                                href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-regular fa-bell"></i>
+                                @if ($countChat > 0)
+                                    <span
+                                        class="badge ms-2 rounded-pill badge-center h-px-20 w-px-20 bg-label-primary">{{ $countChat }}</span>
+                                @endif
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                @if (count($chats) > 0)
+                                    @foreach ($chats as $chat)
+                                        <li>
+                                            <a class="dropdown-item text-wrap"
+                                                href="/chat/{{ $chat->from_user->username }}">
+                                                <p class="font-bold">Dari : {{ $chat->from_user->name }}</p>
+                                                <p>Pesan : {{ $chat->message }}</p>
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                    <li>
+                                        <a class="dropdown-item text-wrap text-center border-top" href="/chat">
+                                            Lihat Semua
+                                        </a>
+                                    </li>
+                                @else
+                                    <li>
+                                        <a class="dropdown-item text-wrap" href="#">
+                                            Kosong
+                                        </a>
+                                    </li>
+                                @endif
+                            </ul>
+                        </li>
+
                         <li class="nav-item dropdown">
                             <button class="btn text-white btn-white btn-icon rounded-pill dropdown-toggle hide-arrow"
                                 href="#" data-bs-toggle="dropdown" aria-expanded="false">
