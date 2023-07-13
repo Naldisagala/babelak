@@ -19,8 +19,7 @@ class ProductController extends Controller
 
     public function myProducts()
     {
-        $products = Barang::where('id_seller', '=', auth()->user()->id)
-        ->where('status','=','accept')->get();
+        $products = Barang::where('id_seller', '=', auth()->user()->id)->get();
         return view('pages.product.index', [
             'products' => $products
         ]);
@@ -41,12 +40,10 @@ class ProductController extends Controller
             $valid   = [
                 'name'        => 'required',
                 'price'       => 'required',
-                'stock'       => 'required',
                 'description' => 'required',
                 'status'      => 'required',
                 'usage'       => 'required',
                 'method'      => 'required',
-                'wight'       => 'required',
                 'image'       => 'required',
                 'image.*'     => 'mimes:jpeg,jpg,png,gif|max:2048'
             ];
@@ -90,11 +87,8 @@ class ProductController extends Controller
                 'harga'         => $data['price'],
                 'status_tawar'  => $data['is_tawar'] ? 'yes' : 'no',
                 'status_barang' => $data['status'] ?? '',
-                'stock'         => $data['stock'],
-                'address'       => $data['address'] ?? null,
-                'id_village'    => $data['village'] ?? null,
-                'postcode'      => $data['postcode'] ?? null,
-                'wight'         => $data['wight'],
+                'stock'         => $data['stock'] ?? 1,
+                'wight'         => $data['wight'] ?? null,
                 'usage'         => $data['usage'],
                 'method'        => join(',', $data['method']),
             ];
@@ -162,23 +156,7 @@ class ProductController extends Controller
     {
         $product = Barang::select(
             'barangs.*',
-            'v.name as village',
-            'd.name as district',
-            'r.name as regencie',
-            'p.name as province',
         )
-        ->leftJoin('villages as v', [
-            ['v.id', '=', 'barangs.id_village'],
-        ])
-        ->leftJoin('districts as d', [
-            ['d.id', '=', 'v.district_id'],
-        ])
-        ->leftJoin('regencies as r', [
-            ['r.id', '=', 'd.regency_id'],
-        ])
-        ->leftJoin('provinces as p', [
-            ['p.id', '=', 'r.province_id'],
-        ])
         ->where('barangs.id', '=', $id)->first();
 
         $gallery = Gallery::where('id_product','=', $id)->get();

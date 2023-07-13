@@ -112,7 +112,7 @@
                                     @endif
 
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-1">
                                     @if (!empty(auth()->user()))
                                         @if ($barang->seller->id != auth()->user()->id)
                                             <form method="POST" action="/add-cart">
@@ -131,6 +131,12 @@
                                         <a href="/login-page" class="btn btn-primary"><i
                                                 class="fa-solid fa-cart-shopping"></i></a>
                                     @endif
+                                </div>
+                                <div class="col-md-3">
+                                    <a class="btn btn-outline-primary"
+                                        href="/chat/{{ $barang->user->username }}/{{ $barang->id }}" role="button">
+                                        Tanyakan Barang
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -159,11 +165,17 @@
                                             alt="Penjual">
                                     </a>
                                 </div>
-                                <div class="col-11 ps-4">
+                                <div class="col-9 ps-4">
                                     <a href="/toko/{{ $barang->seller->id }}">
                                         <h5><strong>{{ $barang->seller->nama_toko }}</strong></h5>
                                     </a>
                                     <small style="font-size: 12px">{{ $barang->seller->alamat->kota }}</small>
+                                </div>
+                                <div class="col-md-2">
+                                    <a class="btn btn-outline-primary" href="/chat/{{ $barang->user->username }}"
+                                        role="button">
+                                        <i class="fa-regular fa-comments"></i>
+                                    </a>
                                 </div>
                             </div>
                         </h5>
@@ -174,12 +186,13 @@
                                     <span class="text-center text-white fw-bold">Barang Tidak Dapat
                                         Ditawar</span>
                                 @else
-                                    <form action="/tawar/{{auth()->user()->id}}/{{ $barang->seller->id }}/{{ $barang->id }}/null"
+                                    <form
+                                        action="/tawar/{{ auth()->user()->id }}/{{ $barang->seller->id }}/{{ $barang->id }}/null"
                                         method="POST">
                                         @csrf
                                         <div class="input-group mb-3">
-                                            <input type="number" class="form-control" name="tawar"
-                                                placeholder="Ketikkan tawaran" aria-label="Ketikkan tawaran"
+                                            <input type="number" required class="form-control" name="tawar"
+                                                placeholder="Ketikkan tawaran" aria-label="Maukan tawaran"
                                                 aria-describedby="basic-addon2">
                                             <button style="background: #CB63A3!important" class="input-group-text"
                                                 id="basic-addon2" type="submit"><i style="color:white;"
@@ -198,7 +211,7 @@
                                         @endphp
                                         @foreach ($rekomendasi_tawar as $tawar)
                                             <a style="text-decoration: none"
-                                                href="/tawar/{{auth()->user()->id}}/{{ $barang->seller->id }}/{{ $barang->id }}/{{ $tawar }}">
+                                                href="/tawar/{{ auth()->user()->id }}/{{ $barang->seller->id }}/{{ $barang->id }}/{{ $tawar }}">
                                                 <span
                                                     class="rekom-tawar me-2">{{ 'Rp ' . number_format($tawar, 0, ',', '.') }}</span>
                                             </a>
@@ -207,8 +220,8 @@
                                     <div>
                                         <div
                                             style="overflow-y: scroll; display: flex; flex-direction: column; max-height: 250px;">
-                                            @if (count($barang->tawar) > 0)
-                                                @foreach ($barang->tawar as $tawar)
+                                            @if (count($barang->tawar_by_user) > 0)
+                                                @foreach ($barang->tawar_by_user as $tawar)
                                                     <div class="mt-3">
                                                         <div class="bubble-chat">
                                                             Saya menawar:

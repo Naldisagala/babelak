@@ -89,7 +89,6 @@ class ProfileController extends Controller
             'username'      => 'required',
             'email'         => 'required|email:dns',
             'hp'            => 'required',
-            'nik'           => 'required',
             'address'       => 'required',
             'id_village'    => 'required',
             'province'      => 'required',
@@ -121,7 +120,7 @@ class ProfileController extends Controller
 
             
             $dataUser   = array_slice($data, 0, 4);
-            $dataDetail = array_slice($data, 4, 3);
+            $dataDetail = array_slice($data, 4, 2);
             $dataDetail['id_user'] = $id;
             $dataDetail['photo']   = $file ?? $o_photo;
             $dataDetail['institute'] = $request->get('institute');

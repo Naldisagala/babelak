@@ -28,6 +28,7 @@
                                             <th>Tanggal/Waktu</th>
                                             <th>No. Resi</th>
                                             <th>Nama Barang</th>
+                                            <th>Status</th>
                                             <th>Jumlah</th>
                                         </tr>
                                     </thead>
@@ -44,6 +45,8 @@
                                                 <td>{{ date('d/m/Y h:m', strtotime($product->created_at)) }}</td>
                                                 <td>{{ $product->resi }}</td>
                                                 <td>{{ $product->keranjang->barang->nama_barang }}</td>
+                                                <td>{{ !empty($product->is_transfer) ? 'Sudah Ditrasfer' : 'Belum Ditransfer' }}
+                                                </td>
                                                 <td class="text-end">
                                                     {{ 'Rp ' . number_format($product->total, 0, ',', '.') }}</td>
                                             </tr>

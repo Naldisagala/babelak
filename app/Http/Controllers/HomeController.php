@@ -33,7 +33,6 @@ class HomeController extends Controller
     {
         $barang = $this->getBarangById($id);
         $gallery = Gallery::where('id_product', '=', $id)->get();
-        // dd($gallery);
 
         return view('pages.barang',[
             'barang'  => $barang,

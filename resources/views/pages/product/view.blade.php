@@ -97,7 +97,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-12 mt-3">
+                                <div class="col-md-12 mt-3 hidden">
                                     <div class="row">
                                         <div class="col-md-2 vertical-top">
                                             <span class="font-bold">Stok</span>
@@ -138,41 +138,7 @@
                                             <span class="font-bold">Lokasi Domisili/ Barang</span>
                                         </div>
                                         <div class="col-md-8">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <textarea required name="address" placeholder="Deskripsi Barang" class="form-control" id="address" cols="30"
-                                                        rows="7">{{ $product->address }}</textarea>
-                                                </div>
-                                                <div class="col-md-6 mt-3">
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-control" name="province"
-                                                            id="province"
-                                                            value="{{ ucwords(strtolower($product['province'])) }}">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 mt-3">
-                                                    <input type="text" class="form-control" name="regencie"
-                                                        id="regencie"
-                                                        value="{{ ucwords(strtolower($product['regencie'])) }}">
-                                                </div>
-                                                <div class="col-md-6 mt-3">
-                                                    <input type="text" class="form-control" name="district"
-                                                        id="district"
-                                                        value="{{ ucwords(strtolower($product['district'])) }}">
-                                                </div>
-                                                <div class="col-md-6 mt-3">
-                                                    <input type="text" class="form-control" name="village"
-                                                        id="village"
-                                                        value="{{ ucwords(strtolower($product['village'])) }}">
-                                                </div>
-                                                <div class="col-md-6 mt-3">
-                                                    <div class="form-group">
-                                                        <input type="number" class="form-control" name="postcode"
-                                                            placeholder="Kode Pos" id="postcode"
-                                                            value="{{ $product->postcode }}">
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <span>Lokasi barang disesuaikan dari alamat user</span>
                                         </div>
                                     </div>
                                 </div>

@@ -48,6 +48,7 @@ Route::group(['middleware' => ['admin']], function() {
     Route::post('/'.env("URL_ADMIN", 'admin').'/payment-confirmation', 'PaymentController@proof');
     Route::get('/'.env("URL_ADMIN", 'admin').'/report-finance', 'ReportController@finance');
     Route::get('/'.env("URL_ADMIN", 'admin').'/notification', 'NotificationController@index');
+    Route::get('/'.env("URL_ADMIN", 'admin').'/transfer/{id}', 'ReportController@transfer');
 });
 
 Route::group(['middleware' => ['buyer']], function() {
@@ -82,6 +83,7 @@ Route::group(['middleware' => ['buyer-seller']], function() {
     Route::post('/change-password', 'ProfileController@changePassword');
     Route::get('/chat', 'ChatController@index');
     Route::get('/chat/{username}', 'ChatController@personal');
+    Route::get('/chat/{username}/{id_product}', 'ChatController@product');
     Route::get('/notification', 'NotificationController@index');
     Route::post('/ajax-region', 'ProductController@ajaxRegion');
     Route::get('/tawar/{user}/{seller}/{barang}/{harga}','TawarController@sendChatTawar');
@@ -96,6 +98,7 @@ Route::group(['middleware' => ['buyer-seller']], function() {
     Route::post('/add-cart-to-checkout', 'KeranjangController@addCartToCheckout');
     Route::post('/ajax-cart-to-checkout', 'KeranjangController@ajaxCartToCheckout');
     Route::post('/done-order', 'OrderController@doneOrder');
+    Route::post('/send/message', 'ChatController@send');
 });
 
 Auth::routes();

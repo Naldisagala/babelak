@@ -117,7 +117,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    {{-- <input type="hidden" name="stock" id="stock" value="1">
+                                    <input type="hidden" name="stock" id="stock" value="1">
                                      <div class="col-md-12 mt-3 hidden">
                                         <div class="row">
                                             <div class="col-md-2 vertical-top">

@@ -14,4 +14,13 @@ class ReportController extends Controller
             'transaction' => $transaction
         ]);
     }
+
+    public function transfer($id)
+    {
+        $transaction = Transaksi::find($id);
+        $transaction->is_transfer = 1;
+        $transaction->update();
+
+        return back()->with('success', 'Successfully Transfer');
+    }
 }
