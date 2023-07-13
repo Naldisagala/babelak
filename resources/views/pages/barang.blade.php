@@ -136,7 +136,7 @@
                                     <div class="col-md-3">
                                         <a class="btn btn-outline-primary"
                                             href="/chat/{{ $barang->user->username }}/{{ $barang->id }}" role="button">
-                                            Tanyakan Barang
+                                            <i class="fa-regular fa-comment"></i>
                                         </a>
                                     </div>
                                 @endif
