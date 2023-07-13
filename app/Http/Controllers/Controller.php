@@ -33,7 +33,6 @@ class Controller extends BaseController
     public function getBarangById($id)
     {
         $barang = Barang::with('alamat','seller','tawar.user')->find($id);
-        // dd($barang);
         return $barang;
     }
 
@@ -68,8 +67,25 @@ class Controller extends BaseController
         ->where('status','=','process')
         ->count();
     }
+
+    public function updateTawarToCart()
+    {
+        $tawars = Tawar::where('status', '=', 'diterima')
+            ->where('id_user','=', auth()->user()->id)
+            ->get();
+
+        foreach($tawars as $tawar){
+            Keranjang::where('id_user', '=', auth()->user()->id)
+            ->where('aktif', '=', 1)
+            ->where('status', '=', 'process')
+            ->where('id_barang', '=', $tawar->id_barang)
+            ->update(['id_tawar' => $tawar->id]);
+        }
+    }
+
     public function getCart($user = null, $is_checkout = false)
     {
+        $this->updateTawarToCart();
         $seller = Keranjang::select('id_seller', DB::raw('COUNT(id_seller) as total_barang'))
         ->where('id_user', $user)
         ->where('aktif','=',1);
@@ -91,7 +107,7 @@ class Controller extends BaseController
             $cart = $cart->where('status','=','process')
             ->get();  
             foreach ($cart as $keys) {
-                $keys->harga_akhir = ($keys->tawar != null) ? $keys->tawar->harga_tawar :( $keys->barang->harga ?? 0);
+                $keys->harga_akhir = (!empty($keys->tawar)) ? $keys->tawar->harga_tawar :( $keys->barang->harga ?? 0);
             }
             $key->nama_toko = $cart[0]->seller->nama_toko;
             $key->kota = $cart[0]->alamatSeller->kota;

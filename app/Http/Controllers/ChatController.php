@@ -37,27 +37,30 @@ class ChatController extends Controller
     public function getChat($username = null)
     {
         $user = auth()->user();
-        $users_chat = Chat::select(
-            'from', 
-            DB::raw('count(*) as total')
-        )
-        ->where('to', '=', $user->id)
-        ->groupBy('from');
+        $users_chat = Chat::where('ke', '=', $user->id)
+            ->orderBy('created_at', 'desc');
 
-        $user_chat = $users_chat->first();
-        $users_chat = $users_chat->get();
-        
-        $id_user = $user_chat->from;
+        $users_chat = $users_chat->get()->unique('dari');
+        $user_chat  = $users_chat->first();
+
+        $from_user = $user_chat->from ?? null;
+        $to_user = $user->id;
         if(!empty($username)){
             $current = User::where('username', '=', $username)->first();
             if(empty($current))  return abort(404);
-            $id_user = $current->id;
+            $from_user = $current->id;
         }else{
-            $current = User::where('id', '=', $id_user)->first();
+            $current = User::where('id', '=', $from_user)->first();
         }
-        $list_chat = Chat::where('from', '=', $id_user)
-        ->orWhere('from', '=', $user->id)
-        ->get();
+
+        $list_chat = Chat::where(function($query) use ($from_user, $to_user){
+            $query->where('dari', '=', $from_user);
+            $query->where('ke', '=', $to_user);
+        })->orWhere(function($query) use ($from_user, $to_user){
+            $query->where('dari', '=', $to_user);
+            $query->where('ke', '=', $from_user);
+        })->get();
+
         return [
             'users_chat' => $users_chat,
             'list_chat'  => $list_chat,

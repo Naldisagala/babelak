@@ -47,8 +47,8 @@ class TawarController extends Controller
         $tawar = Tawar::create($dataTawar);
 
         Chat::create([
-            'from' => $user,
-            'to' => $seller,
+            'dari' => $user,
+            'ke' => $seller,
             'id_tawar' => $tawar->id,
             'message' => 'Ada yang mengajukan penawaran harga Rp '.number_format($harga, 2, ',', '.').' pada barang '.$dataBarang->nama_barang.' ini!',
             'is_read' => 0,
@@ -69,15 +69,13 @@ class TawarController extends Controller
         $from     = $request->get('from');
         $to       = $request->get('to');
 
-        dd(auth()->user()->id);
-
         $tawar = Tawar::find($id_tawar);
         $tawar->status = $status;
         $tawar->update();
 
         Chat::create([
-            'from'     => $to,
-            'to'       => $from,
+            'dari'     => $to,
+            'ke'       => $from,
             'id_tawar' => $id_tawar,
             'message'  => 'Pengajuan penawaran harga Rp '.
                 number_format($tawar->harga_tawar, 2, ',', '.').

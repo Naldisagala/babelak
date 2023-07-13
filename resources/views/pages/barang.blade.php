@@ -174,7 +174,8 @@
                                     <span class="text-center text-white fw-bold">Barang Tidak Dapat
                                         Ditawar</span>
                                 @else
-                                    <form action="/tawar/{{auth()->user()->id}}/{{ $barang->seller->id }}/{{ $barang->id }}/null"
+                                    <form
+                                        action="/tawar/{{ auth()->user()->id }}/{{ $barang->seller->id }}/{{ $barang->id }}/null"
                                         method="POST">
                                         @csrf
                                         <div class="input-group mb-3">
@@ -198,7 +199,7 @@
                                         @endphp
                                         @foreach ($rekomendasi_tawar as $tawar)
                                             <a style="text-decoration: none"
-                                                href="/tawar/{{auth()->user()->id}}/{{ $barang->seller->id }}/{{ $barang->id }}/{{ $tawar }}">
+                                                href="/tawar/{{ auth()->user()->id }}/{{ $barang->seller->id }}/{{ $barang->id }}/{{ $tawar }}">
                                                 <span
                                                     class="rekom-tawar me-2">{{ 'Rp ' . number_format($tawar, 0, ',', '.') }}</span>
                                             </a>
@@ -207,8 +208,8 @@
                                     <div>
                                         <div
                                             style="overflow-y: scroll; display: flex; flex-direction: column; max-height: 250px;">
-                                            @if (count($barang->tawar) > 0)
-                                                @foreach ($barang->tawar as $tawar)
+                                            @if (count($barang->tawar_by_user) > 0)
+                                                @foreach ($barang->tawar_by_user as $tawar)
                                                     <div class="mt-3">
                                                         <div class="bubble-chat">
                                                             Saya menawar:

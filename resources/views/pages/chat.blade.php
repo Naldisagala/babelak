@@ -40,7 +40,7 @@
                                 <tbody class="table-border-bottom-0">
                                     @foreach ($users_chat as $user)
                                         @php
-                                            $last = $user->chat_last($user->from);
+                                            $last = $user->chat_last($user->dari);
                                         @endphp
                                         <tr>
                                             <td>
@@ -77,17 +77,17 @@
                             <div class="col-2 d-flex align-items-center justify-content-center">
                                 <img width="50"
                                     src="{{ !empty($current->detail->photo) ? '/files/profile/' . $current->detail->photo : '/image/default.jpg' }}"
-                                    alt="{{ $current->name }}" class="rounded-circle">
+                                    alt="{{ $current->name ?? '(Kosong)' }}" class="rounded-circle">
                             </div>
                             <div class="col-10 d-flex align-items-center justify-content-start">
-                                <span><strong>{{ $current->name }}</strong></span>
+                                <span><strong>{{ $current->name ?? '(Kosong)' }}</strong></span>
                             </div>
                         </div>
                     </div>
                     <hr class="line">
                     <div class="card-body bg-light-smoth ps ps--active-y both-scrollbars-scroll" id="vertical-chat">
                         @foreach ($list_chat as $chat)
-                            @if ($chat->from == auth()->user()->id)
+                            @if ($chat->dari == auth()->user()->id)
                                 <div class="d-flex align-items-center justify-content-end">
                                     <div class="card p-3 w-50 text-start my-2 bg-primary text-white">
                                         {{ $chat->message }}
@@ -113,9 +113,9 @@
                                                             <input type="hidden" name="id_tawar" id="id_tawar_decline"
                                                                 value="{{ $chat->id_tawar }}">
                                                             <input type="hidden" name="from" id="from_decline"
-                                                                value="{{ $chat->from }}">
+                                                                value="{{ $chat->dari }}">
                                                             <input type="hidden" name="to" id="to_decline"
-                                                                value="{{ $chat->to }}">
+                                                                value="{{ $chat->ke }}">
                                                             <button type="submit"
                                                                 class="btn btn-sm btn-outline-light w-100 mt-3">Tolak</button>
                                                         </form>
@@ -130,9 +130,9 @@
                                                             <input type="hidden" name="id_tawar" id="id_tawar_accept"
                                                                 value="{{ $chat->id_tawar }}">
                                                             <input type="hidden" name="from" id="from_accept"
-                                                                value="{{ $chat->from }}">
+                                                                value="{{ $chat->dari }}">
                                                             <input type="hidden" name="to" id="to_accept"
-                                                                value="{{ $chat->to }}">
+                                                                value="{{ $chat->ke }}">
                                                             <button type="submit"
                                                                 class="btn btn-sm btn-light w-100 mt-3">Terima</button>
                                                         </form>
@@ -168,9 +168,9 @@
                                                             <input type="hidden" name="id_tawar" id="id_tawar_decline"
                                                                 value="{{ $chat->id_tawar }}">
                                                             <input type="hidden" name="from" id="from_decline"
-                                                                value="{{ $chat->from }}">
+                                                                value="{{ $chat->dari }}">
                                                             <input type="hidden" name="to" id="to_decline"
-                                                                value="{{ $chat->to }}">
+                                                                value="{{ $chat->ke }}">
                                                             <button type="submit"
                                                                 class="btn btn-sm btn-outline-primary w-100 mt-3">Tolak</button>
                                                         </form>
@@ -185,9 +185,9 @@
                                                             <input type="hidden" name="id_tawar" id="id_tawar_accept"
                                                                 value="{{ $chat->id_tawar }}">
                                                             <input type="hidden" name="from" id="from_accept"
-                                                                value="{{ $chat->from }}">
+                                                                value="{{ $chat->dari }}">
                                                             <input type="hidden" name="to" id="to_accept"
-                                                                value="{{ $chat->to }}">
+                                                                value="{{ $chat->ke }}">
                                                             <button type="submit"
                                                                 class="btn btn-sm btn-primary w-100 mt-3">Terima</button>
                                                         </form>

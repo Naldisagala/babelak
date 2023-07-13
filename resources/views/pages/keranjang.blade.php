@@ -80,7 +80,7 @@
                                                             $total += $items->harga_akhir;
                                                         }
                                                     @endphp
-                                                    @if ($items->id_tawar == '')
+                                                    @if (!empty($items->id_tawar))
                                                         <small>
                                                             <span>Harga: </span>
                                                             @if ($items->harga_akhir < $items->barang->harga)
@@ -94,8 +94,11 @@
                                                             @endif
                                                         </small>
                                                     @else
-                                                        <small><span class="font-bold">Harga:
-                                                                {{ 'Rp ' . number_format($items->harga_akhir, 0, ',', '.') }}</span></small>
+                                                        <small>
+                                                            <span>Harga: </span>
+                                                            <span
+                                                                class="font-bold">{{ 'Rp ' . number_format($items->harga_akhir, 0, ',', '.') }}</span>
+                                                        </small>
                                                     @endif
                                                 </div>
                                             </div>
