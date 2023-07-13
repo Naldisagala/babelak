@@ -49,16 +49,24 @@
                                                 <span>{{ 'Rp ' . number_format($product['harga'], 2, ',', '.') }}</span>
                                             </td>
                                             <td class="text-center">
-                                                <span>{{ $product->status }}</span>
+                                                @if ($product->status == 'accept')
+                                                    <span>Diterima</span>
+                                                @elseif ($product->status == 'decline')
+                                                    <span>Ditolak</span>
+                                                @else
+                                                    <span>Menunggu</span>
+                                                @endif
                                             </td>
                                             <td class="text-center">
                                                 <span>{{ strtoupper($product->usage) }}</span>
                                             </td>
                                             <td class="text-end">
-                                                <a href="/{{ env('URL_ADMIN', 'admin') }}/item-validation/{{ $product->id }}"
-                                                    class="btn btn-primary mx-2">
-                                                    Check
-                                                </a>
+                                                @if ($product->status != 'accept')
+                                                    <a href="/{{ env('URL_ADMIN', 'admin') }}/item-validation/{{ $product->id }}"
+                                                        class="btn btn-primary mx-2">
+                                                        Check
+                                                    </a>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
