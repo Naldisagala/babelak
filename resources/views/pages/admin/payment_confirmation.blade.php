@@ -108,7 +108,7 @@
                     @csrf
                     <div class="modal-body">
                         <input type="hidden" name="id" id="id_data">
-                        <p>Apakah kamu yakin ingin menyetuhui bukti pembayaran pemesanan ini?</p>
+                        <p>Apakah kamu yakin ingin menyetujui bukti pembayaran pemesanan ini?</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
