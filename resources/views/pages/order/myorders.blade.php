@@ -135,7 +135,7 @@
                                                                                     </button>
                                                                                 @endif
 
-                                                                                <a href="/chat"
+                                                                                <a href="/chat/{{ $product->keranjang->user_seller->username }}/{{ $product->keranjang->barang->id }}"
                                                                                     class="btn btn-secondary">Chat
                                                                                     Penjual</a>
                                                                             </div>
@@ -198,7 +198,7 @@
                                                                             <div
                                                                                 class="col-md-8 d-flex align-items-center justify-content-end">
 
-                                                                                <a href="/chat"
+                                                                                <a href="/chat/{{ $product->keranjang->user_seller->username }}/{{ $product->keranjang->barang->id }}"
                                                                                     class="btn btn-secondary">Chat
                                                                                     Penjual</a>
                                                                             </div>
@@ -265,7 +265,7 @@
                                                                                     data-id="{{ $product->id }}"
                                                                                     class="btn btn-primary mx-3">Pesanan
                                                                                     Diterima</button>
-                                                                                <a href="/chat"
+                                                                                <a href="/chat/{{ $product->keranjang->user_seller->username }}/{{ $product->keranjang->barang->id }}"
                                                                                     class="btn btn-secondary">Chat
                                                                                     Penjual</a>
                                                                             </div>
