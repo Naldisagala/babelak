@@ -132,7 +132,7 @@
                                                 class="fa-solid fa-cart-shopping"></i></a>
                                     @endif
                                 </div>
-                                @if (aut()->user()->role != 'seller')
+                                @if (auth()->user()->role != 'seller')
                                     <div class="col-md-3">
                                         <a class="btn btn-outline-primary"
                                             href="/chat/{{ $barang->user->username }}/{{ $barang->id }}" role="button">
@@ -173,7 +173,7 @@
                                     </a>
                                     <small style="font-size: 12px">{{ $barang->seller->alamat->kota }}</small>
                                 </div>
-                                @if (aut()->user()->id != $barang->seller->id)
+                                @if (auth()->user()->id != $barang->seller->id)
                                     <div class="col-md-2">
                                         <a class="btn btn-outline-primary" href="/chat/{{ $barang->user->username }}"
                                             role="button">
