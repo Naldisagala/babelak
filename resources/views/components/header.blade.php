@@ -37,7 +37,7 @@
                         <li class="nav-item dropdown me-3">
                             <button class="btn text-white btn-white btn-icon rounded-pill dropdown-toggle hide-arrow"
                                 href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fa-regular fa-bell"></i>
+                                <i class="fa-regular fa-message"></i>
                                 @if ($countChat > 0)
                                     <span
                                         class="badge ms-2 rounded-pill badge-center h-px-20 w-px-20 bg-label-primary">{{ $countChat }}</span>
@@ -66,7 +66,7 @@
                                         </a>
                                     </li>
                                 @endif
-                            </ul>
+                            </ul> --}}
                         </li>
 
                         <li class="nav-item dropdown">
