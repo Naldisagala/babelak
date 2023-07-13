@@ -83,6 +83,7 @@ Route::group(['middleware' => ['buyer-seller']], function() {
     Route::post('/change-password', 'ProfileController@changePassword');
     Route::get('/chat', 'ChatController@index');
     Route::get('/chat/{username}', 'ChatController@personal');
+    Route::get('/chat/{username}/{id_product}', 'ChatController@product');
     Route::get('/notification', 'NotificationController@index');
     Route::post('/ajax-region', 'ProductController@ajaxRegion');
     Route::get('/tawar/{user}/{seller}/{barang}/{harga}','TawarController@sendChatTawar');

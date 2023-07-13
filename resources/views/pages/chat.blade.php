@@ -90,17 +90,38 @@
                             @if ($chat->dari == auth()->user()->id)
                                 <div class="d-flex align-items-center justify-content-end">
                                     <div class="card p-3 w-50 text-start my-2 bg-primary text-white">
-                                        {{ $chat->message }}
+                                        <span>{{ $chat->message }}</span>
                                         @if (!empty($chat->id_tawar))
                                             <hr>
-                                            <div class="row">
-                                                <div class="col-3">
-                                                    <img width="50"
-                                                        src="{{ str_contains($chat->tawar->barang->gambar, '://') ? $chat->tawar->barang->gambar : '/files/product/' . $chat->tawar->barang->gambar }}"
-                                                        alt="{{ $chat->tawar->barang->nama_barang }}">
+                                            <a href="/barang/{{ $chat->tawar->barang->id }}" class="text-white">
+                                                <div class="row">
+                                                    <div class="col-3">
+                                                        <img width="50"
+                                                            src="{{ str_contains($chat->tawar->barang->gambar, '://') ? $chat->tawar->barang->gambar : '/files/product/' . $chat->tawar->barang->gambar }}"
+                                                            alt="{{ $chat->tawar->barang->nama_barang }}">
+                                                    </div>
+                                                    <div class="col-9 d-flex align-items-center justify-content-start">
+                                                        <span>{{ $chat->tawar->barang->nama_barang }}</span>
+                                                    </div>
                                                 </div>
-                                                <div class="col-9 d-flex align-items-center justify-content-start">
-                                                    <span>{{ $chat->tawar->barang->nama_barang }}</span>
+                                            </a>
+                                        @elseif (!empty($chat->id_barang))
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <a href="/barang/{{ $chat->barang->id }}" class="text-white">
+                                                        <div class="row">
+                                                            <div class="col-3">
+                                                                <img width="50"
+                                                                    src="{{ str_contains($chat->barang->gambar, '://') ? $chat->barang->gambar : '/files/product/' . $chat->barang->gambar }}"
+                                                                    alt="{{ $chat->barang->nama_barang }}">
+                                                            </div>
+                                                            <div
+                                                                class="col-9 d-flex align-items-center justify-content-start">
+                                                                <span>{{ $chat->barang->nama_barang }}</span>
+                                                            </div>
+                                                        </div>
+                                                    </a>
                                                 </div>
                                             </div>
                                         @endif
@@ -109,17 +130,24 @@
                             @else
                                 <div class="d-flex align-items-center justify-content-start">
                                     <div class="card p-3 w-50 text-start my-2">
-                                        {{ $chat->message }}
+                                        <span>{{ $chat->message }}</span>
                                         @if (!empty($chat->id_tawar))
                                             <hr>
                                             <div class="row">
-                                                <div class="col-3">
-                                                    <img width="50"
-                                                        src="{{ str_contains($chat->tawar->barang->gambar, '://') ? $chat->tawar->barang->gambar : '/files/product/' . $chat->tawar->barang->gambar }}"
-                                                        alt="{{ $chat->tawar->barang->nama_barang }}">
-                                                </div>
-                                                <div class="col-9 d-flex align-items-center justify-content-start">
-                                                    <span>{{ $chat->tawar->barang->nama_barang }}</span>
+                                                <div class="col-12">
+                                                    <a href="/barang/{{ $chat->tawar->barang->id }}">
+                                                        <div class="row">
+                                                            <div class="col-3">
+                                                                <img width="50"
+                                                                    src="{{ str_contains($chat->tawar->barang->gambar, '://') ? $chat->tawar->barang->gambar : '/files/product/' . $chat->tawar->barang->gambar }}"
+                                                                    alt="{{ $chat->tawar->barang->nama_barang }}">
+                                                            </div>
+                                                            <div
+                                                                class="col-9 d-flex align-items-center justify-content-start">
+                                                                <span>{{ $chat->tawar->barang->nama_barang }}</span>
+                                                            </div>
+                                                        </div>
+                                                    </a>
                                                 </div>
                                                 @if ($chat->to_user->role == 'seller')
                                                     @if ($chat->tawar->status == 'waiting')
@@ -160,6 +188,25 @@
                                                     @endif
                                                 @endif
                                             </div>
+                                        @elseif (!empty($chat->id_barang))
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <a href="/barang/{{ $chat->barang->id }}">
+                                                        <div class="row">
+                                                            <div class="col-3">
+                                                                <img width="50"
+                                                                    src="{{ str_contains($chat->barang->gambar, '://') ? $chat->barang->gambar : '/files/product/' . $chat->barang->gambar }}"
+                                                                    alt="{{ $chat->barang->nama_barang }}">
+                                                            </div>
+                                                            <div
+                                                                class="col-9 d-flex align-items-center justify-content-start">
+                                                                <span>{{ $chat->barang->nama_barang }}</span>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
                                         @endif
                                     </div>
 
@@ -178,6 +225,25 @@
                         <form action="/send/message" method="POST">
                             @csrf
                             <div class="row">
+                                @if (!empty($barang))
+                                    <div class="col-12 mb-3">
+                                        <a href="/barang/{{ $barang->id }}">
+                                            <input type="hidden" name="id_barang" id="id_barang_chat"
+                                                value="{{ $barang->id }}">
+                                            <div class="row">
+                                                <div class="col-2">
+                                                    <img width="50"
+                                                        src="{{ str_contains($barang->gambar, '://') ? $barang->gambar : '/files/product/' . $barang->gambar }}"
+                                                        alt="{{ $barang->nama_barang }}">
+                                                </div>
+                                                <div class="col-10">
+                                                    <h6 class="font-bold">{{ $barang->nama_barang }}</h6>
+                                                    <span>{{ 'Rp ' . number_format($barang->harga, 0, ',', '.') }}</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                @endif
                                 <div class="col-10">
                                     <div class="form-group">
                                         <input type="hidden" name="id_from" id="id_from"

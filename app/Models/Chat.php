@@ -28,11 +28,17 @@ class Chat extends Model
         'id_tawar',
         'message',
         'is_read',
+        'id_barang',
     ];
 
     public function tawar()
     {
         return $this->belongsTo(Tawar::class, 'id_tawar', 'id');
+    }
+
+    public function barang()
+    {
+        return $this->belongsTo(Barang::class, 'id_barang', 'id');
     }
 
     public function from_user()
