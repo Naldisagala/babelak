@@ -132,12 +132,14 @@
                                                 class="fa-solid fa-cart-shopping"></i></a>
                                     @endif
                                 </div>
-                                <div class="col-md-3">
-                                    <a class="btn btn-outline-primary"
-                                        href="/chat/{{ $barang->user->username }}/{{ $barang->id }}" role="button">
-                                        Tanyakan Barang
-                                    </a>
-                                </div>
+                                @if (aut()->user()->role != 'seller')
+                                    <div class="col-md-3">
+                                        <a class="btn btn-outline-primary"
+                                            href="/chat/{{ $barang->user->username }}/{{ $barang->id }}" role="button">
+                                            Tanyakan Barang
+                                        </a>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -171,12 +173,14 @@
                                     </a>
                                     <small style="font-size: 12px">{{ $barang->seller->alamat->kota }}</small>
                                 </div>
-                                <div class="col-md-2">
-                                    <a class="btn btn-outline-primary" href="/chat/{{ $barang->user->username }}"
-                                        role="button">
-                                        <i class="fa-regular fa-comments"></i>
-                                    </a>
-                                </div>
+                                @if (aut()->user()->id != $barang->seller->id)
+                                    <div class="col-md-2">
+                                        <a class="btn btn-outline-primary" href="/chat/{{ $barang->user->username }}"
+                                            role="button">
+                                            <i class="fa-regular fa-comments"></i>
+                                        </a>
+                                    </div>
+                                @endif
                             </div>
                         </h5>
                         @if (!empty(auth()->user()) && $barang->seller->id != auth()->user()->id)
