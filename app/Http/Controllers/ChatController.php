@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use App\Models\Notification;
 use App\Models\Chat;
 use App\Models\Tawar;
 use App\Models\User;
@@ -68,5 +69,35 @@ class ChatController extends Controller
             'list_chat'  => $list_chat,
             'current'    => $current
         ];
+    }
+
+    public function send(Request $request)
+    {
+        $dari = $request->get('id_from');
+        $ke   = $request->get('id_to');
+        $send = $request->get('send');
+
+        $userFrom = User::find($dari);
+
+        Chat::create([
+            'dari'     => $dari,
+            'ke'       => $ke,
+            'id_tawar' => null,
+            'message'  => $send,
+            'is_read'  => 0,
+        ]);
+
+        $usernameFrom = $userFrom->username;
+        $description = "Ada pemberitahuan chat masuk";
+        Notification::create([
+            'from'        => $dari,
+            'to'          => $ke,
+            'type'        => 'chat',
+            'description' => $description,
+            'is_read'     => 0,
+            'link'        => "/chat/$usernameFrom"
+        ]);
+
+        return back()->withInput()->with('success', 'Pesan berhasil dikirim!');
     }
 }

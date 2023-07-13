@@ -158,9 +158,6 @@
                                                             </form>
                                                         </div>
                                                     @endif
-                                                @else
-                                                    <hr class="mt-3">
-                                                    <span class="text-center">{{ ucfirst($chat->tawar->status) }}</span>
                                                 @endif
                                             </div>
                                         @endif
@@ -183,8 +180,13 @@
                             <div class="row">
                                 <div class="col-10">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="" id="" typing
-                                            typing aria-describedby="helpId" placeholder="Tulis pesan disini">
+                                        <input type="hidden" name="id_from" id="id_from"
+                                            value="{{ auth()->user()->id }}">
+                                        <input type="hidden" name="id_to" id="id_to"
+                                            value="{{ $current->id }}">
+                                        <input type="text" required class="form-control" name="send"
+                                            id="" typing typing aria-describedby="helpId"
+                                            placeholder="Tulis pesan disini">
                                     </div>
                                 </div>
                                 <div class="col-2">
