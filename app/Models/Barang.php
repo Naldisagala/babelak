@@ -52,6 +52,11 @@ class Barang extends Model
         return $this->hasMany(Tawar::class, 'id_barang', 'id');
     }
 
+    public function tawar_acc()
+    {
+        return $this->hasMany(Tawar::class, 'id_barang', 'id')->where('status','=', 'diterima');
+    }
+
     public function tawar_by_user()
     {
         return $this->hasMany(Tawar::class, 'id_barang', 'id')->where('id_user','=', auth()->user()->id);

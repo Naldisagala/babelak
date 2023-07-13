@@ -48,7 +48,6 @@
                         @endif
 
 
-
                     </div>
                 </div>
             </div>
@@ -56,7 +55,15 @@
                 <div class="card">
                     <div class="card-body">
                         <h5><b>{{ $barang->nama_barang }}</b></h5>
-                        <h2><strong>{{ 'Rp ' . number_format($barang->harga, 0, ',', '.') }}</strong></h2>
+                        @if (count($barang->tawar_acc) > 0)
+                            <span class="text-strike-through text-danger">
+                                {{ 'Rp ' . number_format($barang->harga, 0, ',', '.') }}
+                            </span>
+                            <h2><strong>{{ 'Rp ' . number_format($barang->tawar_acc[0]->harga_tawar, 0, ',', '.') }}</strong>
+                            </h2>
+                        @else
+                            <h2><strong>{{ 'Rp ' . number_format($barang->harga, 0, ',', '.') }}</strong></h2>
+                        @endif
                         <br><br>
                         <p>
                             <i class="fa fa-check me-3"></i>
@@ -135,7 +142,8 @@
                                 @if (auth()->user()->role != 'seller')
                                     <div class="col-md-3 px-3">
                                         <a class="btn btn-outline-primary"
-                                            href="/chat/{{ $barang->user->username }}/{{ $barang->id }}" role="button">
+                                            href="/chat/{{ $barang->user->username }}/{{ $barang->id }}"
+                                            role="button">
                                             <i class="fa-regular fa-comment"></i>
                                         </a>
                                     </div>
