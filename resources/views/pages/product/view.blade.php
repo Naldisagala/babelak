@@ -201,6 +201,11 @@
                                         </label>
                                     </div>
                                 </div>
+                                
+                            </div>
+                            <div class="mt-5 mb-3 float-end">
+                                <button type="submit" class="btn btn-primary me-2">Simpan</button>
+                                <button type="reset" class="btn btn-outline-secondary">Batal</button>
                             </div>
                         </div>
                     </div>

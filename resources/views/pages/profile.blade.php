@@ -184,7 +184,7 @@
                                                 <div class="col-md-6 mt-3">
                                                     <select required class="chosen form-control" name="id_village"
                                                         id="village">
-                                                        <option value="" disabled selected>Pilih Kelurahan</option>
+                                                        <option value="" disabled selected>Pilih Desa/Kelurahan</option>
                                                         @if (!empty($villages))
                                                             @foreach ($villages as $vil)
                                                                 <option
@@ -369,17 +369,17 @@
                             '<option selected disabled value="">Pilih Kecamatan</option>');
                         $(`#district`).trigger("chosen:updated");
                         $('#village').empty().append(
-                            '<option selected disabled value="">Pilih Desa</option>');
+                            '<option selected disabled value="">Pilih Desa/Kelurahan</option>');
                         $('#village').trigger("chosen:updated");
                     } else if (type == 'district') {
                         $('#district').empty().append(
                             '<option selected disabled value="">Pilih Kecamatan</option>');
                         $('#village').empty().append(
-                            '<option selected disabled value="">Pilih Kelurahan</option>');
+                            '<option selected disabled value="">Pilih Desa/Kelurahan</option>');
                         $('#village').trigger("chosen:updated");
                     } else if (type == 'village') {
                         $('#village').empty().append(
-                            '<option selected disabled value="">Pilih Kelurahan</option>');
+                            '<option selected disabled value="">Pilih Desa/Kelurahan</option>');
                     }
                     $(data).each(function(index, item) {
                         let selected = ''

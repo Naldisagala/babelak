@@ -46,11 +46,11 @@
                                             <td class="text-center">{{ $product->code_payment }}</td>
                                             <td class="text-center">
                                                 @if (!empty($product->is_transfer))
-                                                    <span>Sudah Ditrasfer</span>
+                                                    <span>Sudah Ditransfer</span>
                                                 @else
                                                     <a class="btn btn-outline-primary"
                                                         href="/{{ env('URL_ADMIN', 'admin') }}/transfer/{{ $product->id }}"
-                                                        role="button">Tranfer</a>
+                                                        role="button">Transfer</a>
                                                 @endif
                                             </td>
                                             <td class="text-md-end">

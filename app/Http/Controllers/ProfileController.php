@@ -35,7 +35,7 @@ class ProfileController extends Controller
             'p.name as name_province',
             'p.id as id_province',
             's.nama_toko',
-            's.saldo',
+            
             's.rekening',
             's.type as type_rekening',
         )->leftJoin('user_detail as ud', [
@@ -100,7 +100,7 @@ class ProfileController extends Controller
 
         if($role_seller){
             $valid['nama_toko']     = 'required';
-            $valid['saldo']         = 'required';
+           
             $valid['rekening']      = 'required';
             $valid['type_rekening'] = 'required';
         }
@@ -161,7 +161,7 @@ class ProfileController extends Controller
                 $dataSeller = [
                     'id_user'   => $id,
                     'nama_toko' => $data['nama_toko'],
-                    'saldo'     => $data['saldo'],
+                    
                     'rekening'  => $data['rekening'],
                     'type'      => $data['type_rekening'],
                 ];

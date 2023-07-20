@@ -64,7 +64,7 @@
                         @else
                             <h2><strong>{{ 'Rp ' . number_format($barang->harga, 0, ',', '.') }}</strong></h2>
                         @endif
-                        <br><br>
+                        <br>
                         <p>
                             <i class="fa fa-check me-3"></i>
                             <b>Tingkat Pemakaian</b><br>
@@ -73,12 +73,26 @@
                         <p>
                             <i class="fa fa-location-dot me-3"></i>
                             <b>Lokasi</b><br>
-                            <small class="ms-4 ps-2">{{ $barang->seller->alamat->kota }}</small>
+                            <small class="ms-4 ps-2">{{ $barang->lokasi_barang }}</small>
                         </p>
                         <p>
                             <i class="fa fa-credit-card  me-3"></i>
                             <b>Pembayaran yang dipakai</b><br>
-                            @php
+                            <div class="col-md mb-3">
+                                <div class="form-check mt-3">
+                                    <label class="form-check-input" name="method[]" type="checkbox"
+                                        value="e-money" id="cbx-e-money">
+                                    <label class="form-check-label font-bold" for="cbx-e-money"> E-Money </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" name="method[]" type="checkbox"
+                                        value="transfer" id="cbx-transfer"
+                                        {{ old('method') ? (in_array('transfer', old('method')) ? 'checked' : '') : 'checked' }}>
+                                    <label class="form-check-label font-bold" for="cbx-transfer"> Transfer
+                                    </label>
+                                </div>
+                            </div>
+                            {{-- @php
                                 $methods = explode(',', $barang->method);
                                 $method = '';
                                 foreach ($methods as $k => $m) {
@@ -88,7 +102,7 @@
                                     $method .= ucfirst($m);
                                 }
                             @endphp;
-                            <small class="ms-4 ps-2">{{ $method }}</small>
+                            <small class="ms-4 ps-2">{{ $method }}</small> --}}
                         </p>
                         <div class="mt-5">
                             @if (!empty(auth()->user()))
@@ -112,7 +126,6 @@
                                                 <button type="submit" class="btn btn-primary w-100 me-3">Beli</button>
                                             </form>
                                         @else
-                                            <p>Barang Sendiri!</p>
                                         @endif
                                     @else
                                         <a href="/login-page" class="btn btn-primary w-100 me-3">Beli</a>
