@@ -30,6 +30,7 @@ class Barang extends Model
         'postcode',
         'usage',
         'method',
+        'wight',
     ];
 
     public function user()

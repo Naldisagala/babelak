@@ -124,6 +124,112 @@ class ProductController extends Controller
         }
     }
 
+    public function update(Request $request)
+    {
+        try{
+            $user = auth()->user();
+            $valid   = [
+                'name'        => 'required',
+                'price'       => 'required',
+                'description' => 'required',
+                'status'      => 'required',
+                'usage'       => 'required',
+                'method'      => 'required',
+            ];
+
+            if(!empty($request->image)){
+                $valid['image.*'] = 'mimes:jpeg,jpg,png,gif|max:2048';
+            }
+
+            if(!empty($request->video)){
+                $valid['video.*'] = 'mimes:mp4|max:51200';
+            }
+
+            $request->validate($valid);
+            $data = $request->all();
+            $id_product = $request->get('id_product');
+            $photo_old = $request->photo_old;
+
+            $gallery = [];
+            if($request->hasfile('image')) {
+                foreach($request->file('image') as $file)
+                {
+                    $name = 'image-' . date('Ymdms').'.'.$file->extension();
+                    $file->move(public_path('files/product'), $name);  
+                    $gallery[] = [
+                        'name' => $name,
+                        'type' => 'image'
+                    ];
+                }
+            }
+            if($request->hasfile('video')) {
+                foreach($request->file('video') as $file)
+                {
+                    $name = 'video-' . date('Ymdms').'.'.$file->extension();
+                    $file->move(public_path('files/product'), $name);  
+                    $gallery[] = [
+                        'name' => $name,
+                        'type' => 'video'
+                    ];
+                }
+            }
+
+            $dataProduct = [
+                'id_seller'     => $user->id,
+                'nama_barang'   => $data['name'],
+                'gambar'        => $gallery[0]['name'] ?? ($photo_old[0] ?? ''),
+                'deskripsi'     => $data['description'],
+                'harga'         => $data['price'],
+                'status_tawar'  => !empty($data['is_tawar']) ? 'yes' : 'no',
+                'status_barang' => $data['status'] ?? '',
+                'stock'         => $data['stock'] ?? 1,
+                'wight'         => $data['wight'] ?? null,
+                'usage'         => $data['usage'],
+                'method'        => join(',', $data['method']),
+            ];
+
+            $product = Barang::find($id_product);
+            $product->update($dataProduct);
+            Gallery::where('id_product', '=', $id_product)->delete();
+            foreach($photo_old as $file){
+                Gallery::create([
+                    'id_product' => $id_product,
+                    'name'       => $file,
+                    'type'       => 'image',
+                    'created_by' => $user->id
+                ]);
+            }
+
+            if(!empty($gallery)){
+                foreach($gallery as $file){
+                    Gallery::create([
+                        'id_product' => $id_product,
+                        'name'       => $file['name'],
+                        'type'       => $file['type'],
+                        'created_by' => $user->id
+                    ]);
+                }
+            }
+
+            $user = auth()->user();
+            $admin = User::where('role','=','admin')->first();
+            $description = "Terdapat update barang masuk (". 
+            $product->nama_barang. ") mohon untuk dicek";
+            Notification::create([
+                'from'        => $user->id,
+                'to'          => $admin->id,
+                'type'        => 'barang-masuk',
+                'description' => $description,
+                'is_read'     => 0,
+                'link'        => '/'.env("URL_ADMIN", 'admin').'/items-enter'
+            ]);
+
+            return back()->with('success', 'Successfully add product');
+        }catch(\Exception $e){
+            return redirect()->back()->with('error','Update Profile Failed! '.$e->getMessage());
+        }
+    }
+
     public function ajaxRegion(Request $request)
     {
         $type      = $request->get('type');
@@ -161,7 +267,7 @@ class ProductController extends Controller
 
         $gallery = Gallery::where('id_product','=', $id)->get();
 
-        return view('pages.product.view', [
+        return view('pages.product.update', [
             'product' => $product,
             'gallery' => $gallery,
         ]);

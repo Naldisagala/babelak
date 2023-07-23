@@ -61,6 +61,7 @@ Route::group(['middleware' => ['seller']], function() {
     Route::get('/product', 'ProductController@product');
     Route::get('/product/{id}', 'ProductController@detail');
     Route::post('/product', 'ProductController@insert');
+    Route::put('/product', 'ProductController@update');
     Route::delete('/product', 'ProductController@delete');
 
     Route::get('/sold-orders', 'OrderController@soldOrders');

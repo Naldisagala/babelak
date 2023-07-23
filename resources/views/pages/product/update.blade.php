@@ -3,7 +3,7 @@
 
 <!-- isi bagian judul halaman -->
 <!-- cara penulisan isi section yang pendek -->
-@section('title', 'Tambah Produk')
+@section('title', 'Detail Produk')
 
 
 <!-- isi bagian konten -->
@@ -20,6 +20,8 @@
                         <div role="tabpanel">
                             <form id="form-profile" method="POST" action="/product" enctype="multipart/form-data">
                                 @csrf
+                                {{ method_field('PUT') }}
+                                <input type="hidden" name="id_product" id="id_product" value="{{ $product->id }}">
                                 <h4 class="mb-5"><strong>@yield('title')</strong></h4>
                                 <div class="row m-4 shadow px-3 py-5 rounded">
                                     <div class="col-md-2 vertical-top">
@@ -35,15 +37,17 @@
                                                 </button>
                                             </div>
                                             @if (old('image'))
-                                                @foreach (old('image') as $img)
+                                                @foreach (old('image') as $key => $img)
                                                     <div class="col-lg-3 col-md-4 col-sm-6 py-3" id="data-photo-1">
+                                                        <input type="hidden" name="photo_old[]"
+                                                            id="photo_old_{{ $key }}" value="{{ $img }}">
                                                         <img id="image-product-view-1" class="w-100"
                                                             src="{{ $img }}" alt="Default" width="190"
                                                             height="190">
                                                         <div class="btn-group w-100 my-3" role="group">
                                                             <label class="btn btn-primary w-75">
-                                                                Choose... <input required name="image[]"
-                                                                    value="{{ $img }}" onchange="changePhoto(this)"
+                                                                Choose... <input name="image[]" value="{{ $img }}"
+                                                                    onchange="changePhoto(this)"
                                                                     data-target_photo="image-product-view-1" data-inc="1"
                                                                     id="image-product-1" type="file"
                                                                     style="display: none;">
@@ -51,16 +55,48 @@
                                                         </div>
                                                     </div>
                                                 @endforeach
+                                            @elseif (count($gallery) > 0)
+                                                @foreach ($gallery as $key => $item)
+                                                    <div class="col-lg-3 col-md-4 col-sm-6 py-3"
+                                                        id="data-photo-{{ $key }}">
+                                                        <input type="hidden" name="photo_old[]"
+                                                            id="photo_old_{{ $key }}" value="{{ $item->name }}">
+                                                        <img id="image-product-view-{{ $key }}" class="w-100"
+                                                            src="{{ str_contains($item->name, '://') ? $item->name : '/files/product/' . $item->name }}"
+                                                            alt="Default" width="190" height="190">
+
+                                                        <div class="btn-group w-100 my-3" role="group">
+                                                            <label class="btn btn-primary w-75">
+                                                                Choose... <input name="image[]" onchange="changePhoto(this)"
+                                                                    data-target_photo="image-product-view-{{ $key }}"
+                                                                    data-inc="{{ $key }}"
+                                                                    id="image-product-{{ $key }}" type="file"
+                                                                    style="display: none;">
+                                                            </label>
+                                                            @if ($key > 0)
+                                                                <button type="button" onclick="remove(this)"
+                                                                    data-type="photo" data-inc="{{ $key }}"
+                                                                    class="btn btn-outline-primary w-25">
+                                                                    <i class="fa fa-trash"></i>
+                                                                </button>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                @endforeach
                                             @else
                                                 <div class="col-lg-3 col-md-4 col-sm-6 py-3" id="data-photo-1">
-                                                    <img id="image-product-view-1" class="w-100" src="/image/default.jpg"
+                                                    <input type="hidden" name="photo_old[]" id="photo_old_1"
+                                                        value="{{ $product->gambar }}">
+                                                    <img id="image-product-view-1" class="w-100"
+                                                        src="{{ str_contains($product->gambar, '://') ? $product->gambar : '/files/product/' . $product->gambar }}"
                                                         alt="Default" width="190" height="190">
                                                     <div class="btn-group w-100 my-3" role="group">
                                                         <label class="btn btn-primary w-75">
-                                                            Choose... <input required name="image[]"
+                                                            Choose... <input name="image[]" value="{{ $product->gambar }}"
                                                                 onchange="changePhoto(this)"
                                                                 data-target_photo="image-product-view-1" data-inc="1"
-                                                                id="image-product-1" type="file" style="display: none;">
+                                                                id="image-product-1" type="file"
+                                                                style="display: none;">
                                                         </label>
                                                     </div>
                                                 </div>
@@ -88,9 +124,9 @@
                                             </div>
                                             <div class="col-md-8">
                                                 <input required type="text"
-                                                    class="form-control @error('name') is-invalid @enderror" name="name"
-                                                    id="name" placeholder="Nama Barang"
-                                                    value="{{ old('name') ?? '' }}">
+                                                    class="form-control @error('name') is-invalid @enderror"
+                                                    name="name" id="name" placeholder="Nama Barang"
+                                                    value="{{ old('name') ?? $product->nama_barang }}">
                                                 @error('name')
                                                     <div class="invalid-feedback text-left">
                                                         {{ $message }}
@@ -106,9 +142,9 @@
                                             </div>
                                             <div class="col-md-8">
                                                 <input required type="number"
-                                                    class="form-control @error('price') is-invalid @enderror" name="price"
-                                                    id="price" placeholder="Harga" min="1"
-                                                    value="{{ old('price') ?? '' }}">
+                                                    class="form-control @error('price') is-invalid @enderror"
+                                                    name="price" id="price" placeholder="Harga" min="1"
+                                                    value="{{ old('price') ?? $product->harga }}">
                                                 @error('price')
                                                     <div class="invalid-feedback text-left">
                                                         {{ $message }}
@@ -127,6 +163,7 @@
                                                 <input required type="number"
                                                     class="form-control @error('stock') is-invalid @enderror"
                                                     name="stock" id="stock" placeholder="Stok" min="1"
+                                                    value="{{ !empty($product->stock) ? $product->stock : 1 }}"
                                                     value="{{ old('stock') ?? '' }}">
                                                 @error('stock')
                                                     <div class="invalid-feedback text-left">
@@ -145,7 +182,7 @@
                                                 <input required type="number"
                                                     class="form-control @error('wight') is-invalid @enderror"
                                                     name="wight" id="wight" placeholder="Weight" min="1"
-                                                    value="{{ old('wight') ?? '' }}">
+                                                    value="{{ old('wight') ?? $product->wight }}">
                                                 @error('wight')
                                                     <div class="invalid-feedback text-left">
                                                         {{ $message }}
@@ -163,7 +200,7 @@
                                                 <input required type="text"
                                                     class="form-control @error('status') is-invalid @enderror"
                                                     name="status" id="status" placeholder="Status Barang"
-                                                    value="{{ old('status') ?? '' }}">
+                                                    value="{{ old('status') ?? $product->status_barang }}">
                                                 @error('status')
                                                     <div class="invalid-feedback text-left">
                                                         {{ $message }}
@@ -179,7 +216,7 @@
                                             </div>
                                             <div class="col-md-8">
                                                 <textarea name="description" placeholder="Deskripsi Barang"
-                                                    class="form-control @error('description') is-invalid @enderror" id="description" cols="30" rows="7">{{ old('description') ?? '' }}</textarea>
+                                                    class="form-control @error('description') is-invalid @enderror" id="description" cols="30" rows="7">{{ old('description') ?? $product->deskripsi }}</textarea>
                                                 @error('description')
                                                     <div class="invalid-feedback text-left">
                                                         {{ $message }}
@@ -270,7 +307,7 @@
                                         <div class="form-check my-3">
                                             <input name="usage" class="form-check-input" type="radio" value="ringan"
                                                 id="rb-ringan"
-                                                {{ old('usage') ? (old('usage') == 'ringan' ? 'checked' : '') : 'checked' }}>
+                                                {{ old('usage') ?? $product->usage ? ((old('usage') ?? $product->usage) == 'ringan' ? 'checked' : '') : '' }}>
                                             <label class="form-check-label" for="rb-ringan">
                                                 <span class="font-bold">Pemakaian Ringan</span><br>
                                                 <span>Digunakan secara terawat, jika ada kekurangan pun hampir tidak
@@ -280,7 +317,7 @@
                                         <div class="form-check my-3">
                                             <input name="usage" class="form-check-input" type="radio" value="baik"
                                                 id="rb-baik"
-                                                {{ old('usage') ? (old('usage') == 'baik' ? 'checked' : '') : '' }}>
+                                                {{ old('usage') ?? $product->usage ? ((old('usage') ?? $product->usage) == 'baik' ? 'checked' : '') : '' }}>
                                             <label class="form-check-label" for="rb-baik">
                                                 <span class="font-bold">Pemakaian Baik</span><br>
                                                 <span>Memiliki kekurangan atau kerusakan kecil.</span>
@@ -289,25 +326,28 @@
                                         <div class="form-check my-3">
                                             <input name="usage" class="form-check-input" type="radio" value="berat"
                                                 id="rb-berat"
-                                                {{ old('usage') ? (old('usage') == 'berat' ? 'checked' : '') : '' }}>
+                                                {{ old('usage') ?? $product->usage ? ((old('usage') ?? $product->usage) == 'berat' ? 'checked' : '') : '' }}>
                                             <label class="form-check-label" for="rb-berat">
                                                 <span class="font-bold">Pemakaian Berat</span><br>
                                                 <span>Memiliki tanda-tanda penggunaan atau kerusakan yang jelas.</span>
                                             </label>
                                         </div>
                                     </div>
+                                    @php
+                                        $exp_method = explode(',', $product->method);
+                                    @endphp
                                     <h6 class="font-bold mt-3">Methode Pembayaran</h6>
                                     <div class="col-md mb-3">
                                         <div class="form-check mt-3">
                                             <input class="form-check-input" name="method[]" type="checkbox"
                                                 value="e-money" id="cbx-e-money"
-                                                {{ old('method') ? (in_array('e-money', old('method')) ? 'checked' : '') : 'checked' }}>
+                                                {{ old('method') ?? $exp_method ? (in_array('e-money', old('method') ?? $exp_method) ? 'checked' : '') : 'checked' }}>
                                             <label class="form-check-label font-bold" for="cbx-e-money"> E-Money </label>
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" name="method[]" type="checkbox"
                                                 value="transfer" id="cbx-transfer"
-                                                {{ old('method') ? (in_array('transfer', old('method')) ? 'checked' : '') : 'checked' }}>
+                                                {{ old('method') ?? $exp_method ? (in_array('transfer', old('method') ?? $exp_method) ? 'checked' : '') : 'checked' }}>
                                             <label class="form-check-label font-bold" for="cbx-transfer"> Transfer
                                             </label>
                                         </div>
@@ -317,7 +357,7 @@
                                         <div class="form-check">
                                             <input class="form-check-input" name="is_tawar" type="checkbox"
                                                 value="1" id="cbx-is-tawar"
-                                                {{ old('is_tawar') ? (old('is_tawar') == 1 ? 'checked' : '') : 'checked' }}>
+                                                {{ old('is_tawar') ?? $product->status_tawar ? ((old('is_tawar') ?? $product->status_tawar) == 'yes' ? 'checked' : '') : 'checked' }}>
                                             <label class="form-check-label font-bold" for="cbx-is-tawar"> Ya/Tidak
                                             </label>
                                         </div>
@@ -327,7 +367,7 @@
                                     <div class="offset-md-8 col-md-4 text-end">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <button type="submit" class="btn btn-primary w-100"> Tambah</button>
+                                                <button type="submit" class="btn btn-primary w-100"> Simpan</button>
                                             </div>
                                             <div class="col-md-6">
                                                 <a href="/my-products" class="btn btn-outline-secondary w-100">Batal</a>
