@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Gallery;
 use App\Models\Barang;
+use App\Models\User;
+use App\Models\Seller;
 
 class HomeController extends Controller
 {
@@ -37,6 +39,17 @@ class HomeController extends Controller
         return view('pages.barang',[
             'barang'  => $barang,
             'gallery' => $gallery,
+        ]);
+    }
+
+    public function store($id, Request $request)
+    {
+        $user = User::find($id);
+        $seller = Seller::where('id_user', '=', $id)->first();
+        return view('pages.store',[
+            'barang' => $this->getAllBarang($request['search'], "accept", $user->id),
+            'user'   => $user,
+            'seller' => $seller,
         ]);
     }
 }

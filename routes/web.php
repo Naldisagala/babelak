@@ -35,6 +35,7 @@ Route::post('/register-post', 'RegisterController@RegisterUser');
 Route::post('/login-post', 'LoginController@login');
 Route::post('/logout', 'LoginController@logout');
 Route::get('/'.env("URL_ADMIN", 'admin'), 'AdminController@login');
+Route::get('/toko/{id}', 'HomeController@store');
 
 Route::group(['middleware' => ['admin']], function() {
     Route::get('/'.env("URL_ADMIN", 'admin').'/dashboard', 'AdminController@index');
@@ -75,15 +76,18 @@ Route::get('/province_city={id_province}','CheckoutController@getCity');
 Route::get('/province_city={id_province}&city={id_city}','CheckoutController@getCity');
 Route::get('/courier/province={province}&city={city}&weight={weight}','CheckoutController@getListCourier');
 
+Route::group(['middleware' => ['auth']], function() {
+    Route::get('/chat', 'ChatController@index');
+    Route::get('/chat/{username}', 'ChatController@personal');
+    Route::get('/chat/{username}/{id_product}', 'ChatController@product');
+});
+
 Route::group(['middleware' => ['buyer-seller']], function() {
     Route::get('/profile', 'ProfileController@index');
     Route::post('/profile', 'ProfileController@changeProfile');
     Route::get('/my-orders', 'OrderController@myOrders');
     Route::post('/proof-payment', 'OrderController@proofPayment');
     Route::post('/change-password', 'ProfileController@changePassword');
-    Route::get('/chat', 'ChatController@index');
-    Route::get('/chat/{username}', 'ChatController@personal');
-    Route::get('/chat/{username}/{id_product}', 'ChatController@product');
     Route::get('/notification', 'NotificationController@index');
     Route::post('/ajax-region', 'ProductController@ajaxRegion');
     Route::get('/tawar/{user}/{seller}/{barang}/{harga}','TawarController@sendChatTawar');

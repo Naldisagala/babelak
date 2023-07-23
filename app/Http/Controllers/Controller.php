@@ -17,7 +17,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
-    public function getAllBarang($cari = null, $status = null)
+    public function getAllBarang($cari = null, $status = null, $id_seller = null)
     {
         $barang = Barang::with('user', 'alamat', 'seller')
         ->when($cari, function ($query) use ($cari) {
@@ -25,6 +25,9 @@ class Controller extends BaseController
         });
         if($status){
             $barang->where('status', '=', $status);
+        }
+        if(!empty($id_seller)){
+            $barang->where('id_seller', '=', $id_seller);
         }
 
         return $barang->paginate(10);
