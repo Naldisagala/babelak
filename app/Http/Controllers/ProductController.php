@@ -45,7 +45,7 @@ class ProductController extends Controller
                 'usage'       => 'required',
                 'method'      => 'required',
                 'image'       => 'required',
-                'image.*'     => 'mimes:jpeg,jpg,png,gif|max:2048'
+                'image.*'     => 'mimes:jpeg,jpg,png,gif|max:100240'
             ];
 
             if(!empty($request->video)){
@@ -120,7 +120,7 @@ class ProductController extends Controller
 
             return back()->with('success', 'Successfully add product');
         }catch(\Exception $e){
-            return redirect()->back()->with('error','Update Profile Failed! '.$e->getMessage());
+            return redirect()->back()->with('error','Update Product Failed! '.$e->getMessage());
         }
     }
 
@@ -138,7 +138,7 @@ class ProductController extends Controller
             ];
 
             if(!empty($request->image)){
-                $valid['image.*'] = 'mimes:jpeg,jpg,png,gif|max:2048';
+                $valid['image.*'] = 'mimes:jpeg,jpg,png,gif|max:100240';
             }
 
             if(!empty($request->video)){
@@ -192,12 +192,14 @@ class ProductController extends Controller
             $product->update($dataProduct);
             Gallery::where('id_product', '=', $id_product)->delete();
             foreach($photo_old as $file){
-                Gallery::create([
-                    'id_product' => $id_product,
-                    'name'       => $file,
-                    'type'       => 'image',
-                    'created_by' => $user->id
-                ]);
+                if(!empty($file)){
+                    Gallery::create([
+                        'id_product' => $id_product,
+                        'name'       => $file,
+                        'type'       => 'image',
+                        'created_by' => $user->id
+                    ]);
+                }
             }
 
             if(!empty($gallery)){
@@ -226,7 +228,7 @@ class ProductController extends Controller
 
             return back()->with('success', 'Successfully add product');
         }catch(\Exception $e){
-            return redirect()->back()->with('error','Update Profile Failed! '.$e->getMessage());
+            return redirect()->back()->with('error','Update Product Failed! '.$e->getMessage());
         }
     }
 

@@ -47,7 +47,7 @@
                                                         <div class="btn-group w-100 my-3" role="group">
                                                             <label class="btn btn-primary w-75">
                                                                 Choose... <input name="image[]" value="{{ $img }}"
-                                                                    onchange="changePhoto(this)"
+                                                                    onchange="changeImageProduct(this)"
                                                                     data-target_photo="image-product-view-1" data-inc="1"
                                                                     id="image-product-1" type="file"
                                                                     style="display: none;">
@@ -67,7 +67,8 @@
 
                                                         <div class="btn-group w-100 my-3" role="group">
                                                             <label class="btn btn-primary w-75">
-                                                                Choose... <input name="image[]" onchange="changePhoto(this)"
+                                                                Choose... <input name="image[]"
+                                                                    onchange="changeImageProduct(this)"
                                                                     data-target_photo="image-product-view-{{ $key }}"
                                                                     data-inc="{{ $key }}"
                                                                     id="image-product-{{ $key }}" type="file"
@@ -93,7 +94,7 @@
                                                     <div class="btn-group w-100 my-3" role="group">
                                                         <label class="btn btn-primary w-75">
                                                             Choose... <input name="image[]" value="{{ $product->gambar }}"
-                                                                onchange="changePhoto(this)"
+                                                                onchange="changeImageProduct(this)"
                                                                 data-target_photo="image-product-view-1" data-inc="1"
                                                                 id="image-product-1" type="file"
                                                                 style="display: none;">
@@ -397,7 +398,7 @@
                     alt="Default" width="190" height="190">
                 <div class="btn-group w-100 my-3" role="group">
                     <label class="btn btn-primary w-75">
-                        Choose... <input name="image[]" onchange="changePhoto(this)"
+                        Choose... <input name="image[]" onchange="changeImageProduct(this)"
                             data-target_photo="image-product-view-${inc}" data-inc="${inc}"
                             id="image-product-${inc}" type="file" style="display: none;">
                     </label>
@@ -506,6 +507,25 @@
                     console.log(error)
                 }
             });
+        }
+
+        function changeImageProduct(input) {
+            let url = $(input).val();
+            let target = $(input).data('target_photo');
+            let inc = $(input).data('inc');
+            $(`#photo_old_${inc}`).val('')
+            let ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+            if (input.files && input.files[0] && (ext == "png" || ext == "jpeg" ||
+                    ext == "jpg")) {
+                let reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $(`#${target}`).attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                $(`#${target}`).attr('src', '/image/default.jpg');
+            }
         }
 
         function titleCase(str) {
