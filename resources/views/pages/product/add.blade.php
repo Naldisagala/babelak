@@ -120,10 +120,10 @@
                                     <input type="hidden" name="stock" id="stock" value="1">
                                     <div class="col-md-12 mt-3 hidden">
                                         <div class="row">
-                                            <div class="col-md-2 vertical-top">
+                                            {{-- <div class="col-md-2 vertical-top">
                                                 <span class="font-bold">Stok</span>
-                                            </div>
-                                            <div class="col-md-8">
+                                            </div> --}}
+                                            {{-- <div class="col-md-8">
                                                 <input required type="number"
                                                     class="form-control @error('stock') is-invalid @enderror"
                                                     name="stock" id="stock" placeholder="Stok" min="1"
@@ -133,15 +133,15 @@
                                                         {{ $message }}
                                                     </div>
                                                 @enderror
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </div>
                                     <div class="col-md-12 mt-3">
-                                        <div class="row">
-                                            <div class="col-md-2 vertical-top">
+                                         <div class="row">
+                                            {{-- <div class="col-md-2 vertical-top">
                                                 <span class="font-bold">Weight</span>
-                                            </div>
-                                            <div class="col-md-8">
+                                            </div> --}}
+                                            {{-- <div class="col-md-8">
                                                 <input required type="number"
                                                     class="form-control @error('wight') is-invalid @enderror"
                                                     name="wight" id="wight" placeholder="Weight" min="1"
@@ -151,8 +151,8 @@
                                                         {{ $message }}
                                                     </div>
                                                 @enderror
-                                            </div>
-                                        </div>
+                                            </div> --}}
+                                        </div> 
                                     </div>
                                     <div class="col-md-12 mt-3">
                                         <div class="row">

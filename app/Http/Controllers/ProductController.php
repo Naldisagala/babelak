@@ -87,8 +87,8 @@ class ProductController extends Controller
                 'harga'         => $data['price'],
                 'status_tawar'  => $data['is_tawar'] ? 'yes' : 'no',
                 'status_barang' => $data['status'] ?? '',
-                'stock'         => $data['stock'] ?? 1,
-                'wight'         => $data['wight'] ?? null,
+                // 'stock'         => $data['stock'] ?? 1,
+                // 'wight'         => $data['wight'] ?? null,
                 'usage'         => $data['usage'],
                 'method'        => join(',', $data['method']),
             ];
@@ -182,8 +182,8 @@ class ProductController extends Controller
                 'harga'         => $data['price'],
                 'status_tawar'  => !empty($data['is_tawar']) ? 'yes' : 'no',
                 'status_barang' => $data['status'] ?? '',
-                'stock'         => $data['stock'] ?? 1,
-                'wight'         => $data['wight'] ?? null,
+                // 'stock'         => $data['stock'] ?? 1,
+                // 'wight'         => $data['wight'] ?? null,
                 'usage'         => $data['usage'],
                 'method'        => join(',', $data['method']),
             ];

@@ -176,10 +176,10 @@
                                     </div>
                                     <div class="col-md-12 mt-3">
                                         <div class="row">
-                                            <div class="col-md-2 vertical-top">
+                                            {{-- <div class="col-md-2 vertical-top">
                                                 <span class="font-bold">Weight</span>
-                                            </div>
-                                            <div class="col-md-8">
+                                            </div> --}}
+                                            {{-- <div class="col-md-8">
                                                 <input required type="number"
                                                     class="form-control @error('wight') is-invalid @enderror"
                                                     name="wight" id="wight" placeholder="Weight" min="1"
@@ -189,7 +189,7 @@
                                                         {{ $message }}
                                                     </div>
                                                 @enderror
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </div>
                                     <div class="col-md-12 mt-3">
