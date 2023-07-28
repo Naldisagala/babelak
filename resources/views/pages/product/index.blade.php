@@ -31,7 +31,7 @@
                                     <thead class="bg-light-smoth">
                                         <tr>
                                             <th>No.</th>
-                                            {{-- <th> ID Barang</th> --}}
+                                            <th> ID Barang</th>
                                             <th>Info Barang</th>
                                             <th class="text-center">Harga</th>
                                             <th class="text-center">Status</th>
@@ -42,7 +42,7 @@
                                         @foreach ($products as $inc => $product)
                                             <tr>
                                                 <td>{{ $inc + 1 }}</td>
-                                                {{-- <td>{{ $product['id'] }}</td> --}}
+                                                <td>{{ $product['id'] }}</td>
                                                 <td>
                                                     <div class="row">
                                                         <div class="col-2">
