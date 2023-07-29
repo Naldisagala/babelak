@@ -38,6 +38,11 @@ class Barang extends Model
         return $this->belongsTo(User::class, 'id_seller', 'id');
     }
 
+    public function user_detail()
+    {
+        return $this->belongsTo(UserDetail::class, 'id_seller', 'id_user');
+    }
+
     public function alamat()
     {
         return $this->belongsTo(Alamat::class, 'id_seller', 'id_user');
