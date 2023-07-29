@@ -8,6 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Transaksi extends Model
 {
     use HasFactory;
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'transaksis';
+    protected $guarded = ['id'];  
+
     protected $fillable = [
         'id_cart',
         'id_user',

@@ -13,10 +13,13 @@ class OrderController extends Controller
 {
     public function myOrders()
     {
+        $statuses = ['waiting', 'process'];
         $id_user = auth()->user()->id;
         $productWaiting   = Transaksi::where('id_user', '=', $id_user)
-        ->where('status','=','waiting')
-        ->orWhere('status','=','process')
+        ->where(function($query) use ($statuses){
+            $query->where('status','=',$statuses[0]);
+            $query->orWhere('status','=',$statuses[1]);
+        })
         ->get();
         
         $productPackaging = Transaksi::where('id_user', '=', $id_user)
