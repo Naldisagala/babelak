@@ -80,15 +80,15 @@
                             <b>Pembayaran yang dipakai</b><br>
                             <div class="col-md mb-3">
                                 <div class="form-check mt-3">
-                                    <label class="form-check-input" name="method[]" type="checkbox"
+                                    <input style="opacity: 1;" disabled class="form-check-input" name="method[]" type="checkbox"
                                         value="e-money" id="cbx-e-money">
-                                    <label class="form-check-label font-bold" for="cbx-e-money"> E-Money </label>
+                                    <label style="opacity: 1;" class="form-check-label font-bold" for="cbx-e-money"> E-Money </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" name="method[]" type="checkbox"
+                                    <input style="opacity: 1;" disabled class="form-check-input" name="method[]" type="checkbox"
                                         value="transfer" id="cbx-transfer"
                                         {{ old('method') ? (in_array('transfer', old('method')) ? 'checked' : '') : 'checked' }}>
-                                    <label class="form-check-label font-bold" for="cbx-transfer"> Transfer
+                                    <label style="opacity: 1;" class="form-check-label font-bold" for="cbx-transfer"> Transfer
                                     </label>
                                 </div>
                             </div>
@@ -184,8 +184,8 @@
                             <div class="row">
                                 <div class="col-1">
                                     <a href="/toko/{{ $barang->seller->id }}">
-                                        <img src="{{ url('/image/bangku_kecil.jpeg') }}" class="barang-img-profile"
-                                            alt="Penjual">
+                                        <img src="{{ !empty($barang->user_detail->photo) ? '/files/profile/' . $barang->user_detail->photo : '/image/bangku_kecil.jpeg' }}"
+                                            alt="{{ $barang->user->name }}" class="barang-img-profile"id="store-img" />
                                     </a>
                                 </div>
                                 <div class="col-9 ps-4">
