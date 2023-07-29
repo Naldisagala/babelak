@@ -97,7 +97,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-12 mt-3 hidden">
+                                {{-- <div class="col-md-12 mt-3 hidden">
                                     <div class="row">
                                         <div class="col-md-2 vertical-top">
                                             <span class="font-bold">Stok</span>
@@ -108,7 +108,7 @@
                                                 value="{{ $product->stock }}">
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="col-md-12 mt-3">
                                     <div class="row">
                                         <div class="col-md-2 vertical-top">

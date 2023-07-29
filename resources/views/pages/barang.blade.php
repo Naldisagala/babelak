@@ -154,11 +154,11 @@
                                 </div>
                                 @if (auth()->user()->role ?? null != 'seller')
                                     <div class="col-md-3 px-3">
-                                        <a class="btn btn-outline-primary"
+                                        {{-- <a class="btn btn-outline-primary"
                                             href="/chat/{{ $barang->user->username }}/{{ $barang->id }}"
                                             role="button">
                                             <i class="fa-regular fa-comment"></i>
-                                        </a>
+                                        </a> --}}
                                     </div>
                                 @endif
                             </div>

@@ -344,6 +344,9 @@ main {
     -webkit-box-orient: vertical;
 }
 
+.card-text{
+white-space: pre-line;}
+
 .icon-search {
     margin-top: -25px;
     position: absolute;
